@@ -9,9 +9,16 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^2.11.3",
+    "@prisma/adapter-neon": "^7.10.0",
+    "@prisma/client": "^7.10.0",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^18.0.7",
     "next": "16.4.0",
+    "next-auth": "^5.0.0-beta.32",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",
@@ -20,7 +27,9 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.0",
+    "prisma": "^7.10.0",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }

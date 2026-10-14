@@ -1,0 +1,273 @@
+// TriSync database schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Auth.js models (credentials + OAuth, via @auth/prisma-adapter)
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+
+  // Email/password login. Optional so Google-only accounts don't need one.
+  hashedPassword String?
+
+  accounts Account[]
+  sessions Session[]
+
+  // App-specific relations
+  profile             Profile?
+  trainingPlans       TrainingPlan[]
+  workoutLogs         WorkoutLog[]
+  performanceInsights PerformanceInsight[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// Onboarding / athlete profile
+
+enum ExperienceLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum RaceGoal {
+  SPRINT
+  OLYMPIC
+  HALF_IRONMAN
+  IRONMAN
+  GENERAL_FITNESS
+}
+
+model Profile {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  experienceLevel   ExperienceLevel
+  goal              RaceGoal
+  daysPerWeek       Int              // availability, e.g. 4
+  minutesPerSession Int?             // optional finer-grained availability
+  targetRaceDate    DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// AI-generated training plans
+
+enum PlanStatus {
+  ACTIVE
+  COMPLETED
+  ARCHIVED
+}
+
+model TrainingPlan {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title       String
+  status      PlanStatus @default(ACTIVE)
+  goal        RaceGoal
+  startDate   DateTime
+  endDate     DateTime
+  totalWeeks  Int        // e.g. 12 — drives "Week X of totalWeeks" in the UI
+  aiRawOutput Json?      // raw AI response, kept for audit/debugging
+
+  // Reproducibility for evaluation/dissertation purposes — not the full prompt,
+  // just enough to know which model/prompt iteration produced this plan.
+  aiModel         String? // e.g. "claude-sonnet-4-6"
+  aiPromptVersion String? // e.g. "v1", "v2" — bump when the plan-generation prompt changes
+
+  workouts Workout[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Prescribed workouts (part of a plan)
+
+enum Discipline {
+  SWIM
+  BIKE
+  RUN
+  BRICK
+  STRENGTH
+  REST
+}
+
+enum MuscleGroup {
+  QUADRICEPS
+  HAMSTRINGS
+  GLUTES
+  CALVES
+  CORE
+  SHOULDERS
+  BACK
+  CHEST
+  ARMS
+  HIP_FLEXORS
+}
+
+model Workout {
+  id     String       @id @default(cuid())
+  planId String
+  plan   TrainingPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+
+  weekNumber  Int
+  dayOfWeek   Int          // 1–7
+  discipline  Discipline   // overall category — SWIM/BIKE/RUN/BRICK/STRENGTH/REST
+  title       String
+  description String?      @db.Text
+
+  muscleGroups MuscleGroup[] // aggregate across all segments, for display/filtering
+
+  segments WorkoutSegment[]
+  logs     WorkoutLog[]
+  resourceLinks WorkoutResource[]
+
+  createdAt DateTime @default(now())
+}
+
+// One or more legs of a workout, in order.
+// A normal run = 1 segment. A brick = 2+ segments. A structured run
+// (warm-up / intervals / cool-down) = 3+ segments with the same discipline.
+model WorkoutSegment {
+  id        String  @id @default(cuid())
+  workoutId String
+  workout   Workout @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+
+  order      Int
+  discipline Discipline // typically SWIM/BIKE/RUN/STRENGTH at segment level
+
+  targetDistanceKm  Float?
+  targetDurationMin Int?
+  targetIntensity   String? // e.g. "Zone 2", "Threshold", "5x5min hard"
+
+  @@index([workoutId, order])
+}
+
+// Actual logged training data
+
+model WorkoutLog {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  workoutId String?           // nullable: user can log outside of a prescribed workout
+  workout   Workout? @relation(fields: [workoutId], references: [id], onDelete: SetNull)
+
+  discipline    Discipline
+  date          DateTime
+  distanceKm    Float?
+  durationMin   Int?
+  avgPaceSecKm  Int?
+  avgHeartRate  Int?
+  avgSpeedKmh   Float?
+  notes         String?  @db.Text
+
+  aiInsight Json?           // AI-generated analysis for this specific log
+
+  createdAt DateTime @default(now())
+}
+
+// Higher-level AI analysis generated periodically (starting with monthly),
+// stored rather than recomputed on every dashboard load.
+model PerformanceInsight {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  periodStart DateTime
+  periodEnd   DateTime
+  summary     String   @db.Text
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, periodStart, periodEnd])
+}
+
+// Learning Hub (coach lessons + curated YouTube videos)
+
+enum ResourceType {
+  COACH_LESSON
+  YOUTUBE_VIDEO
+}
+
+model LearningResource {
+  id   String       @id @default(cuid())
+  type ResourceType
+
+  title          String
+  description    String?  @db.Text
+  content        String?  @db.Text // for COACH_LESSON: lesson body/markdown
+  youtubeVideoId String?           // for YOUTUBE_VIDEO: YouTube Data API video id
+  coverImageUrl  String?           // for COACH_LESSON (videos derive thumbnail from youtubeVideoId)
+
+  discipline   Discipline?
+  muscleGroups MuscleGroup[]
+  topicTags    String[]        // free-form tags, e.g. "brick training", "swim technique"
+
+  workoutLinks WorkoutResource[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Join table: many-to-many between Workout and LearningResource
+model WorkoutResource {
+  workoutId  String
+  workout    Workout          @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+  resourceId String
+  resource   LearningResource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+
+  @@id([workoutId, resourceId])
+}
