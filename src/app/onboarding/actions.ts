@@ -29,10 +29,11 @@ const parsed = onboardingSchema.safeParse({
 if(!parsed.success){
     return{ error: parsed.error.issues[0].message}
 }
+const { raceGoal, ...profileData } = parsed.data
 await prisma.profile.upsert({
-    where: { userId },
-    create: { userId, ...parsed.data },
-    update: parsed.data,
-  })
+        where: { userId },
+        create: { userId, ...profileData, goal: raceGoal },
+        update: { ...profileData, goal: raceGoal },
+    })
 redirect("/welcome")
 }
