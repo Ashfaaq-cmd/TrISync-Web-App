@@ -42,7 +42,7 @@ export async function registerUser(
 
   // Log new user
   try {
-    await signIn("credentials", { email, password, redirectTo: "/" })
+    await signIn("credentials", { email, password, redirectTo: "/welcome" })
   } catch (error) {
     if (error instanceof AuthError) {
       return { error: "Account created, but automatic login failed. Please log in." }
