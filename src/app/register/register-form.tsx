@@ -2,6 +2,7 @@
 
 import { useActionState } from "react"
 import { registerUser } from "./actions"
+import Link from "next/link"
 
 export default function RegisterForm() {
   const [state, formAction, pending] = useActionState(registerUser, undefined)
@@ -63,6 +64,14 @@ export default function RegisterForm() {
         className="w-full rounded-lg bg-blue-600 py-2 font-semibold text-white disabled:opacity-60"
       >
         {pending ? "Creating account..." : "Create account"}
+        <p className="text-center text-sm text-gray-600"> Already have an account?{" "}
+          <Link
+            href="/login"
+            className="font-medium text-blue-600 hover:underline"
+          >
+            Log in
+          </Link>
+        </p>
       </button>
     </form>
   )
