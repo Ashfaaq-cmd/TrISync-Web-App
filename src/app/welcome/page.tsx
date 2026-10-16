@@ -1,6 +1,6 @@
 import { Suspense } from "react"
-import { requireUser } from "@/lib/session"
 import Splash from "./splash"
+import { requireOnboardedUser } from "@/lib/session"
 
 export default async function WelcomePage() {
     return (
@@ -10,6 +10,6 @@ export default async function WelcomePage() {
     )
 }
 async function WelcomeContent() {
-    const user = await requireUser()
+    const { user } = await requireOnboardedUser()
     return <Splash name={user.name} />
 }

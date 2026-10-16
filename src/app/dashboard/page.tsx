@@ -1,7 +1,6 @@
 import { Suspense } from "react"
-import { requireUser } from "@/lib/session"
 import SignOutButton from "@/components/sign-out-button"
-
+import { requireOnboardedUser } from "@/lib/session"
 export default async function DashboardPage() {
     return (
         <Suspense fallback={<p className="p-8 text-gray-500">Loading...</p>}>
@@ -11,7 +10,7 @@ export default async function DashboardPage() {
 }
 
 async function DashboardContent() {
-    const user = await requireUser()
+    const { user } = await requireOnboardedUser()
     return (
         <main className="p-8">
             <h1 className="text-2xl font-bold text-gray-900">Welcome, {user.name}!</h1>

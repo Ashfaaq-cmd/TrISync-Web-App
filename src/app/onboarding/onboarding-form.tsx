@@ -2,8 +2,6 @@
 
 import { useActionState, useState } from "react"
 import { saveOnboarding } from "./actions"
-import { on } from "events"
-import { Peddana } from "next/font/google"
 
 const LEVELS = [
     { value: "BEGINNER", label: "Beginner", description:"New to triathlon, or under 1 year of training" },
@@ -93,7 +91,7 @@ export default function OnboardingForm(){
             id="targetRaceDate"
             name="targetRaceDate"
             type="date"
-            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900"/>
+            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 cursor-pointer"/>
             </div>
             </div>
         
@@ -133,7 +131,7 @@ export default function OnboardingForm(){
                     {step > 1 && (
                         <button type="button"
                         onClick={()=> setStep(step-1)}
-                        className="rounded-lg border border-gray-300 px-4 py-2 font-semibold text-gray-700">
+                        className="rounded-lg border border-gray-300 px-4 py-2 font-semibold text-gray-700 cursor-pointer">
                             Back
                         </button>
                     )}
@@ -141,13 +139,13 @@ export default function OnboardingForm(){
                         <button type="button"
                         disabled={!canContinue}
                         onClick={()=> setStep(step+1)}
-                        className="flex rounded-lg bg-blue-600 py-2 font-semibold text-white disabled:opacity-60">
+                        className="flex rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white disabled:opacity-60 cursor-pointer">
                             Next
                         </button>
                     ): (
                         <button type="submit"
                         disabled={!canContinue || pending}
-                        className="flex-1 rounded-lg bg-blue-600 py-2 font-semibold text-white disabled:opacity-60">{pending? "Saving..." : "Finish"}</button>
+                        className="flex-1 rounded-lg bg-blue-600 py-2 font-semibold text-white disabled:opacity-60 cursor-pointer">{pending? "Saving..." : "Finish"}</button>
                     )}
                 </div>
         </form>
