@@ -14,6 +14,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
   // Credentials login only works with JWT sessions
   session: { strategy: "jwt" },
+  pages:{ signIn: "/login" },
   providers: [
     Credentials({
       credentials: {
