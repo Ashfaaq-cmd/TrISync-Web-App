@@ -1,5 +1,8 @@
 import LoginForm from "./login-form";
 import Image from "next/image";
+import { Suspense } from "react"
+import GoogleButton from "@/components/google-btn"
+import LoginError from "./login-error"
 
 export default function LoginPage() {
     return (
@@ -17,7 +20,12 @@ export default function LoginPage() {
                 <p className="mb-6 mt-1 text-sm text-gray-700">
                     Your next milestone starts here
                 </p>
+                 <Suspense fallback={null}>
+                    <LoginError />
+                </Suspense>
                 <LoginForm />
+                <p className="my-4 text-center text-sm text-gray-500">or</p>
+                <GoogleButton />
             </div>
         </main>
     )

@@ -63,7 +63,7 @@ export default function RegisterForm() {
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-lg bg-blue-600 py-2 font-semibold text-white disabled:opacity-60 hover:bg-blue-700"
+        className="w-full rounded-lg bg-blue-600 py-2 font-semibold text-white disabled:opacity-60 hover:bg-blue-700 cursor-pointer"
       >
         {pending ? "Creating account..." : "Create account"}
         </button>
