@@ -45,12 +45,12 @@ export default function OnboardingForm(){
     const [state,formAction, pending] = useActionState(saveOnboarding,undefined)
     const [step,setStep] = useState(1)
     const [level,setLevel] = useState("")
-    const [goal,setGoal] = useState("")
+    const [raceGoal,setRaceGoal] = useState("")
     const [days,setDays] = useState("")
     const [minutes,setMinutes] = useState("")
 
     //Next button stays disabled until current step has an answer
-    const canContinue = step ===1? level!=="" : step ===2? goal !== "" : days !== "" && minutes !== ""
+    const canContinue = step ===1? level!=="" : step ===2? raceGoal !== "" : days !== "" && minutes !== ""
 
     return(
         <form action={formAction}>
@@ -77,21 +77,23 @@ export default function OnboardingForm(){
                 {GOALS.map((option)=>(
                     <OptionCard
                     key={option.value}
-                    name="goal"
-                    checked={goal === option.value}
-                    onChange={setGoal}
+                    name="raceGoal"
+                    checked={raceGoal === option.value}
+                    onChange={setRaceGoal}
                     {...option}
                     />
                 ))}
                 </div>
 
             <div>
-            <label htmlFor="targetRaceDate" className="block text-sm font-medium text-gray-700">Race Date (optional)</label>
-            <input 
-            id="targetRaceDate"
-            name="targetRaceDate"
-            type="date"
-            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 cursor-pointer"/>
+            <label htmlFor="targetRaceDate" className="block cursor-pointer text-sm font-medium text-gray-700">
+                Race Date (optional)
+                <input 
+                id="targetRaceDate"
+                name="targetRaceDate"
+                type="date"
+                className="mt-1 w-full cursor-pointer rounded-lg border border-gray-300 px-3 py-2 text-gray-900"/>
+            </label>
             </div>
             </div>
         

@@ -4,7 +4,6 @@ import { redirect } from "next/navigation"
 import { auth } from "@/auth"
 import { prisma } from "@/lib/prisma"
 import { onboardingSchema } from "@/lib/validations/onboarding"
-import { ExperienceLevel } from "@/generated/prisma"
 
 export type OnboardingState = { error?: string } | undefined
 
@@ -19,7 +18,7 @@ if(!session?.user?.id) redirect("/login")
 
 const parsed = onboardingSchema.safeParse({
     experienceLevel: formData.get("experienceLevel"),
-    goal: formData.get("goal"),
+    raceGoal: formData.get("raceGoal"),
     daysPerWeek: formData.get("daysPerWeek"),
     minutesPerSession: formData.get("minutesPerSession"),
     //empty date field arrives as "" treat as not provided
