@@ -1,18 +1,24 @@
 import { signOut } from "@/auth"
 
-export default function SignOutButton() {
-    return (
-        <form action={async () => {
-            "use server"
-            await signOut({ redirectTo: "/login" })
-        }}
-        >
-            <button
-                type="submit"
-                className="rounded-lg bg-primary py-2 px-4 font-semibold text-primary-foreground disabled:opacity-60 hover:bg-primary-hover"
-            >
-                Sign out
-            </button>
-        </form>
-    )
+type SignOutButtonProps = { className?: string }
+
+export default function SignOutButton({ className }: SignOutButtonProps) {
+  return (
+    <form
+      action={async () => {
+        "use server"
+        await signOut({ redirectTo: "/login" })
+      }}
+    >
+      <button
+        type="submit"
+        className={
+          className ??
+          "w-full rounded-lg border border-border bg-surface py-2 font-semibold text-foreground hover:bg-background"
+        }
+      >
+        Sign out
+      </button>
+    </form>
+  )
 }
