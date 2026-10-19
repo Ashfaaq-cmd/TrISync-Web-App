@@ -18,6 +18,10 @@
   --swim: #0284C7;
   --bike: #EA580C;
   --run: #16A34A;
+  --sidebar: #111827;
+  --sidebar-foreground: #CBD5E1;
+  --sidebar-active: #1F2937;
+  --sidebar-active-foreground: #FFFFFF;
 }
 
 .dark {
@@ -36,6 +40,10 @@
   --swim: #38BDF8;
   --bike: #FB923C;
   --run: #4ADE80;
+  --sidebar: #070D1A;
+  --sidebar-foreground: #CBD5E1;
+  --sidebar-active: #16213A;
+  --sidebar-active-foreground: #FFFFFF;
 }
 
 @theme inline {
@@ -54,6 +62,10 @@
   --color-swim: var(--swim);
   --color-bike: var(--bike);
   --color-run: var(--run);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-active: var(--sidebar-active);
+  --color-sidebar-active-foreground: var(--sidebar-active-foreground);
 }
 
 body {
