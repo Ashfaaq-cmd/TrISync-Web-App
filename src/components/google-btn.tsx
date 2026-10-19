@@ -10,7 +10,7 @@ export default function GoogleButton() {
     >
       <button
         type="submit"
-        className="flex w-full items-center justify-center gap-3 rounded-lg border border-gray-300 bg-white py-2 font-semibold text-gray-700 hover:bg-gray-50"
+        className="flex w-full items-center justify-center gap-3 rounded-lg border border-border bg-surface py-2 font-semibold text-muted hover:bg-background"
       >
         <svg
           aria-hidden="true"

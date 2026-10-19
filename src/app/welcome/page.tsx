@@ -4,7 +4,7 @@ import { requireOnboardedUser } from "@/lib/session"
 
 export default async function WelcomePage() {
     return (
-        <Suspense fallback={<div className="min-h-screen bg-white" />}>
+        <Suspense fallback={<div className="min-h-screen bg-surface" />}>
             <WelcomeContent />
         </Suspense>
     )

@@ -29,13 +29,13 @@ type OptionCardProps ={
 
 function OptionCard({name,value,label,description,checked, onChange}: OptionCardProps){
     return(
-        <label className="flex flex-col rounded-lg border border-gray-300 p-4 has-checked:border-blue-600 has-checked:bg-blue-50 has-[:focus-visible]: ring-2 has-focus-visible:ring-blue-600">
+        <label className="flex flex-col rounded-lg border border-border p-4 has-checked:border-primary has-checked:bg-primary-soft has-[:focus-visible]: ring-2 has-focus-visible:ring-primary">
             <input
             type="radio" name={name} value={value} checked={checked}
             onChange={()=>onChange(value)}
             className="sr-only" />
-            <span className="font-semibold text-gray-900">{label}</span>{description &&(
-                <span className="mt-1 text-sm text-gray-600">{description}</span>
+            <span className="font-semibold text-foreground">{label}</span>{description &&(
+                <span className="mt-1 text-sm text-muted">{description}</span>
             )}
         </label>
     )
@@ -54,12 +54,12 @@ export default function OnboardingForm(){
 
     return(
         <form action={formAction}>
-            <p className="text-xs font-bold uppercase text-blue-600">Step {step} of 3</p>
+            <p className="text-xs font-bold uppercase text-link">Step {step} of 3</p>
 
             {/* All steps stays in the form.. every answer is submitted, only 1 is visible */}
             <div className={step === 1 ? "mt-2 space-y-3" : "hidden"}>
-                <h1 className="text-2xl font-bold text-gray-900">What is your experience level?</h1>
-                <p className="text-sm text-gray-600">This shapes how your training plan is built</p>
+                <h1 className="text-2xl font-bold text-foreground">What is your experience level?</h1>
+                <p className="text-sm text-muted">This shapes how your training plan is built</p>
                 {LEVELS.map((option)=>(
                     <OptionCard
                     key={option.value}
@@ -71,8 +71,8 @@ export default function OnboardingForm(){
                 ))}
             </div>
             <div className={step === 2 ? "mt-2 space-y-3" : "hidden"}>
-                <h1 className="text-2xl font-bold text-gray-900">What are you training for?</h1>
-                <p className="text-sm text-gray-600">Pick the race distance you are aiming at</p>
+                <h1 className="text-2xl font-bold text-foreground">What are you training for?</h1>
+                <p className="text-sm text-muted">Pick the race distance you are aiming at</p>
                 <div className="grid grid-cols-2 gap-3">
                 {GOALS.map((option)=>(
                     <OptionCard
@@ -86,20 +86,20 @@ export default function OnboardingForm(){
                 </div>
 
             <div>
-            <label htmlFor="targetRaceDate" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="targetRaceDate" className="block text-sm font-medium text-muted">
                 Race Date (optional)
                 <input 
                 id="targetRaceDate"
                 name="targetRaceDate"
                 type="date"
-                className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900"/>
+                className="mt-1 w-full rounded-lg border border-border px-3 py-2 text-foreground"/>
             </label>
             </div>
             </div>
         
             <div className={step === 3 ? "mt-2 space-y-3" : "hidden"}>
-                <h1 className="text-2xl font-bold text-gray-900">How much time can you train?</h1>
-                <p className="text-sm text-gray-600">Days per week</p>
+                <h1 className="text-2xl font-bold text-foreground">How much time can you train?</h1>
+                <p className="text-sm text-muted">Days per week</p>
                 <div className="grid grid-cols-6 gap-2">
                 {DAYS.map((day)=>(
                     <OptionCard
@@ -112,7 +112,7 @@ export default function OnboardingForm(){
                     />
                 ))}
             </div>
-                <p className="text-sm text-gray-600">Minutes per session</p>
+                <p className="text-sm text-muted">Minutes per session</p>
                 <div className="grid grid-cols-5 gap-2">
                 {MINUTES.map((minute)=>(
                     <OptionCard
@@ -127,13 +127,13 @@ export default function OnboardingForm(){
                 </div>
                 </div>
                 {state?.error && (
-                    <p role="alert" className="mt-4 text-sm text-red-600">{state.error}</p>
+                    <p role="alert" className="mt-4 text-sm text-danger">{state.error}</p>
                 )}
                 <div className="mt-6 flex gap-3">
                     {step > 1 && (
                         <button type="button"
                         onClick={()=> setStep(step-1)}
-                        className="rounded-lg border border-gray-300 px-4 py-2 font-semibold text-gray-700">
+                        className="rounded-lg border border-border px-4 py-2 font-semibold text-muted">
                             Back
                         </button>
                     )}
@@ -141,13 +141,13 @@ export default function OnboardingForm(){
                         <button type="button"
                         disabled={!canContinue}
                         onClick={()=> setStep(step+1)}
-                        className="flex rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white disabled:opacity-60">
+                        className="flex rounded-lg bg-primary px-4 py-2 font-semibold text-primary-foreground disabled:opacity-60">
                             Next
                         </button>
                     ): (
                         <button type="submit"
                         disabled={!canContinue || pending}
-                        className="flex-1 rounded-lg bg-blue-600 py-2 font-semibold text-white disabled:opacity-60">{pending? "Saving..." : "Finish"}</button>
+                        className="flex-1 rounded-lg bg-primary py-2 font-semibold text-primary-foreground disabled:opacity-60">{pending? "Saving..." : "Finish"}</button>
                     )}
                 </div>
         </form>

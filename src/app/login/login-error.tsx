@@ -13,7 +13,7 @@ export default function LoginError() {
       : "Sign-in failed. Please try again."
 
   return (
-    <p role="alert" className="mb-4 text-sm text-red-600">
+    <p role="alert" className="mb-4 text-sm text-danger">
       {error && message}
     </p>
   )

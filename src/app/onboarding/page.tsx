@@ -6,9 +6,9 @@ import OnboardingForm from "./onboarding-form";
 
 export default function OnboardingPage(){
     return(
-        <main className="flex min-h-screen items-center justify-center bg-gray-50 p-4">
-            <div className="w-full max-w-xl rounded-xl bg-white p-8 shadow">
-                <Suspense fallback={<p className="text-gray-500">Loading...</p>}>
+        <main className="flex min-h-screen items-center justify-center bg-background p-4">
+            <div className="w-full max-w-xl rounded-xl bg-surface p-8 shadow">
+                <Suspense fallback={<p className="text-muted">Loading...</p>}>
                 <OnboardingContent />
                 </Suspense>
             </div>
