@@ -13,7 +13,7 @@ return(
         <aside className="hidden w-60 shrink-0 flex-col bg-sidebar p-4 md:flex">
             <Link href="/dashboard" className="mb-6 block px-2">
             <Image
-            src="/trisync-logo-white.png"
+            src="/trisync-logo-black.png"
             alt="Trisync"
             width={200}
             height={100}
@@ -32,10 +32,10 @@ return(
             <div className="mb-2 flex items-center justify-between">
                  <Link href="/dashboard">
             <Image
-            src="/trisync-logo-white.png"
+            src="/trisync-logo-black.png"
             alt="Trisync"
             width={200}
-            height={100}
+            height={90}
             priority
             className="h-auto w-24"
             />
