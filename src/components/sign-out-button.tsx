@@ -9,7 +9,7 @@ export default function SignOutButton() {
         >
             <button
                 type="submit"
-                className="rounded-lg bg-blue-600 py-2 px-4 font-semibold text-white disabled:opacity-60 hover:bg-blue-700 cursor-pointer"
+                className="rounded-lg bg-blue-600 py-2 px-4 font-semibold text-white disabled:opacity-60 hover:bg-blue-700"
             >
                 Sign out
             </button>

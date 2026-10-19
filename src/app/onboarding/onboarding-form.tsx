@@ -29,7 +29,7 @@ type OptionCardProps ={
 
 function OptionCard({name,value,label,description,checked, onChange}: OptionCardProps){
     return(
-        <label className="flex cursor-pointer flex-col rounded-lg border border-gray-300 p-4 has-checked:border-blue-600 has-checked:bg-blue-50 has-[:focus-visible]: ring-2 has-focus-visible:ring-blue-600">
+        <label className="flex flex-col rounded-lg border border-gray-300 p-4 has-checked:border-blue-600 has-checked:bg-blue-50 has-[:focus-visible]: ring-2 has-focus-visible:ring-blue-600">
             <input
             type="radio" name={name} value={value} checked={checked}
             onChange={()=>onChange(value)}
@@ -86,13 +86,13 @@ export default function OnboardingForm(){
                 </div>
 
             <div>
-            <label htmlFor="targetRaceDate" className="block cursor-pointer text-sm font-medium text-gray-700">
+            <label htmlFor="targetRaceDate" className="block text-sm font-medium text-gray-700">
                 Race Date (optional)
                 <input 
                 id="targetRaceDate"
                 name="targetRaceDate"
                 type="date"
-                className="mt-1 w-full cursor-pointer rounded-lg border border-gray-300 px-3 py-2 text-gray-900"/>
+                className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900"/>
             </label>
             </div>
             </div>
@@ -133,7 +133,7 @@ export default function OnboardingForm(){
                     {step > 1 && (
                         <button type="button"
                         onClick={()=> setStep(step-1)}
-                        className="rounded-lg border border-gray-300 px-4 py-2 font-semibold text-gray-700 cursor-pointer">
+                        className="rounded-lg border border-gray-300 px-4 py-2 font-semibold text-gray-700">
                             Back
                         </button>
                     )}
@@ -141,13 +141,13 @@ export default function OnboardingForm(){
                         <button type="button"
                         disabled={!canContinue}
                         onClick={()=> setStep(step+1)}
-                        className="flex rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white disabled:opacity-60 cursor-pointer">
+                        className="flex rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white disabled:opacity-60">
                             Next
                         </button>
                     ): (
                         <button type="submit"
                         disabled={!canContinue || pending}
-                        className="flex-1 rounded-lg bg-blue-600 py-2 font-semibold text-white disabled:opacity-60 cursor-pointer">{pending? "Saving..." : "Finish"}</button>
+                        className="flex-1 rounded-lg bg-blue-600 py-2 font-semibold text-white disabled:opacity-60">{pending? "Saving..." : "Finish"}</button>
                     )}
                 </div>
         </form>
