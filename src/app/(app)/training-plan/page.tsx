@@ -6,14 +6,7 @@ import { formatEnum } from "@/lib/discipline"
 import { requireOnboardedUser } from "@/lib/session"
 import { getActiveTrainingPlan } from "@/lib/training-plan"
 import { createSamplePlan } from "./actions"
-import { request } from "http"
-
-const dateFormatter = new Intl.DateTimeFormat("en-GB", {
-  weekday: "long",
-  day: "numeric",
-  month: "short",
-  timeZone: "UTC",
-})
+import { formatWorkoutDate } from "@/lib/dates"
 
 const MS_PER_WEEK = 7*24*60*60*1000
 type PageProps = { searchParams: Promise<{ week?: string }> }
@@ -70,14 +63,12 @@ return(
   ))}
   </nav>
 {[1,2,3,4,5,6,7].map((day)=>{
-  const date = new Date(plan.startDate)
-  date.setUTCDate(date.getUTCDate() + (week -1 ) * 7 + (day-1))
   const dayWorkouts = weekWorkouts.filter((workout)=> workout.dayOfWeek === day)
 
   return(
     <section key={day}>
       <h2 className="mb-2 text-xs font-bold uppercase text-muted">
-        {dateFormatter.format(date)}
+        {formatWorkoutDate(plan.startDate, week, day)}
       </h2>
       {dayWorkouts.length > 0 ? (
         <div className="grid gap-3 md:grid-cols-2">

@@ -63,5 +63,16 @@ export async function getActiveTrainingPlan(userId: string){
         },
     })
 }
+// Returns the workout only if it belongs to this user, otherwise null
+export async function getWorkoutForUser(userId: string, workoutId: string) {
+  return prisma.workout.findFirst({
+    where: { id: workoutId, plan: { userId } },
+    include: {
+      plan: { select: { startDate: true } },
+      segments: { orderBy: { order: "asc" } },
+    },
+  })
+}
+
 type ActivePlan = NonNullable<Awaited<ReturnType<typeof getActiveTrainingPlan>>>
 export type PlanWorkout = ActivePlan["workouts"][number]
