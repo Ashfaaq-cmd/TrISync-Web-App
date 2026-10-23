@@ -5,11 +5,14 @@ import {
   DISCIPLINE_LABELS,
   formatEnum,
 } from "@/lib/discipline"
+import { formatDistance } from "@/lib/discipline"
 
 function describeSegment(segment: PlanWorkout["segments"][number]) {
   const parts = [DISCIPLINE_LABELS[segment.discipline]]
   if (segment.targetDurationMin) parts.push(`${segment.targetDurationMin} min`)
-  if (segment.targetDistanceKm) parts.push(`${segment.targetDistanceKm} km`)
+  if (segment.targetDistanceKm){ 
+    parts.push(formatDistance(segment.targetDistanceKm, segment.discipline))
+  }
   if (segment.targetIntensity) parts.push(segment.targetIntensity)
   return parts.join(" · ")
 }

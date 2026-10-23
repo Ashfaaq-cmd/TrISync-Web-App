@@ -1,13 +1,17 @@
+import Link from "next/link"
 import PageHeader from "@/components/page-header"
 import ProtectedPage from "@/components/protected-page"
 import {
   DISCIPLINE_CHIP_STYLES,
   DISCIPLINE_LABELS,
+  formatDistance,
 } from "@/lib/discipline"
 import { formatLogDate, formatWorkoutDate } from "@/lib/dates"
 import { requireOnboardedUser } from "@/lib/session"
 import { getLoggableWorkouts, getRecentLogs } from "@/lib/workout-log"
+import DeleteLogButton from "./delete-log-button"
 import LogWorkoutForm from "./log-workout-form"
+import SavedWorkoutNotice from "./saved-workout-notice"
 
 type PageProps = {
   searchParams: Promise<{ workoutId?: string; saved?: string }>
@@ -46,11 +50,7 @@ async function LogWorkoutContent({ searchParams }: PageProps) {
 
   return (
     <div className="max-w-2xl space-y-8 p-6 md:p-10">
-      {saved && (
-        <p role="status" className="rounded-lg bg-primary-soft px-4 py-3 text-sm text-success">
-          Workout saved.
-        </p>
-      )}
+      {saved && <SavedWorkoutNotice key={saved} />}
 
       <div className="rounded-xl border border-border bg-surface p-6">
         {/* A new key after saving gives an empty form again */}
@@ -81,7 +81,9 @@ async function LogWorkoutContent({ searchParams }: PageProps) {
                   >
                     {DISCIPLINE_LABELS[log.discipline]}
                   </span>
-                  <span className="text-sm text-muted">{formatLogDate(log.date)}</span>
+                  <span className="text-sm text-muted">
+                    {formatLogDate(log.date)}
+                  </span>
                 </div>
                 <p className="mt-2 font-semibold text-foreground">
                   {log.workout?.title ?? "Unplanned session"}
@@ -89,12 +91,23 @@ async function LogWorkoutContent({ searchParams }: PageProps) {
                 <p className="text-sm text-muted">
                   {[
                     log.durationMin ? `${log.durationMin} min` : null,
-                    log.distanceKm ? `${log.distanceKm} km` : null,
+                    log.distanceKm
+                      ? formatDistance(log.distanceKm, log.discipline)
+                      : null,
                     log.avgHeartRate ? `${log.avgHeartRate} bpm` : null,
                   ]
                     .filter(Boolean)
                     .join(" · ")}
                 </p>
+                <div className="mt-3 flex items-center gap-4">
+                  <Link
+                    href={`/log-workout/${log.id}`}
+                    className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-semibold text-link hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  >
+                    Edit
+                  </Link>
+                  <DeleteLogButton logId={log.id} />
+                </div>
               </li>
             ))}
           </ul>

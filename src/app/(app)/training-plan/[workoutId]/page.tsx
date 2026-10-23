@@ -10,6 +10,7 @@ import {
 } from "@/lib/discipline"
 import { requireOnboardedUser } from "@/lib/session"
 import { getWorkoutForUser } from "@/lib/training-plan"
+import { formatDistance } from "@/lib/discipline"
 
 type PageProps = { params: Promise<{ workoutId: string }> }
 export default function WorkoutDetailsPage({ params }: PageProps){
@@ -88,7 +89,7 @@ async function WorkoutContent({ params }: PageProps) {
                       <dt className="text-muted">Distance</dt>
                       <dd className="font-semibold text-foreground">
                         {segment.targetDistanceKm
-                          ? `${segment.targetDistanceKm} km`
+                          ? formatDistance(segment.targetDistanceKm, segment.discipline)
                           : "Not set"}
                       </dd>
                     </div>

@@ -21,3 +21,8 @@ export function formatEnum(value: string){
     const text = value.replaceAll("_", " ").toLowerCase()
     return text.charAt(0).toUpperCase() + text.slice(1)
 }
+// Swims read better in metres, everything else in kilometres
+export function formatDistance(km: number, discipline: Discipline) {
+  if (discipline === "SWIM") return `${Math.round(km * 1000)} m`
+  return `${km} km`
+}
