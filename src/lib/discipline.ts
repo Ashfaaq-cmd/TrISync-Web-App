@@ -12,8 +12,8 @@ export const DISCIPLINE_CHIP_STYLES: Record<Discipline, string> = {
     SWIM: "border-swim text-swim",
     BIKE: "border-bike text-bike",
     RUN: "border-run text-run",
-    BRICK: "border-bike text-bike",
-    STRENGTH: "border-muted text-muted",
+    BRICK: "border-brick text-brick",
+    STRENGTH: "border-strength text-strength",
     REST: "border-muted text-muted",
 }
 
