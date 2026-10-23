@@ -14,3 +14,12 @@ const date = new Date(startDate)
 date.setUTCDate(date.getUTCDate() + (weekNumber - 1) * 7 + (dayOfWeek -1 ))
 return formatter.format(date)
 }
+const logDateFormatter = new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+})
+export function formatLogDate(date: Date){
+    return logDateFormatter.format(date)
+}
