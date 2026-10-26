@@ -4,8 +4,6 @@ import type { ReactNode } from "react";
 import NavLinks from "@/components/nav-links";
 import SignOutButton from "@/components/sign-out-button";
 
-const sidebarSignOutStyle = "w-full rounded-lg px-3 py-2 text-left text-sm text-sidebar-foreground hover:bg-sidebar-active"
-
 export default function AppLayout({  children }:{ children: React.ReactNode}) {
 return(
     <div className="flex min-h-screen flex-col md:flex-row">
@@ -22,8 +20,8 @@ return(
             />
             </Link>
             <NavLinks />
-            <div className="mt-auto">
-                <SignOutButton className={sidebarSignOutStyle} />
+            <div className="mt-3">
+                <SignOutButton className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-left text-sm font-semibold text-foreground hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" />
             </div>
         </aside>
 
