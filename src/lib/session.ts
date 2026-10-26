@@ -8,11 +8,13 @@ export const requireUser = cache(async () => {
   const session = await auth()
   if (!session?.user?.id) redirect("/login")
 
-  return {
-    id: session.user.id,
-    name: session.user.name,
-    email: session.user.email,
-  }
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { id: true, name: true, email: true },
+  })
+  if (!user) redirect("/login")
+
+  return user
 })
 
 // Same as requireUser, but also sends users without a profile to onboarding

@@ -1,6 +1,6 @@
 "use client"
 
-import { useActionState, useState } from "react"
+import { useActionState, useEffect, useState } from "react"
 import type { ChangeEvent } from "react"
 import { DAYS, GOALS, LEVELS, MINUTES } from "@/lib/onboarding-options"
 import { updateProfile } from "./actions"
@@ -23,6 +23,17 @@ const labelClass = "block text-sm font-medium text-muted"
 export default function ProfileForm({ initial }: ProfileFormProps) {
   const [state, formAction, pending] = useActionState(updateProfile, undefined)
   const [values, setValues] = useState(initial)
+  const [expiredSuccess, setExpiredSuccess] = useState<typeof state>(undefined)
+
+  useEffect(() => {
+    if (!state?.success) return
+
+    const timeoutId = window.setTimeout(
+      () => setExpiredSuccess(state),
+      3000
+    )
+    return () => window.clearTimeout(timeoutId)
+  }, [state])
 
   function handleChange(field: keyof typeof initial) {
     return (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
@@ -143,7 +154,7 @@ export default function ProfileForm({ initial }: ProfileFormProps) {
           {state.error}
         </p>
       )}
-      {state?.success && (
+      {state?.success && expiredSuccess !== state && (
         <p role="status" className="text-sm text-success">
           Profile saved.
         </p>
