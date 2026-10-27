@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { ArrowLeft } from "lucide-react"
 import DisciplineChip from "@/components/discipline-chip"
 import MarkdownContent from "@/components/markdown-content"
 import PageHeader from "@/components/page-header"
@@ -26,9 +27,10 @@ async function ResourceContent({params}:PageProps) {
     <div className="max-w-2xl space-y-6 p-6 md:p-10">
         <Link
           href="/learning-hub"
-          className="text-sm font-medium text-link hover:underline"
+          className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2 text-sm font-semibold text-foreground hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         >
-          ← Back to Learning Hub
+          <ArrowLeft aria-hidden="true" size={16} />
+          Back to Learning Hub
         </Link>
          <div className="flex flex-wrap items-center gap-2">
           {resource.discipline && <DisciplineChip discipline={resource.discipline} />}

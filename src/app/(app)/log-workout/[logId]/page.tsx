@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { ArrowLeft } from "lucide-react"
 import PageHeader from "@/components/page-header"
 import ProtectedPage from "@/components/protected-page"
 import { requireOnboardedUser } from "@/lib/session"
@@ -34,8 +35,12 @@ async function EditLogContent({ params }: PageProps) {
 
   return (
     <div className="max-w-2xl space-y-6 p-6 md:p-10">
-      <Link href="/log-workout" className="text-sm font-medium text-link hover:underline">
-        ← Back to Log Workout
+      <Link
+        href="/log-workout"
+        className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2 text-sm font-semibold text-foreground hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+      >
+        <ArrowLeft aria-hidden="true" size={16} />
+        Back to Log Workout
       </Link>
       <div className="rounded-xl border border-border bg-surface p-6">
         <LogWorkoutForm

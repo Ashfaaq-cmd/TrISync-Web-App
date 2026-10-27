@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { ArrowLeft } from "lucide-react"
 import PageHeader from "@/components/page-header"
 import ProtectedPage from "@/components/protected-page"
 import { formatWorkoutDate } from "@/lib/dates"
@@ -40,7 +41,12 @@ async function WorkoutContent({ params }: PageProps) {
         <PageHeader title={workout.title} subtitle={`${date} . Week ${workout.weekNumber}`}
         />
         <div className="max-w-2xl space-y-6 p-6 md:p-10">
-            <Link href={`/training-plan?week=${workout.weekNumber}`} className="text-sm font-medium text-link hover:underline">← Back to Week {workout.weekNumber}
+            <Link
+              href={`/training-plan?week=${workout.weekNumber}`}
+              className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2 text-sm font-semibold text-foreground hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              <ArrowLeft aria-hidden="true" size={16} />
+              Back to Week {workout.weekNumber}
             </Link>
 
             <div className="flex flex-wrap items-center gap-3">
