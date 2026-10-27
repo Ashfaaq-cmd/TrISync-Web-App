@@ -1,11 +1,9 @@
 import { z } from "zod";
 import { RACE_GOALS } from '@/lib/validations/onboarding'
-import { title } from "process";
-import { MuscleGroup } from "@/generated/prisma";
 
 const DISCIPLINES = ["SWIM", "BIKE", "RUN","BRICK", "STRENGTH", "REST"] as const
 const SEGMENT_DISCIPLINES = ["SWIM", "BIKE", "RUN", "STRENGTH"] as const
-const MUSCLE_GROUP = [
+export const MUSCLE_GROUPS = [
 "QUADRICEPS",
 "HAMSTRINGS",
 "GLUTES",
@@ -31,7 +29,7 @@ const workoutSchema = z.object({
     discipline: z.enum(DISCIPLINES),
     title: z.string().min(1),
     description: z.string().optional(),
-    muscleGroups: z.array(z.enum(MUSCLE_GROUP)),
+    muscleGroups: z.array(z.enum(MUSCLE_GROUPS)),
     segments: z.array(segmentSchema),
 })
 .refine((workout)=>
