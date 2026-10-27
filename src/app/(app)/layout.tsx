@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
 import NavLinks from "@/components/nav-links";
 import SignOutButton from "@/components/sign-out-button";
 

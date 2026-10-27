@@ -19,7 +19,7 @@ export default function Splash({ name }: { name?: string | null }) {
         return () => clearTimeout(timer) },[router])
 
     return (
-        <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 px-5 py-10 text-white">
+        <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-linear-to-br from-slate-950 via-slate-900 to-blue-950 px-5 py-10 text-white">
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute -left-32 top-1/4 h-80 w-80 rounded-full bg-blue-500/20 blur-3xl"
@@ -29,7 +29,7 @@ export default function Splash({ name }: { name?: string | null }) {
                 className="pointer-events-none absolute -right-24 bottom-0 h-96 w-96 rounded-full bg-orange-500/10 blur-3xl"
             />
 
-            <section className="relative flex w-full max-w-lg flex-col items-center rounded-3xl border border-white/10 bg-white/[0.06] px-6 py-9 text-center shadow-2xl shadow-black/30 backdrop-blur-sm sm:px-12 sm:py-12">
+            <section className="relative flex w-full max-w-lg flex-col items-center rounded-3xl border border-white/10 bg-white/6 px-6 py-9 text-center shadow-2xl shadow-black/30 backdrop-blur-sm sm:px-12 sm:py-12">
                 <Image
                     src="/trisync-logo-white.png"
                     alt="TriSync"
@@ -42,7 +42,7 @@ export default function Splash({ name }: { name?: string | null }) {
                 <div className="relative mb-5 flex h-56 w-56 items-center justify-center sm:h-64 sm:w-64">
                     <div
                         aria-hidden="true"
-                        className="absolute inset-4 rounded-full border border-white/10 bg-gradient-to-br from-blue-400/15 to-orange-400/10 shadow-[0_0_80px_rgba(59,130,246,0.15)]"
+                        className="absolute inset-4 rounded-full border border-white/10 bg-linear-to-br from-blue-400/15 to-orange-400/10 shadow-[0_0_80px_rgba(59,130,246,0.15)]"
                     />
                     <Lottie
                         src={animationData}
