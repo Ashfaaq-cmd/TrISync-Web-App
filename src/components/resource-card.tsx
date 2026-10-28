@@ -1,6 +1,7 @@
 import Link from "next/link"
 import DisciplineChip from "@/components/discipline-chip"
 import type { LearningListItem } from "@/lib/learning"
+import Image from "next/image"
 
 export default function ResourceCard({ resource }: { resource: LearningListItem }) {
   return (
@@ -8,6 +9,15 @@ export default function ResourceCard({ resource }: { resource: LearningListItem 
       href={`/learning-hub/${resource.id}`}
       className="flex flex-col rounded-lg border border-border bg-surface p-4 hover:border-primary"
     >
+      {resource.type === "YOUTUBE_VIDEO" && resource.youtubeVideoId && (
+        <Image
+          src={`https://i.ytimg.com/vi/${resource.youtubeVideoId}/hqdefault.jpg`}
+          alt=""
+          width={480}
+          height={360}
+          className="mb-3 aspect-video w-full rounded-md object-cover"
+        />
+      )}
       <div className="flex items-center justify-between gap-2">
         <span className="rounded-full border border-border px-2 py-0.5 text-xs font-bold text-muted">
           {resource.type === "COACH_LESSON" ? "Coach lesson" : "Video"}

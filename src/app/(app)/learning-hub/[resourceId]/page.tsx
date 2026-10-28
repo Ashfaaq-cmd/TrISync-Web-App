@@ -8,6 +8,8 @@ import ProtectedPage from "@/components/protected-page"
 import { formatEnum } from "@/lib/discipline"
 import { getLearningResource } from "@/lib/learning"
 type PageProps = { params: Promise<{ resourceId: string }> }
+//Youtube video id are always 11 letters, digits, "-" or "_"
+const VIDEO_ID_PATTERN = /^[A-Za-z0-9_-]{11}$/
 export default function ResourcePage({ params }: PageProps){
     return (
         <ProtectedPage>
@@ -43,7 +45,27 @@ async function ResourceContent({params}:PageProps) {
             </span>
           ))}
         </div>
-                {resource.content && <MarkdownContent>{resource.content}</MarkdownContent>}
+         {resource.type === "YOUTUBE_VIDEO" &&
+          resource.youtubeVideoId &&
+          VIDEO_ID_PATTERN.test(resource.youtubeVideoId) && (
+            <div className="aspect-video w-full overflow-hidden rounded-lg border border-border">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${resource.youtubeVideoId}`}
+                title={resource.title}
+                loading="lazy"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                className="h-full w-full"
+              />
+            </div>
+          )}
+
+        {resource.type === "YOUTUBE_VIDEO" && resource.description && (
+          <p className="text-foreground">{resource.description}</p>
+        )}
+
+        {resource.content && <MarkdownContent>{resource.content}</MarkdownContent>}
  <p className="border-t border-border pt-4 text-xs text-muted">
           This content is general information for training. It does not replace
           advice from a qualified coach or medical professional.

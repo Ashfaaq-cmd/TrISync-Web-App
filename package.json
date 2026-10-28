@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "eslint",
     "postinstall": "prisma generate",
-    "db:seed": "tsx prisma/seed.ts"
+    "db:seed": "tsx prisma/seed.ts",
+    "yt:search": "tsx scripts/youtube-search.ts",
+    "db:seed-videos": "tsx scripts/seed-videos.ts"
+
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.3",
