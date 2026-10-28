@@ -12,6 +12,8 @@ import {
 import { requireOnboardedUser } from "@/lib/session"
 import { getWorkoutForUser } from "@/lib/training-plan"
 import { formatDistance } from "@/lib/discipline"
+import ResourceCard from "@/components/resource-card"
+import { getRecommendedResources } from "@/lib/learning"
 
 type PageProps = { params: Promise<{ workoutId: string }> }
 export default function WorkoutDetailsPage({ params }: PageProps){
@@ -29,6 +31,8 @@ async function WorkoutContent({ params }: PageProps) {
     //only returns the workout if it belongs to this user
     const workout = await getWorkoutForUser(user.id, workoutId)
     if(!workout) notFound()
+      //Rest days have no related learning
+    const related = workout.discipline === "REST" ? [] : await getRecommendedResources(workout)
 
         const date = formatWorkoutDate(
             workout.plan.startDate, workout.weekNumber,workout.dayOfWeek
@@ -127,6 +131,15 @@ async function WorkoutContent({ params }: PageProps) {
                 </span>
               ))}
             </div>
+          </section>
+        )}
+
+        {related.length > 0 && (
+          <section>
+            <h2 className="mb-3 text-xs font-bold uppercase text-muted">Recommended Learning</h2>
+            <div className="grid gap-3 sm:grid-cols-2">{related.map((resource)=> (
+              <ResourceCard key={resource.id} resource={resource}/>
+            ))}</div>
           </section>
         )}
 
