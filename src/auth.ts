@@ -5,9 +5,10 @@ import bcrypt from "bcryptjs"
 import { z } from "zod"
 import { prisma } from "@/lib/prisma"
 import Google from "next-auth/providers/google"
+import { gmailEmailSchema } from "@/lib/validations/email"
 
 const loginSchema = z.object({
-  email: z.email(),
+  email: gmailEmailSchema,
   password: z.string().min(8),
 })
 
@@ -46,6 +47,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
+    signIn({ user, account }) {
+      if (account?.provider === "google") {
+        return gmailEmailSchema.safeParse(user.email).success
+      }
+      return true
+    },
     // Make the user's id available on session.user
     session({ session, token }) {
       if (token.sub) session.user.id = token.sub

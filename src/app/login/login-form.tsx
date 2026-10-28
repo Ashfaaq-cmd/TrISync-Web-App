@@ -16,6 +16,8 @@ export default function LoginForm() {
           name="email"
             id="email"
             required
+            pattern=".+@[gG][mM][aA][iI][lL][.]com"
+            title="Use an email address ending in @gmail.com"
             placeholder="john@gmail.com"
             autoComplete="email"
             className="mt-1 w-full rounded-lg border border-border px-3 py-2 text-muted"/>

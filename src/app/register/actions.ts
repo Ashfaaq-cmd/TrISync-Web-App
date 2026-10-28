@@ -1,14 +1,13 @@
 "use server"
 
-import { AuthError } from "next-auth"
 import bcrypt from "bcryptjs"
 import { z } from "zod"
 import { prisma } from "@/lib/prisma"
-import { signIn } from "@/auth"
+import { gmailEmailSchema } from "@/lib/validations/email"
 
 const registerSchema = z.object({
   name: z.string().trim().min(2, "Name must be at least 2 characters"),
-  email: z.email("Enter a valid email address"),
+  email: gmailEmailSchema,
   password: z.string().min(8, "Password must be at least 8 characters"),
 })
 
@@ -36,17 +35,6 @@ export async function registerUser(
     return { error: "An account with this email already exists" }
   }
 
-  //hash password
   const hashedPassword = await bcrypt.hash(password, 12)
   await prisma.user.create({ data: { name, email, hashedPassword } })
-
-  // Log new user
-  try {
-    await signIn("credentials", { email, password, redirectTo: "/welcome" })
-  } catch (error) {
-    if (error instanceof AuthError) {
-      return { error: "Account created, but automatic login failed. Please log in." }
-    }
-    throw error
-  }
 }
