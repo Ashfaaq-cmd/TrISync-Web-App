@@ -23,15 +23,79 @@ type CuratedVideo = {
 // Add videos here after finding them with: npm run yt:search -- "your search"
 // The title and description are your own words, not copied from YouTube.
 const videos: CuratedVideo[] = [
-  // {
-  //   videoId: "11 characters from the video URL",
-  //   title: "Your title",
-  //   description: "Why this video is worth watching, in your own words",
-  //   discipline: "BRICK",
-  //   muscleGroups: ["QUADRICEPS", "CALVES"],
-  //   topicTags: ["brick training"],
-  // },
-]
+  {
+    videoId: "fFTUPkGTh_A",
+    title: "Run Faster In A Triathlon With This Brick Workout",
+    description:
+      "Learn how brick workouts combine cycling and running to help triathletes adapt to running after a bike session.",
+    discipline: "BRICK",
+    muscleGroups: ["QUADRICEPS", "HAMSTRINGS", "GLUTES", "CALVES"],
+    topicTags: ["brick training", "bike to run", "triathlon", "transition"],
+  },
+  {
+    videoId: "B-_-tVKrMUs",
+    title: "IRONMAN 70.3: What Are Triathlon Brick Sessions and Why Are They Important?",
+    description:
+      "Understand the purpose of brick sessions, why triathletes use them, and how they prepare you for the demands of race day.",
+    discipline: "BRICK",
+    muscleGroups: ["QUADRICEPS", "HAMSTRINGS", "GLUTES", "CALVES"],
+    topicTags: ["brick training", "IRONMAN", "race preparation", "bike to run"],
+  },
+  {
+    videoId: "JeluJHvClaE",
+    title: "5 Freestyle Drills For Beginner Swimmers",
+    description:
+      "Explore beginner-friendly freestyle drills designed to help develop swimming technique, coordination, and body position.",
+    discipline: "SWIM",
+    muscleGroups: ["SHOULDERS", "BACK", "CORE"],
+    topicTags: ["swimming", "freestyle", "technique", "beginner", "drills"],
+  },
+  {
+    videoId: "p5OLDtnSNLo",
+    title: "4 Essential Tips To Improve Your Swim Technique",
+    description:
+      "Learn practical swimming technique tips that can help improve efficiency and build better freestyle habits for triathlon training.",
+    discipline: "SWIM",
+    muscleGroups: ["SHOULDERS", "BACK", "CORE"],
+    topicTags: ["swimming", "freestyle", "technique", "efficiency"],
+  },
+  {
+    videoId: "4VrwO-RdMds",
+    title: "6 Easy Ways To Improve Your Average Speed On A Road Bike",
+    description:
+      "Discover practical cycling tips to improve your riding efficiency and work towards maintaining a better average speed.",
+    discipline: "BIKE",
+    muscleGroups: ["QUADRICEPS", "HAMSTRINGS", "GLUTES", "CALVES"],
+    topicTags: ["cycling", "road cycling", "speed", "performance"],
+  },
+  {
+    videoId: "iJg5MbP-PTs",
+    title: "7 Tips To Take You From Amateur To Accomplished Cyclist",
+    description:
+      "Explore useful cycling skills and habits to build confidence, improve riding technique, and become a more capable cyclist.",
+    discipline: "BIKE",
+    muscleGroups: ["QUADRICEPS", "HAMSTRINGS", "GLUTES", "CORE"],
+    topicTags: ["cycling", "cycling skills", "technique", "beginner"],
+  },
+  {
+    videoId: "v-p_0Bs4KNU",
+    title: "The 10 Biggest Mistakes New Runners Make (and How to Avoid Them)",
+    description:
+      "Learn about common mistakes made by beginner runners and practical ways to develop better running habits.",
+    discipline: "RUN",
+    muscleGroups: ["QUADRICEPS", "HAMSTRINGS", "GLUTES", "CALVES"],
+    topicTags: ["running", "beginner", "running tips", "technique"],
+  },
+  {
+    videoId: "msw3RZMvq1c",
+    title: "How to Run Properly: Improve Your Running Form and Technique",
+    description:
+      "Explore running form tips and technique adjustments that may help you develop a more efficient and controlled running style.",
+    discipline: "RUN",
+    muscleGroups: ["QUADRICEPS", "HAMSTRINGS", "GLUTES", "CALVES", "CORE"],
+    topicTags: ["running", "running form", "technique", "beginner"],
+  },
+];
 type VideosResponse = {
     items?: { id: string; status: { embeddable: boolean; privacyStatus:string } }[]
     error?: { message:string }
