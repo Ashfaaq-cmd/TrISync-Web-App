@@ -7,7 +7,7 @@ import { Lottie } from "lottie-react"
 import { ArrowRight } from "lucide-react"
 import animationData from "@/animations/trisplash.json"
 
-const SPLASH_DURATION = 4000 // Duration of the splash screen in milliseconds
+const SPLASH_DURATION = 6000 // Duration of the splash screen in milliseconds
 
 export default function Splash({ name }: { name?: string | null }) {
     const router = useRouter()
