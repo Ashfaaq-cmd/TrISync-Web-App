@@ -31,7 +31,7 @@ export default function Splash({ name }: { name?: string | null }) {
 
             <section className="relative flex w-full max-w-lg flex-col items-center rounded-3xl border border-white/10 bg-white/6 px-6 py-9 text-center shadow-2xl shadow-black/30 backdrop-blur-sm sm:px-12 sm:py-12">
                 <Image
-                    src="/trisync-logo-white.png"
+                    src="/trisync-logo-black.png"
                     alt="TriSync"
                     width={240}
                     height={120}
