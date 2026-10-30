@@ -10,11 +10,12 @@
     "postinstall": "prisma generate",
     "db:seed": "tsx prisma/seed.ts",
     "yt:search": "tsx scripts/youtube-search.ts",
-    "db:seed-videos": "tsx scripts/seed-videos.ts"
-
+    "db:seed-videos": "tsx scripts/seed-videos.ts",
+    "ai:test": "tsx scripts/ai-test.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.3",
+    "@google/genai": "^2.32.0",
     "@prisma/adapter-neon": "^7.10.0",
     "@prisma/client": "^7.10.0",
     "bcryptjs": "^3.0.3",
