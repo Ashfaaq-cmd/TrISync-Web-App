@@ -1,6 +1,5 @@
 import type { RaceGoal } from "@/generated/prisma"
 
-// Placeholder coaching settings for the prototype, to be set by the coach.
 // They are not medically validated prescriptions.
 export const PLAN_LENGTHS: Record<RaceGoal, { min: number; default: number; max: number }> = {
   GENERAL_FITNESS: { min: 8, default: 8, max: 8 },

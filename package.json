@@ -13,7 +13,8 @@
     "db:seed-videos": "tsx scripts/seed-videos.ts",
     "ai:test": "tsx scripts/ai-test.ts",
     "ai:models": "tsx scripts/list-models.ts",
-    "ai:test-full": "tsx scripts/ai-test-full.ts"
+    "ai:test-full": "tsx scripts/ai-test-full.ts",
+    "test:plan-rules": "tsx scripts/test-plan-validator.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.3",
