@@ -106,7 +106,8 @@ async function WorkoutContent({ params }: PageProps) {
                     <div>
                       <dt className="text-muted">Intensity</dt>
                       <dd className="font-semibold text-foreground">
-                        {segment.targetIntensity ?? "Not set"}
+                        {segment.targetIntensity ? formatEnum(segment.targetIntensity) 
+                        : "Not set"}
                       </dd>
                     </div>
                   </dl>

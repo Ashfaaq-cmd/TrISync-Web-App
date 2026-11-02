@@ -13,7 +13,7 @@ function describeSegment(segment: PlanWorkout["segments"][number]) {
   if (segment.targetDistanceKm){ 
     parts.push(formatDistance(segment.targetDistanceKm, segment.discipline))
   }
-  if (segment.targetIntensity) parts.push(segment.targetIntensity)
+  if (segment.targetIntensity) parts.push(formatEnum(segment.targetIntensity))
   return parts.join(" · ")
 }
 

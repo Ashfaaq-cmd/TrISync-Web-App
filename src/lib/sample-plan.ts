@@ -17,7 +17,7 @@ const weeklyTemplate: Omit<WorkoutInput, "weekNumber">[] = [
     description: "Steady swim with drills at the start to work on your stroke.",
     muscleGroups: ["SHOULDERS", "BACK", "CORE"],
     segments: [
-      { discipline: "SWIM", targetDistanceKm: 1.5, targetDurationMin: 45, targetIntensity: "Zone 2" },
+      { discipline: "SWIM", targetDistanceKm: 1.5, targetDurationMin: 45, targetIntensity: "EASY" },
     ],
   },
   {
@@ -27,7 +27,7 @@ const weeklyTemplate: Omit<WorkoutInput, "weekNumber">[] = [
     description: "Conversational pace. You should be able to talk the whole way.",
     muscleGroups: ["QUADRICEPS", "HAMSTRINGS", "CALVES"],
     segments: [
-      { discipline: "RUN", targetDistanceKm: 6, targetDurationMin: 40, targetIntensity: "Zone 2" },
+      { discipline: "RUN", targetDistanceKm: 6, targetDurationMin: 40, targetIntensity: "EASY" },
     ],
   },
   {
@@ -37,7 +37,7 @@ const weeklyTemplate: Omit<WorkoutInput, "weekNumber">[] = [
     description: "Warm up, then hold a firm but sustainable effort.",
     muscleGroups: ["QUADRICEPS", "GLUTES", "CALVES"],
     segments: [
-      { discipline: "BIKE", targetDistanceKm: 30, targetDurationMin: 60, targetIntensity: "Zone 3" },
+      { discipline: "BIKE", targetDistanceKm: 30, targetDurationMin: 60, targetIntensity: "MODERATE" },
     ],
   },
   {
@@ -46,7 +46,7 @@ const weeklyTemplate: Omit<WorkoutInput, "weekNumber">[] = [
     title: "Core and stability",
     description: "Bodyweight core work and hip stability exercises.",
     muscleGroups: ["CORE", "GLUTES", "HIP_FLEXORS"],
-    segments: [{ discipline: "STRENGTH", targetDurationMin: 30 }],
+    segments: [{ discipline: "STRENGTH", targetDurationMin: 30, targetIntensity: "EASY" }],
   },
   {
     dayOfWeek: 6,
@@ -55,8 +55,8 @@ const weeklyTemplate: Omit<WorkoutInput, "weekNumber">[] = [
     description: "Move from the bike straight into the run to practise the transition.",
     muscleGroups: ["QUADRICEPS", "CALVES", "HIP_FLEXORS"],
     segments: [
-      { discipline: "BIKE", targetDistanceKm: 20, targetDurationMin: 45, targetIntensity: "Zone 2" },
-      { discipline: "RUN", targetDistanceKm: 2.5, targetDurationMin: 15, targetIntensity: "Zone 2" },
+      { discipline: "BIKE", targetDistanceKm: 20, targetDurationMin: 45, targetIntensity: "EASY" },
+      { discipline: "RUN", targetDistanceKm: 2.5, targetDurationMin: 15, targetIntensity: "EASY" },
     ],
   },
   {
@@ -66,7 +66,7 @@ const weeklyTemplate: Omit<WorkoutInput, "weekNumber">[] = [
     description: "Your longest session of the week, at an easy effort.",
     muscleGroups: ["QUADRICEPS", "HAMSTRINGS", "CALVES", "CORE"],
     segments: [
-      { discipline: "RUN", targetDistanceKm: 10, targetDurationMin: 70, targetIntensity: "Zone 2" },
+      { discipline: "RUN", targetDistanceKm: 10, targetDurationMin: 70, targetIntensity: "EASY" },
     ],
   },
 ]

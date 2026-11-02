@@ -15,12 +15,12 @@ export const MUSCLE_GROUPS = [
 "ARMS",
 "HIP_FLEXORS",
 ] as const
-
+export const INTENSITIES = ["EASY", "MODERATE", "HARD"] as const
 const segmentSchema = z.object({
     discipline: z.enum(SEGMENT_DISCIPLINES),
     targetDistanceKm: z.number().positive().optional(),
     targetDurationMin: z.number().int().positive().optional(),
-    targetIntensity: z.string().optional(),
+    targetIntensity: z.enum(INTENSITIES).optional(),
 })
 
 const workoutSchema = z.object({
