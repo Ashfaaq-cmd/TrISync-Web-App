@@ -1,54 +1,58 @@
 import "dotenv/config"
 import { GoogleGenAI } from "@google/genai"
+import type { ThinkingLevel } from "@google/genai"
 import { z } from "zod"
 import { trainingPlanSchema } from "../src/lib/validations/training-plan"
 
 const apiKey = process.env.GEMINI_API_KEY ?? ""
-const model = process.env.AI_MODEL ?? ""
-
-if (!apiKey || !model) {
-  console.error("Set GEMINI_API_KEY and AI_MODEL in .env first")
-  process.exit(1)
-}
-
-const ai = new GoogleGenAI({ apiKey })
+// Usage: npm run ai:test -- <model> [thinking level]
+const [model, thinkingLevel] = process.argv.slice(2)
 
 async function main() {
-  // Test 1: can we reach the model and get JSON back?
-  const hello = await ai.models.generateContent({
-    model,
-    contents: "Reply with a short greeting.",
-    config: {
-      responseMimeType: "application/json",
-      responseJsonSchema: z.toJSONSchema(z.object({ greeting: z.string() })),
-    },
-  })
-  console.log("Test 1 response:", hello.text)
+  if (!apiKey || !model) {
+    throw new Error("Usage: npm run ai:test -- <model> [minimal|low|medium|high]")
+  }
 
-  // Test 2: does the model accept our real plan schema?
+  const ai = new GoogleGenAI({ apiKey })
   const startedAt = Date.now()
-  const response = await ai.models.generateContent({
-    model,
-    contents:
-      "Create a 1-week triathlon training plan for a beginner training for a sprint triathlon. " +
-      "3 training days, at most 45 minutes per session. Explain each workout in simple language.",
-    config: {
-      responseMimeType: "application/json",
-      responseJsonSchema: z.toJSONSchema(trainingPlanSchema),
-    },
-  })
-  console.log(`Test 2 took ${Math.round((Date.now() - startedAt) / 1000)} seconds`)
-  console.log("Tokens used:", response.usageMetadata)
 
-  const result = trainingPlanSchema.safeParse(JSON.parse(response.text ?? ""))
-  console.log(
-    result.success
-      ? `Plan is valid: ${result.data.workouts.length} workouts`
-      : result.error.issues
-  )
+  try {
+    const response = await ai.models.generateContent({
+      model,
+      contents:
+        "Create a 1-week triathlon training plan for a beginner training for a sprint triathlon. " +
+        "3 training days, at most 45 minutes per session. Explain each workout in simple language.",
+      config: {
+        responseMimeType: "application/json",
+        responseJsonSchema: z.toJSONSchema(trainingPlanSchema),
+        ...(thinkingLevel
+          ? { thinkingConfig: { thinkingLevel: thinkingLevel.toUpperCase() as ThinkingLevel } }
+          : {}),
+      },
+    })
+
+    const seconds = Math.round((Date.now() - startedAt) / 1000)
+    const usage = response.usageMetadata
+    console.log(`${model} (thinking: ${thinkingLevel ?? "default"}) OK in ${seconds}s`)
+    console.log(
+      `output tokens: ${usage?.candidatesTokenCount}, thinking tokens: ${usage?.thoughtsTokenCount ?? 0}`
+    )
+
+    const result = trainingPlanSchema.safeParse(JSON.parse(response.text ?? ""))
+    console.log(
+      result.success
+        ? `Plan is valid: ${result.data.workouts.length} workouts`
+        : result.error.issues
+    )
+  } catch (error) {
+    const seconds = Math.round((Date.now() - startedAt) / 1000)
+    const status = (error as { status?: number }).status
+    console.log(`${model} FAILED after ${seconds}s (status ${status})`)
+    console.log((error as Error).message)
+  }
 }
 
 main().catch((error) => {
   console.error(error)
-  process.exit(1)
+  process.exitCode = 1
 })

@@ -11,7 +11,9 @@
     "db:seed": "tsx prisma/seed.ts",
     "yt:search": "tsx scripts/youtube-search.ts",
     "db:seed-videos": "tsx scripts/seed-videos.ts",
-    "ai:test": "tsx scripts/ai-test.ts"
+    "ai:test": "tsx scripts/ai-test.ts",
+    "ai:models": "tsx scripts/list-models.ts",
+    "ai:test-full": "tsx scripts/ai-test-full.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.3",
