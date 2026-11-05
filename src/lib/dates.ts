@@ -23,3 +23,13 @@ const logDateFormatter = new Intl.DateTimeFormat("en-GB", {
 export function formatLogDate(date: Date){
     return logDateFormatter.format(date)
 }
+// Plans start on the next Monday
+// Dates are stored in UTC so server time zone shift them by a day
+export function nextMonday(from = new Date()){
+    const date = new Date(
+        Date.UTC(from.getUTCFullYear(), from.getUTCMonth(), from.getUTCDate())
+    )
+    const daysUntilMonday = (8 - date.getUTCDay()) % 7 || 7
+    date.setUTCDate(date.getUTCDate() + daysUntilMonday)
+    return date
+}

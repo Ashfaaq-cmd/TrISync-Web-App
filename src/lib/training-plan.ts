@@ -1,16 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import type { TrainingPlanInput } from "./validations/training-plan";
-
-//Plans start on next Mon, dates stored as plain UTC dates so server time zone cannot shift them by a day
-
-function nextMonday(from = new Date()){
-    const date = new Date(
-        Date.UTC(from.getUTCFullYear(), from.getUTCMonth(), from.getUTCDate())
-    )
-    const daysUntilMonday = (8 - date.getUTCDay()) % 7 || 7 
-    date.setUTCDate(date.getUTCDate() + daysUntilMonday)
-    return date
-}
+import { nextMonday } from "@/lib/dates";
 
 export async function saveTrainingPlan(userId: string, plan: TrainingPlanInput){
     const startDate = nextMonday()

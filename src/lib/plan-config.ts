@@ -28,3 +28,5 @@ export const PLAN_RULES = {
   // Rule 13: shortest accepted workout explanation, in characters
   minDescriptionLength: 20,
 }
+// Shortest plan we will generate when a race date is close
+export const MIN_PLAN_WEEKS = 4

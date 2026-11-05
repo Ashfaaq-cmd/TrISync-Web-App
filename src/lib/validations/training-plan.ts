@@ -27,8 +27,8 @@ const workoutSchema = z.object({
     weekNumber: z.number().int().min(1),
     dayOfWeek: z.number().int().min(1).max(7),
     discipline: z.enum(DISCIPLINES),
-    title: z.string().min(1),
-    description: z.string().optional(),
+    title: z.string().min(1).max(100),
+    description: z.string().max(500).optional(),
     muscleGroups: z.array(z.enum(MUSCLE_GROUPS)),
     segments: z.array(segmentSchema),
 })
@@ -43,7 +43,7 @@ workout.discipline === "REST"
 )
 
 export const trainingPlanSchema = z.object({
-    title: z.string().min(1),
+    title: z.string().min(1).max(100),
     goal: z.enum(RACE_GOALS),
     totalWeeks: z.number().int().min(1).max(24),
     workouts: z.array(workoutSchema).min(1),

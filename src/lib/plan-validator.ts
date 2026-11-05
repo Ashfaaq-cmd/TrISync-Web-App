@@ -8,6 +8,7 @@ export type PlanContext = {
   minutesPerSession: number
   requestedWeeks: number
   hasRaceDate: boolean
+  isUnwell?: boolean
 }
 
 function workoutMinutes(workout: WorkoutInput) {
@@ -121,7 +122,12 @@ export function validatePlan(plan: TrainingPlanInput, context: PlanContext): str
           `${label} is a brick session in week ${week}; beginners do none before week ${PLAN_RULES.beginnerBrickFreeWeeks + 1}`
         )
       }
-
+      // RULE 10: no hard sessions when unwell
+      if (context.isUnwell && week <= 2 && isHard(workout)) {
+        problems.push(
+          `${label} is a hard session, but the athlete is unwell`)
+        }
+        
       if (isHard(workout)) {
         hardSessions += 1
         hardDays.add((week - 1) * 7 + workout.dayOfWeek)
