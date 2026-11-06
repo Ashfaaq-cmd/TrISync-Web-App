@@ -15,6 +15,7 @@ import {
   type TrainingPlanInput,
 } from "@/lib/validations/training-plan"
 import { formatEnum } from "@/lib/discipline"
+import { repairPlan } from "@/lib/plan-repair"
 
 const MAX_ATTEMPTS = 4
 const TOTAL_TIME_BUDGET_MS = 240_000
@@ -69,7 +70,14 @@ function checkAnswer(text: string, context: PlanContext, goal: RaceGoal) {
 
   // We know the athlete's goal, so we do not rely on the AI for it
   const plan = { ...parsed.data, goal, title: `${parsed.data.totalWeeks}-week ${formatEnum(goal)} plan`, }
-  return { plan, json, problems: validatePlan(plan, context).slice(0, MAX_PROBLEMS) }
+    // Small overshoots are fixed in code. The AI's own answer is kept in json.
+  const repaired = repairPlan(plan, context)
+  return {
+    plan: repaired.plan,
+    repairs: repaired.repairs,
+    json,
+    problems: validatePlan(repaired.plan, context).slice(0, MAX_PROBLEMS),
+  }
 }
 
 export async function generateTrainingPlan(
@@ -135,7 +143,7 @@ export async function generateTrainingPlan(
     if (checked.plan && checked.problems.length === 0) {
       return {
         plan: checked.plan,
-        aiRawOutput: { attempts: attempt, rejectedAttempts, response: checked.json },
+        aiRawOutput: { attempts: attempt, repairs: checked.repairs, rejectedAttempts, response: checked.json },
         aiModel: result.model,
         aiPromptVersion: PROMPT_VERSION,
       }

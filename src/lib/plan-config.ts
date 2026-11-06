@@ -28,6 +28,9 @@ export const PLAN_RULES = {
   maxConsecutiveHardDays: 1,
   // Rule 13: shortest accepted workout explanation, in characters
   minDescriptionLength: 20,
+    // Repair: the biggest overage (in percent) that code fixes by shortening
+  // instead of asking the AI to try again
+  maxRepairOveragePercent: 20,
 }
 // Shortest plan we will generate when a race date is close
 export const MIN_PLAN_WEEKS = 4

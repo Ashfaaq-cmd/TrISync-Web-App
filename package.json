@@ -15,7 +15,8 @@
     "ai:models": "tsx scripts/list-models.ts",
     "ai:test-full": "tsx scripts/ai-test-full.ts",
     "test:plan-rules": "tsx scripts/test-plan-validator.ts",
-    "ai:test-plan": "tsx scripts/test-generate-plan.ts"
+    "ai:test-plan": "tsx scripts/test-generate-plan.ts",
+    "test:plan-repair": "tsx scripts/test-plan-repair.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.3",

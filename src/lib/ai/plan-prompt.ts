@@ -3,7 +3,7 @@ import { PLAN_RULES } from "@/lib/plan-config"
 import { MUSCLE_GROUPS } from "@/lib/validations/training-plan"
 
 // Change this whenever the prompt changes, so plans can be compared by version
-export const PROMPT_VERSION = "v4"
+export const PROMPT_VERSION = "v5"
 
 export type RecentTraining = {
   weeks: number

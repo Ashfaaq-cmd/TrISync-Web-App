@@ -30,11 +30,14 @@ async function main() {
     const seconds = Math.round((Date.now() - startedAt) / 1000)
         const raw = result.aiRawOutput as {
       attempts: number
+      repairs: string[]
       rejectedAttempts: { model: string; problems: string[] }[]
     }
 
     console.log(`\nSUCCESS in ${seconds}s with ${result.aiModel}, prompt ${result.aiPromptVersion}`)
     console.log(`Attempts needed: ${raw.attempts}`)
+    console.log(`Repairs made in code: ${raw.repairs.length}`)
+    raw.repairs.slice(0, 6).forEach((repair) => console.log("  -", repair))
     raw.rejectedAttempts.forEach((attempt, index) => {
       console.log(
         `Attempt ${index + 1} (${attempt.model}) was rejected, ${attempt.problems.length} problems:`
