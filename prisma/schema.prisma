@@ -29,6 +29,7 @@ model User {
   trainingPlans       TrainingPlan[]
   workoutLogs         WorkoutLog[]
   performanceInsights PerformanceInsight[]
+  planGenerationLogs  PlanGenerationLog[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -270,4 +271,25 @@ model WorkoutResource {
   resource   LearningResource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
 
   @@id([workoutId, resourceId])
+}
+enum GenerationOutcome {
+  SUCCESS
+  RULES_FAILED
+  UNAVAILABLE
+}
+
+model PlanGenerationLog {
+  id            String            @id @default(cuid())
+  userId        String
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  outcome       GenerationOutcome
+  attempts      Int
+  repairs       Int               @default(0)
+  aiModel       String?
+  promptVersion String
+  durationMs    Int
+  problems      Json?
+  createdAt     DateTime          @default(now())
+
+  @@index([userId, createdAt])
 }

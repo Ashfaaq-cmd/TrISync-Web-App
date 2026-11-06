@@ -46,3 +46,21 @@ export function derivePaceAndSpeed(
     avgSpeedKmh: Math.round((distanceKm / (durationMin / 60)) * 10) / 10,
   }
 }
+// Totals only. No notes or other free text are ever sent to the AI.
+export async function getRecentTraining(userId: string, now = new Date()) {
+  const weeks = 4
+  const since = new Date(now.getTime() - weeks * 7 * 24 * 60 * 60 * 1000)
+
+  const logs = await prisma.workoutLog.findMany({
+    where: { userId, date: { gte: since } },
+    select: { discipline: true, durationMin: true },
+  })
+  if (logs.length === 0) return undefined
+
+  const minutesByDiscipline: Record<string, number> = {}
+  for (const log of logs) {
+    minutesByDiscipline[log.discipline] =
+      (minutesByDiscipline[log.discipline] ?? 0) + (log.durationMin ?? 0)
+  }
+  return { weeks, sessions: logs.length, minutesByDiscipline }
+}

@@ -1,8 +1,9 @@
 import { prisma } from "@/lib/prisma";
 import type { TrainingPlanInput } from "./validations/training-plan";
 import { nextMonday } from "@/lib/dates";
+import type { Prisma } from "@/generated/prisma"
 
-export async function saveTrainingPlan(userId: string, plan: TrainingPlanInput){
+export async function saveTrainingPlan(userId: string, plan: TrainingPlanInput, ai?: { aiModel: string; aiPromptVersion: string; aiRawOutput: unknown }){
     const startDate = nextMonday()
     const endDate = new Date(startDate)
     endDate.setUTCDate(endDate.getUTCDate() + plan.totalWeeks * 7 - 1)
@@ -19,6 +20,9 @@ export async function saveTrainingPlan(userId: string, plan: TrainingPlanInput){
                 title: plan.title,
                 goal: plan.goal,
                 totalWeeks: plan.totalWeeks, startDate,endDate,
+                aiModel: ai?.aiModel,
+                aiPromptVersion: ai?.aiPromptVersion,
+                aiRawOutput: ai?.aiRawOutput as Prisma.InputJsonValue | undefined,
                 workouts:{
                     create: plan.workouts.map((workout)=>({
                         weekNumber: workout.weekNumber,

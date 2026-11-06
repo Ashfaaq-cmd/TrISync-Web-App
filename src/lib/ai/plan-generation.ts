@@ -36,18 +36,27 @@ export type GeneratedPlan = {
   aiRawOutput: unknown
   aiModel: string
   aiPromptVersion: string
+  attempts: number
+  repairs: number
 }
 
 // UserMessage safe to show to the user; retry later
 export class PlanGenerationError extends Error{
     userMessage: string
     temporary: boolean
+    attempts: number
+    rejectedAttempts: unknown
 
-    constructor(userMessage: string, temporary = false) {
+    constructor(
+    userMessage: string,
+    options: { temporary?: boolean; attempts?: number; rejectedAttempts?: unknown } = {}
+  ) {
     super(userMessage)
     this.name = "PlanGenerationError"
     this.userMessage = userMessage
-    this.temporary = temporary
+    this.temporary = options.temporary ?? false
+    this.attempts = options.attempts ?? 0
+    this.rejectedAttempts = options.rejectedAttempts
   }
 }
 // Check the AI's answer: valid JSON, right shape, then the coaching rules
@@ -127,14 +136,15 @@ export async function generateTrainingPlan(
       if (error instanceof AiUnavailableError) {
         throw new PlanGenerationError(
           "The AI service is busy right now. Please try again in a few minutes.",
-          true
+          { temporary: true, attempts: attempt}
         )
       }
       // Log the message only: never the prompt, the key or personal data
       console.error("AI provider error:", (error as Error).message)
       throw new PlanGenerationError(
         "The plan could not be generated because of a service problem. Please try again later.",
-        true
+        { temporary: true, attempts: attempt}
+
       )
     }
 
@@ -146,6 +156,8 @@ export async function generateTrainingPlan(
         aiRawOutput: { attempts: attempt, repairs: checked.repairs, rejectedAttempts, response: checked.json },
         aiModel: result.model,
         aiPromptVersion: PROMPT_VERSION,
+        attempts: attempt,
+        repairs: checked.repairs.length,
       }
     }
 
@@ -158,6 +170,7 @@ export async function generateTrainingPlan(
 
   console.error("Plan failed the training rules after all attempts:", rejectedAttempts)
   throw new PlanGenerationError(
-    "We could not build a plan that meets our training rules this time. Please try again."
+    "We could not build a plan that meets our training rules this time. Please try again.",
+    { attempts: MAX_ATTEMPTS, rejectedAttempts }
   )
 }
