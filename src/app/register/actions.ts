@@ -1,6 +1,7 @@
 "use server"
 
 import bcrypt from "bcryptjs"
+import { redirect } from "next/navigation"
 import { z } from "zod"
 import { prisma } from "@/lib/prisma"
 import { gmailEmailSchema } from "@/lib/validations/email"
@@ -37,4 +38,5 @@ export async function registerUser(
 
   const hashedPassword = await bcrypt.hash(password, 12)
   await prisma.user.create({ data: { name, email, hashedPassword } })
+  redirect("/login")
 }
