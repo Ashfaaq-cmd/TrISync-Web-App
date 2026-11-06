@@ -3,7 +3,7 @@ import { PLAN_RULES } from "@/lib/plan-config"
 import { MUSCLE_GROUPS } from "@/lib/validations/training-plan"
 
 // Change this whenever the prompt changes, so plans can be compared by version
-export const PROMPT_VERSION = "v2"
+export const PROMPT_VERSION = "v3"
 
 export type RecentTraining = {
   weeks: number
@@ -58,7 +58,7 @@ export function buildPlanPrompt(input: PromptInput) {
   const rules = [
     `Every week has exactly 7 workouts, one for each dayOfWeek from 1 (Monday) to 7 (Sunday). Rest days use discipline "REST" with no segments and no muscleGroups.`,
     `Use at least ${minTrainingDays} and at most ${input.daysPerWeek} training days (non-REST) in every week.`,
-    `The total of all segment durations in one workout must not exceed ${input.minutesPerSession} minutes. Every non-REST segment needs targetDurationMin and targetIntensity.`,
+      `The total of all segment durations in one workout must not exceed ${input.minutesPerSession} minutes. This includes BRICK workouts: the BIKE and RUN segments together must fit inside the limit. Stay a little under the limit, never over it. Every non-REST segment needs targetDurationMin and targetIntensity.`,
     `targetIntensity is EASY (conversational), MODERATE (steady, comfortably hard) or HARD (intervals, threshold or race pace).`,
     `Increase the weekly total training time gradually: no week may be more than ${PLAN_RULES.maxWeeklyIncreasePercent}% above the previous build week, or ${PLAN_RULES.maxWeeklyIncreaseMinutes} minutes above it if that is larger.`,
     `Include a recovery week at least every ${PLAN_RULES.maxBuildWeeksInARow} weeks, with a total at least ${PLAN_RULES.recoveryReductionPercent}% lower than the week before it.`,
@@ -82,5 +82,7 @@ export function buildPlanPrompt(input: PromptInput) {
        `The plan must contain exactly ${input.weeks * 7} workouts (${input.weeks} weeks of 7 days). Write out every single week and day. Never stop early, shorten the plan or skip weeks.`,
     `Rules the plan must follow:`,
     ...rules.map((rule, index) => `${index + 1}. ${rule}`),
+    ``,
+    `Before you answer, add up the minutes of every workout and every week and check each rule.`
   ].join("\n")
 }

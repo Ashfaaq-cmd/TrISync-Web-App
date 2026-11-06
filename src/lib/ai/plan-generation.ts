@@ -14,8 +14,9 @@ import {
   trainingPlanSchema,
   type TrainingPlanInput,
 } from "@/lib/validations/training-plan"
+import { formatEnum } from "@/lib/discipline"
 
-const MAX_ATTEMPTS = 3
+const MAX_ATTEMPTS = 4
 const TOTAL_TIME_BUDGET_MS = 240_000
 const MAX_PROBLEMS = 15
 
@@ -67,7 +68,7 @@ function checkAnswer(text: string, context: PlanContext, goal: RaceGoal) {
   }
 
   // We know the athlete's goal, so we do not rely on the AI for it
-  const plan = { ...parsed.data, goal }
+  const plan = { ...parsed.data, goal, title: `${parsed.data.totalWeeks}-week ${formatEnum(goal)} plan`, }
   return { plan, json, problems: validatePlan(plan, context).slice(0, MAX_PROBLEMS) }
 }
 
@@ -144,7 +145,7 @@ export async function generateTrainingPlan(
     prompt =
       `${basePrompt}\n\nYour previous answer broke these rules:\n` +
       checked.problems.map((problem) => `- ${problem}`).join("\n") +
-      `\n\nReturn the complete corrected plan.`
+      `\n\nWrite the whole plan again from week 1 to week ${length.weeks}, all ${length.weeks * 7} workouts, with these problems fixed. Do not return only the corrected parts.`
   }
 
   console.error("Plan failed the training rules after all attempts:", rejectedAttempts)
