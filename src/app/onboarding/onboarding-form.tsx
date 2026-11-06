@@ -15,7 +15,7 @@ type OptionCardProps ={
 
 function OptionCard({name,value,label,description,checked, onChange}: OptionCardProps){
     return(
-        <label className="flex flex-col rounded-lg border border-border p-4 has-checked:border-primary has-checked:bg-primary-soft has-[:focus-visible]: ring-2 has-focus-visible:ring-primary">
+        <label className="flex cursor-pointer flex-col rounded-lg border border-border p-4 has-checked:border-primary has-checked:bg-primary-soft has-[:focus-visible]: ring-2 has-focus-visible:ring-primary">
             <input
             type="radio" name={name} value={value} checked={checked}
             onChange={()=>onChange(value)}

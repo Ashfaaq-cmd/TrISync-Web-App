@@ -11,20 +11,6 @@ import { getRecentTraining } from "@/lib/workout-log"
 
 // Counts every real attempt except ones where the AI service itself was down
 const DAILY_LIMIT = 5
-// Keep the new model delegate usable if this environment's generated Prisma
-// client types have not yet been refreshed.
-const planGenerationLog = (prisma as unknown as {
-  planGenerationLog: {
-    count: (args: {
-      where: {
-        userId: string
-        createdAt: { gte: Date }
-        outcome: { not: string }
-      }
-    }) => Promise<number>
-    create: (args: { data: Record<string, unknown> }) => Promise<unknown>
-  }
-}).planGenerationLog
 
 export type GeneratePlanState = { error?: string } | undefined
 
@@ -36,7 +22,7 @@ export async function generatePlan(
   const { user, profile } = await requireOnboardedUser()
 
   const since = new Date(Date.now() - 24 * 60 * 60 * 1000)
-  const used = await planGenerationLog.count({
+  const used = await prisma.planGenerationLog.count({
     where: { userId: user.id, createdAt: { gte: since }, outcome: { not: "UNAVAILABLE" } },
   })
   if (used >= DAILY_LIMIT) {
@@ -64,7 +50,7 @@ export async function generatePlan(
       aiRawOutput: result.aiRawOutput,
     })
 
-    await planGenerationLog.create({
+    await prisma.planGenerationLog.create({
       data: {
         userId: user.id,
         outcome: "SUCCESS",
@@ -84,7 +70,7 @@ export async function generatePlan(
 
     // A race date that is too close is rejected before any AI call, so nothing is logged
     if (error.attempts > 0) {
-      await planGenerationLog.create({
+      await prisma.planGenerationLog.create({
         data: {
           userId: user.id,
           outcome: error.temporary ? "UNAVAILABLE" : "RULES_FAILED",

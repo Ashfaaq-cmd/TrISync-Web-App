@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/session";
 import OnboardingForm from "./onboarding-form"; 
@@ -17,6 +18,7 @@ export default function OnboardingPage(){
 }
 
 async function OnboardingContent() {
+    await connection()
     const user = await requireUser()
 
     // Users who already finished onboarding dont see it again
