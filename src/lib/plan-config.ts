@@ -26,8 +26,6 @@ export const PLAN_RULES = {
   // Rule 7: limits on hard sessions
   maxHardSessionsPerWeek: 2,
   maxConsecutiveHardDays: 1,
-  // Rule 1: a week must use at least this share of the chosen training days
-  minTrainingDaysFraction: 0.5,
   // Rule 13: shortest accepted workout explanation, in characters
   minDescriptionLength: 20,
 }

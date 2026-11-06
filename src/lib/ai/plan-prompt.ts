@@ -3,7 +3,7 @@ import { PLAN_RULES } from "@/lib/plan-config"
 import { MUSCLE_GROUPS } from "@/lib/validations/training-plan"
 
 // Change this whenever the prompt changes, so plans can be compared by version
-export const PROMPT_VERSION = "v3"
+export const PROMPT_VERSION = "v4"
 
 export type RecentTraining = {
   weeks: number
@@ -29,7 +29,6 @@ export const SYSTEM_PROMPT =
   "The plan is general guidance, not medical advice."
 
 export function buildPlanPrompt(input: PromptInput) {
-  const minTrainingDays = Math.ceil(input.daysPerWeek * PLAN_RULES.minTrainingDaysFraction)
 
   const athlete = [
     `- Experience level: ${input.experienceLevel}`,
@@ -57,7 +56,7 @@ export function buildPlanPrompt(input: PromptInput) {
 
   const rules = [
     `Every week has exactly 7 workouts, one for each dayOfWeek from 1 (Monday) to 7 (Sunday). Rest days use discipline "REST" with no segments and no muscleGroups.`,
-    `Use at least ${minTrainingDays} and at most ${input.daysPerWeek} training days (non-REST) in every week.`,
+    `Use exactly ${input.daysPerWeek} training days (workouts that are not REST) in every week. Only a recovery week${input.useRaceDate ? " or the race-week taper" : ""} may use ${Math.max(1, input.daysPerWeek - 1)} instead.`,
       `The total of all segment durations in one workout must not exceed ${input.minutesPerSession} minutes. This includes BRICK workouts: the BIKE and RUN segments together must fit inside the limit. Stay a little under the limit, never over it. Every non-REST segment needs targetDurationMin and targetIntensity.`,
     `targetIntensity is EASY (conversational), MODERATE (steady, comfortably hard) or HARD (intervals, threshold or race pace).`,
     `Increase the weekly total training time gradually: no week may be more than ${PLAN_RULES.maxWeeklyIncreasePercent}% above the previous build week, or ${PLAN_RULES.maxWeeklyIncreaseMinutes} minutes above it if that is larger.`,

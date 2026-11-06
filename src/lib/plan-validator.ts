@@ -52,29 +52,17 @@ export function validatePlan(plan: TrainingPlanInput, context: PlanContext): str
   if (problems.length > 0) return problems
 
   const weekMinutes: number[] = []
+  const trainingCounts: number[] = []
   // Each day in the plan gets a number: (week - 1) * 7 + day
   const hardDays = new Set<number>()
-  const minTrainingDays = Math.ceil(
-    context.daysPerWeek * PLAN_RULES.minTrainingDaysFraction
-  )
 
   for (let week = 1; week <= context.requestedWeeks; week++) {
     const training = (weeks.get(week) ?? []).filter(
       (workout) => workout.discipline !== "REST"
     )
+    trainingCounts.push(training.length)
 
-    // RULE 1: respect the number of training days the athlete chose
-    if (training.length > context.daysPerWeek) {
-      problems.push(
-        `Week ${week} has ${training.length} training days, more than the ${context.daysPerWeek} the athlete chose`
-      )
-    } else if (training.length < minTrainingDays) {
-      problems.push(
-        `Week ${week} has only ${training.length} training days, at least ${minTrainingDays} are needed`
-      )
-    }
-
-    // RULE 6: swim, bike and run all appear (a brick counts as bike and run)
+    // Rule 6: swim, bike and run all appear (a brick counts as bike and run)
     if (training.length >= 3) {
       const used = new Set(
         training.flatMap((workout) => workout.segments.map((segment) => segment.discipline))
@@ -90,7 +78,7 @@ export function validatePlan(plan: TrainingPlanInput, context: PlanContext): str
     for (const workout of training) {
       const label = `Week ${week}, day ${workout.dayOfWeek} (${workout.title})`
 
-      // RULE 2: stay within the session length
+      // Rule 2: the whole workout, bricks included, stays within the session length
       if (workout.segments.some((segment) => !segment.targetDurationMin)) {
         problems.push(`${label}: every segment needs a duration`)
       } else if (workoutMinutes(workout) > context.minutesPerSession) {
@@ -99,12 +87,12 @@ export function validatePlan(plan: TrainingPlanInput, context: PlanContext): str
         )
       }
 
-      // RULE 7 needs an intensity on every segment
+      // Rule 7 needs an intensity on every segment
       if (workout.segments.some((segment) => !segment.targetIntensity)) {
         problems.push(`${label}: every segment needs an intensity`)
       }
 
-      // RULE 13: explain the workout and what it works
+      // Rule 13: explain the workout and what it works
       if ((workout.description ?? "").trim().length < PLAN_RULES.minDescriptionLength) {
         problems.push(`${label} needs a short explanation`)
       }
@@ -112,7 +100,7 @@ export function validatePlan(plan: TrainingPlanInput, context: PlanContext): str
         problems.push(`${label} needs at least one targeted muscle group`)
       }
 
-      // RULE 5: no early brick sessions for beginners
+      // Rule 5: no early brick sessions for beginners
       if (
         workout.discipline === "BRICK" &&
         context.experienceLevel === "BEGINNER" &&
@@ -122,19 +110,19 @@ export function validatePlan(plan: TrainingPlanInput, context: PlanContext): str
           `${label} is a brick session in week ${week}; beginners do none before week ${PLAN_RULES.beginnerBrickFreeWeeks + 1}`
         )
       }
-      // RULE 10: no hard sessions when unwell
+
+      // Rule 10: no hard sessions early on if the athlete reported being unwell
       if (context.isUnwell && week <= 2 && isHard(workout)) {
-        problems.push(
-          `${label} is a hard session, but the athlete is unwell`)
-        }
-        
+        problems.push(`${label} is a hard session, but the athlete reported being unwell`)
+      }
+
       if (isHard(workout)) {
         hardSessions += 1
         hardDays.add((week - 1) * 7 + workout.dayOfWeek)
       }
     }
 
-    // RULE 7: limit hard sessions
+    // Rule 7: limit hard sessions
     if (hardSessions > PLAN_RULES.maxHardSessionsPerWeek) {
       problems.push(
         `Week ${week} has ${hardSessions} hard sessions, more than ${PLAN_RULES.maxHardSessionsPerWeek}`
@@ -144,7 +132,38 @@ export function validatePlan(plan: TrainingPlanInput, context: PlanContext): str
     weekMinutes.push(training.reduce((sum, workout) => sum + workoutMinutes(workout), 0))
   }
 
-  // RULE 7: no long runs of hard days (counted across week boundaries too)
+  const increaseLimit = 1 + PLAN_RULES.maxWeeklyIncreasePercent / 100
+  const recoveryLimit = 1 - PLAN_RULES.recoveryReductionPercent / 100
+
+  // Lighter weeks are recovery weeks, and the race-week taper
+  const isLightWeek = weekMinutes.map(
+    (minutes, index) =>
+      index > 0 &&
+      (minutes <= weekMinutes[index - 1] * recoveryLimit ||
+        (context.hasRaceDate && index === weekMinutes.length - 1))
+  )
+
+  // Rule 1: use the training days the athlete chose, or one fewer in a lighter week
+  trainingCounts.forEach((count, index) => {
+    const week = index + 1
+    const fewest = isLightWeek[index]
+      ? Math.max(1, context.daysPerWeek - 1)
+      : context.daysPerWeek
+
+    if (count > context.daysPerWeek) {
+      problems.push(
+        `Week ${week} has ${count} training days, more than the ${context.daysPerWeek} the athlete chose`
+      )
+    } else if (count < fewest) {
+      problems.push(
+        isLightWeek[index]
+          ? `Week ${week} has ${count} training days; use ${context.daysPerWeek}, or ${context.daysPerWeek - 1} in a lighter week`
+          : `Week ${week} has ${count} training days; it must have ${context.daysPerWeek} (only a lighter recovery or taper week may have one fewer)`
+      )
+    }
+  })
+
+  // Rule 7: no long runs of hard days (counted across week boundaries too)
   for (const day of [...hardDays].sort((a, b) => a - b)) {
     if (hardDays.has(day - 1)) continue // not the start of a run
     let length = 1
@@ -156,9 +175,7 @@ export function validatePlan(plan: TrainingPlanInput, context: PlanContext): str
     }
   }
 
-  // RULE 3 and 4: gradual progression with recovery weeks
-  const increaseLimit = 1 + PLAN_RULES.maxWeeklyIncreasePercent / 100
-  const recoveryLimit = 1 - PLAN_RULES.recoveryReductionPercent / 100
+  // Rules 3 and 4: gradual progression with recovery weeks
   let referenceWeek = 0 // the last build week, used as the comparison
   let buildWeeksInARow = 1
   for (let i = 1; i < weekMinutes.length; i++) {
@@ -167,7 +184,7 @@ export function validatePlan(plan: TrainingPlanInput, context: PlanContext): str
       buildWeeksInARow = 0
       continue
     }
-       // Small weeks may grow by a few minutes even if that is more than the percentage
+    // Small weeks may grow by a few minutes even if that is more than the percentage
     const allowedMinutes = Math.max(
       weekMinutes[referenceWeek] * increaseLimit,
       weekMinutes[referenceWeek] + PLAN_RULES.maxWeeklyIncreaseMinutes
@@ -186,7 +203,7 @@ export function validatePlan(plan: TrainingPlanInput, context: PlanContext): str
     }
   }
 
-  // RULE 8: taper before a race
+  // Rule 8: taper before a race
   if (context.hasRaceDate && weekMinutes.length > 1) {
     const last = weekMinutes[weekMinutes.length - 1]
     const peak = Math.max(...weekMinutes.slice(0, -1))

@@ -35,7 +35,13 @@ function run(
     console.log("      problems found:", problems)
   }
 }
-
+function toRest(workout: TrainingPlanInput["workouts"][number]) {
+  workout.discipline = "REST"
+  workout.title = "Rest day"
+  workout.description = "A full rest day to recover well."
+  workout.muscleGroups = []
+  workout.segments = []
+}
 run("the sample plan passes", () => {}, "valid")
 
 run("workout over the session limit", (plan) => {
@@ -100,6 +106,14 @@ run("a week with no swim", (plan) => {
 run("a workout without an explanation", (plan) => {
   plan.workouts[2].description = "Run"
 }, /explanation/)
+run("too few training days in a normal week", (plan) => {
+  toRest(plan.workouts[1])
+}, /must have 6/)
 
+run("one fewer training day is allowed in a recovery week", (plan) => {
+  // Week 4 is the lighter recovery week in the sample plan
+  const week4 = plan.workouts.filter((workout) => workout.weekNumber === 4)
+  toRest(week4[4])
+}, "valid")
 console.log(`\n${total - failed} of ${total} checks passed`)
 if (failed > 0) process.exitCode = 1
