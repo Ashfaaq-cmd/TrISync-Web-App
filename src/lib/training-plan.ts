@@ -9,12 +9,12 @@ export async function saveTrainingPlan(userId: string, plan: TrainingPlanInput, 
     endDate.setUTCDate(endDate.getUTCDate() + plan.totalWeeks * 7 - 1)
 
     // archive the old plan and create new one together so user never end up with 2 active plans
-    const[, created] = await prisma.$transaction([
-        prisma.trainingPlan.updateMany({
+    const created = await prisma.$transaction(async (tx) => {
+        await tx.trainingPlan.updateMany({
             where: { userId, status: "ACTIVE" },
             data: { status: "ARCHIVED" },
-        }),
-        prisma.trainingPlan.create({
+        })
+        return tx.trainingPlan.create({
             data:{
                 userId,
                 title: plan.title,
@@ -40,8 +40,8 @@ export async function saveTrainingPlan(userId: string, plan: TrainingPlanInput, 
                     })),
                 },
             },
-        }),
-    ])
+        })
+    }, { timeout: 30_000 })
     return created
 }
 
