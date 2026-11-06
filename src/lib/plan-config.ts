@@ -12,6 +12,9 @@ export const PLAN_LENGTHS: Record<RaceGoal, { min: number; default: number; max:
 export const PLAN_RULES = {
   // Rule 3: the most a week's total time may grow compared with the last build week
   maxWeeklyIncreasePercent: 15,
+
+  //Rule 3: small weeks may instead grow by this many minutes
+  maxWeeklyIncreaseMinutes: 20,
   // Rule 4: a recovery week is at least this much lighter than the week before
   recoveryReductionPercent: 15,
   // Rule 4: the most build weeks in a row without a recovery week

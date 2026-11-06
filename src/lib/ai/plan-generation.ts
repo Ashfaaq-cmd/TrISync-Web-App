@@ -103,7 +103,7 @@ export async function generateTrainingPlan(
 
   let prompt = basePrompt
   // Kept with the plan, as evidence of how often the AI needed correcting
-  const rejectedAttempts: string[][] = []
+  const rejectedAttempts: { model: string; problems: string[] }[] = []
 
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
     let result
@@ -140,7 +140,7 @@ export async function generateTrainingPlan(
       }
     }
 
-    rejectedAttempts.push(checked.problems)
+    rejectedAttempts.push({ model: result.model, problems: checked.problems })
     prompt =
       `${basePrompt}\n\nYour previous answer broke these rules:\n` +
       checked.problems.map((problem) => `- ${problem}`).join("\n") +

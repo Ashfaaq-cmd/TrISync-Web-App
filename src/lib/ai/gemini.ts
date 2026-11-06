@@ -45,9 +45,14 @@ export function createGeminiProvider(): AiProvider {
             })
             if (response.text) return { text: response.text, model }
             // empty answer treated like temporary failure
-          } catch (error) {
-            // A retired model will never work, so go to the next one
-            if ((error as { status?: number }).status === 404) break
+                    } catch (error) {
+            const status = (error as { status?: number }).status
+            // Only the model, attempt and status are logged: never the prompt or the key
+            console.warn(
+              `AI call failed: ${model}, attempt ${attempt + 1}, status ${status ?? (error as Error).name}`
+            )
+            // A retired model will never work, so go straight to the next one
+            if (status === 404) break
             if (!isTemporary(error)) throw error
           }
 

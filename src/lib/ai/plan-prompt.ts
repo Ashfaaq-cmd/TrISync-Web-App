@@ -3,7 +3,7 @@ import { PLAN_RULES } from "@/lib/plan-config"
 import { MUSCLE_GROUPS } from "@/lib/validations/training-plan"
 
 // Change this whenever the prompt changes, so plans can be compared by version
-export const PROMPT_VERSION = "v1"
+export const PROMPT_VERSION = "v2"
 
 export type RecentTraining = {
   weeks: number
@@ -60,7 +60,7 @@ export function buildPlanPrompt(input: PromptInput) {
     `Use at least ${minTrainingDays} and at most ${input.daysPerWeek} training days (non-REST) in every week.`,
     `The total of all segment durations in one workout must not exceed ${input.minutesPerSession} minutes. Every non-REST segment needs targetDurationMin and targetIntensity.`,
     `targetIntensity is EASY (conversational), MODERATE (steady, comfortably hard) or HARD (intervals, threshold or race pace).`,
-    `Increase the weekly total training time gradually: no week may be more than ${PLAN_RULES.maxWeeklyIncreasePercent}% above the previous build week.`,
+    `Increase the weekly total training time gradually: no week may be more than ${PLAN_RULES.maxWeeklyIncreasePercent}% above the previous build week, or ${PLAN_RULES.maxWeeklyIncreaseMinutes} minutes above it if that is larger.`,
     `Include a recovery week at least every ${PLAN_RULES.maxBuildWeeksInARow} weeks, with a total at least ${PLAN_RULES.recoveryReductionPercent}% lower than the week before it.`,
     `At most ${PLAN_RULES.maxHardSessionsPerWeek} workouts per week may include a HARD segment, and never on two days in a row (also not across two weeks).`,
     `Include swimming, cycling and running in every week (a BRICK counts as cycling and running). Balance them for the goal.`,
@@ -74,15 +74,12 @@ export function buildPlanPrompt(input: PromptInput) {
       : `There is no race date, so no taper is needed.`,
     `Vary the sessions: endurance, technique, intervals, strength and recovery, as suitable for the level and goal.`,
     `Segment disciplines are SWIM, BIKE, RUN or STRENGTH. The workout discipline may also be BRICK or REST. Distances are optional and in kilometres (a 1500 m swim is 1.5).`,
-    `Every non-REST workout needs a title, a one or two sentence description explaining its purpose in simple language, and at least one muscleGroup from: ${MUSCLE_GROUPS.join(", ")}.`,
+    `Every workout, including REST days, needs a title and a description of one or two full sentences (at least 20 characters) explaining its purpose in simple language. Every non-REST workout also needs at least one muscleGroup from: ${MUSCLE_GROUPS.join(", ")}.`,
   ]
 
   return [
-    `Create a triathlon training plan for this athlete.`,
-    ``,
-    `Athlete:`,
-    ...athlete,
-    ``,
+      `Create a triathlon training plan for this athlete.`,
+       `The plan must contain exactly ${input.weeks * 7} workouts (${input.weeks} weeks of 7 days). Write out every single week and day. Never stop early, shorten the plan or skip weeks.`,
     `Rules the plan must follow:`,
     ...rules.map((rule, index) => `${index + 1}. ${rule}`),
   ].join("\n")

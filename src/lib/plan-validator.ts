@@ -167,9 +167,14 @@ export function validatePlan(plan: TrainingPlanInput, context: PlanContext): str
       buildWeeksInARow = 0
       continue
     }
-    if (weekMinutes[i] > weekMinutes[referenceWeek] * increaseLimit) {
+       // Small weeks may grow by a few minutes even if that is more than the percentage
+    const allowedMinutes = Math.max(
+      weekMinutes[referenceWeek] * increaseLimit,
+      weekMinutes[referenceWeek] + PLAN_RULES.maxWeeklyIncreaseMinutes
+    )
+    if (weekMinutes[i] > allowedMinutes) {
       problems.push(
-        `Week ${i + 1} (${weekMinutes[i]} min) is more than ${PLAN_RULES.maxWeeklyIncreasePercent}% above week ${referenceWeek + 1} (${weekMinutes[referenceWeek]} min)`
+        `Week ${i + 1} (${weekMinutes[i]} min) is more than ${PLAN_RULES.maxWeeklyIncreasePercent}% or ${PLAN_RULES.maxWeeklyIncreaseMinutes} minutes above week ${referenceWeek + 1} (${weekMinutes[referenceWeek]} min)`
       )
     }
     referenceWeek = i

@@ -28,13 +28,18 @@ async function main() {
   try {
     const result = await generateTrainingPlan(scenario)
     const seconds = Math.round((Date.now() - startedAt) / 1000)
-    const raw = result.aiRawOutput as { attempts: number; rejectedAttempts: string[][] }
+        const raw = result.aiRawOutput as {
+      attempts: number
+      rejectedAttempts: { model: string; problems: string[] }[]
+    }
 
     console.log(`\nSUCCESS in ${seconds}s with ${result.aiModel}, prompt ${result.aiPromptVersion}`)
     console.log(`Attempts needed: ${raw.attempts}`)
-    raw.rejectedAttempts.forEach((problems, index) => {
-      console.log(`Attempt ${index + 1} was rejected (${problems.length} problems):`)
-      problems.slice(0, 5).forEach((problem) => console.log("  -", problem))
+    raw.rejectedAttempts.forEach((attempt, index) => {
+      console.log(
+        `Attempt ${index + 1} (${attempt.model}) was rejected, ${attempt.problems.length} problems:`
+      )
+      attempt.problems.slice(0, 5).forEach((problem) => console.log("  -", problem))
     })
 
     const weeks = new Map<number, { minutes: number; days: number }>()

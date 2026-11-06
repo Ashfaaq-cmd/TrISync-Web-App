@@ -28,7 +28,7 @@ const workoutSchema = z.object({
     dayOfWeek: z.number().int().min(1).max(7),
     discipline: z.enum(DISCIPLINES),
     title: z.string().min(1).max(100),
-    description: z.string().max(500).optional(),
+    description: z.string().min(10).max(500),
     muscleGroups: z.array(z.enum(MUSCLE_GROUPS)),
     segments: z.array(segmentSchema),
 })
