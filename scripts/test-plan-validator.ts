@@ -107,8 +107,31 @@ run("a workout without an explanation", (plan) => {
   plan.workouts[2].description = "Run"
 }, /explanation/)
 run("too few training days in a normal week", (plan) => {
+  for (const week of [1, 2, 3, 4]) {
+    const workouts = plan.workouts.filter((workout) => workout.weekNumber === week)
+    toRest(workouts[4])
+    toRest(workouts[6])
+  }
+}, /must have at least 5/)
+
+run("one rest day is allowed when the athlete has seven available days", () => {}, "valid", {
+  daysPerWeek: 7,
+})
+
+run("two fewer training days are rejected in a normal week", (plan) => {
   toRest(plan.workouts[1])
-}, /must have 6/)
+  toRest(plan.workouts[2])
+}, /must have at least 6/, { daysPerWeek: 7 })
+
+run("a three-session race-week taper is allowed", (plan) => {
+  const week4 = plan.workouts.filter((workout) => workout.weekNumber === 4)
+  for (const workout of week4.slice(4)) toRest(workout)
+}, "valid", { daysPerWeek: 7, hasRaceDate: true })
+
+run("a race-week taper cannot fall below three training days", (plan) => {
+  const week4 = plan.workouts.filter((workout) => workout.weekNumber === 4)
+  for (const workout of week4.slice(3)) toRest(workout)
+}, /race-week taper must have at least 3/, { daysPerWeek: 7, hasRaceDate: true })
 
 run("one fewer training day is allowed in a recovery week", (plan) => {
   // Week 4 is the lighter recovery week in the sample plan

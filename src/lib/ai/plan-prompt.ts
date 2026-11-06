@@ -3,7 +3,7 @@ import { PLAN_RULES } from "@/lib/plan-config"
 import { MUSCLE_GROUPS } from "@/lib/validations/training-plan"
 
 // Change this whenever the prompt changes, so plans can be compared by version
-export const PROMPT_VERSION = "v5"
+export const PROMPT_VERSION = "v6"
 
 export type RecentTraining = {
   weeks: number
@@ -29,6 +29,8 @@ export const SYSTEM_PROMPT =
   "The plan is general guidance, not medical advice."
 
 export function buildPlanPrompt(input: PromptInput) {
+  const minimumTrainingDays = Math.max(2, input.daysPerWeek - 1)
+  const minimumTaperTrainingDays = Math.min(input.daysPerWeek, 3)
 
   const athlete = [
     `- Experience level: ${input.experienceLevel}`,
@@ -56,7 +58,10 @@ export function buildPlanPrompt(input: PromptInput) {
 
   const rules = [
     `Every week has exactly 7 workouts, one for each dayOfWeek from 1 (Monday) to 7 (Sunday). Rest days use discipline "REST" with no segments and no muscleGroups.`,
-    `Use exactly ${input.daysPerWeek} training days (workouts that are not REST) in every week. Only a recovery week${input.useRaceDate ? " or the race-week taper" : ""} may use ${Math.max(1, input.daysPerWeek - 1)} instead.`,
+    `The athlete can train on up to ${input.daysPerWeek} days per week; this is a maximum, not a requirement to train every available day. In each non-race week, schedule ${minimumTrainingDays} to ${input.daysPerWeek} training days (workouts that are not REST), and use REST for the remaining calendar days.`,
+    ...(input.useRaceDate
+      ? [`In the final race-week taper, schedule ${minimumTaperTrainingDays} to ${input.daysPerWeek} training days, with REST on remaining days. Keep all 7 calendar workouts; do not omit days.`]
+      : []),
       `The total of all segment durations in one workout must not exceed ${input.minutesPerSession} minutes. This includes BRICK workouts: the BIKE and RUN segments together must fit inside the limit. Stay a little under the limit, never over it. Every non-REST segment needs targetDurationMin and targetIntensity.`,
     `targetIntensity is EASY (conversational), MODERATE (steady, comfortably hard) or HARD (intervals, threshold or race pace).`,
     `Increase the weekly total training time gradually: no week may be more than ${PLAN_RULES.maxWeeklyIncreasePercent}% above the previous build week, or ${PLAN_RULES.maxWeeklyIncreaseMinutes} minutes above it if that is larger.`,

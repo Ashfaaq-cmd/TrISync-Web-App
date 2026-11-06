@@ -135,20 +135,13 @@ export function validatePlan(plan: TrainingPlanInput, context: PlanContext): str
   const increaseLimit = 1 + PLAN_RULES.maxWeeklyIncreasePercent / 100
   const recoveryLimit = 1 - PLAN_RULES.recoveryReductionPercent / 100
 
-  // Lighter weeks are recovery weeks, and the race-week taper
-  const isLightWeek = weekMinutes.map(
-    (minutes, index) =>
-      index > 0 &&
-      (minutes <= weekMinutes[index - 1] * recoveryLimit ||
-        (context.hasRaceDate && index === weekMinutes.length - 1))
-  )
-
-  // Rule 1: use the training days the athlete chose, or one fewer in a lighter week
+  // Rule 1: daysPerWeek is the athlete's availability, not a requirement to train daily.
   trainingCounts.forEach((count, index) => {
     const week = index + 1
-    const fewest = isLightWeek[index]
-      ? Math.max(1, context.daysPerWeek - 1)
-      : context.daysPerWeek
+    const isRaceWeek = context.hasRaceDate && index === trainingCounts.length - 1
+    const fewest = isRaceWeek
+      ? Math.min(context.daysPerWeek, 3)
+      : Math.max(2, context.daysPerWeek - 1)
 
     if (count > context.daysPerWeek) {
       problems.push(
@@ -156,9 +149,9 @@ export function validatePlan(plan: TrainingPlanInput, context: PlanContext): str
       )
     } else if (count < fewest) {
       problems.push(
-        isLightWeek[index]
-          ? `Week ${week} has ${count} training days; use ${context.daysPerWeek}, or ${context.daysPerWeek - 1} in a lighter week`
-          : `Week ${week} has ${count} training days; it must have ${context.daysPerWeek} (only a lighter recovery or taper week may have one fewer)`
+        isRaceWeek
+          ? `Week ${week} has ${count} training days; the race-week taper must have at least ${fewest}`
+          : `Week ${week} has ${count} training days; it must have at least ${fewest} (one fewer than the athlete's ${context.daysPerWeek} available days)`
       )
     }
   })
