@@ -51,83 +51,85 @@ async function LogWorkoutContent({ searchParams }: PageProps) {
   const defaultDate = new Date().toISOString().slice(0, 10)
 
   return (
-    <div className="max-w-2xl space-y-8 p-6 md:p-10">
+    <div className="max-w-2xl space-y-8 p-6 md:p-10 lg:max-w-none">
       {saved && <SavedWorkoutNotice key={saved} />}
 
-      <div className="rounded-xl border border-border bg-surface p-6">
-        {/* A new key after saving gives an empty form again */}
-        <LogWorkoutForm
-          key={saved ?? "new"}
-          workouts={options}
-          initialWorkoutId={initialWorkoutId}
-          defaultDate={defaultDate}
-        />
+      <div className="space-y-8 lg:grid lg:grid-cols-[minmax(0,38fr)_minmax(0,62fr)] lg:items-start lg:gap-8 lg:space-y-0">
+        <div className="rounded-xl border border-border bg-surface p-6">
+          {/* A new key after saving gives an empty form again */}
+          <LogWorkoutForm
+            key={saved ?? "new"}
+            workouts={options}
+            initialWorkoutId={initialWorkoutId}
+            defaultDate={defaultDate}
+          />
+        </div>
+
+        <section>
+          <h2 className="mb-3 text-xs font-bold uppercase text-muted">
+            Recent sessions
+          </h2>
+          <p className="mb-3 text-xs text-muted">
+            AI feedback sends a session&apos;s duration, distance, pace or speed, heart
+            rate and your plan target, plus averages of your recent sessions, to
+            Google&apos;s Gemini service. Your notes, name and email are never sent.
+          </p>
+          {recentLogs.length === 0 ? (
+            <p className="text-sm text-muted">No sessions logged yet.</p>
+          ) : (
+            <ul className="space-y-3 xl:grid xl:grid-cols-2 xl:gap-4 xl:space-y-0">
+              {recentLogs.map((log) => {
+                const insight = storedInsightSchema.safeParse(log.aiInsight)
+
+                return (
+                  <li
+                    key={log.id}
+                    className="rounded-lg border border-border bg-surface p-4"
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <span
+                        className={`rounded-full border px-2 py-0.5 text-xs font-bold ${DISCIPLINE_CHIP_STYLES[log.discipline]}`}
+                      >
+                        {DISCIPLINE_LABELS[log.discipline]}
+                      </span>
+                      <span className="text-sm text-muted">
+                        {formatLogDate(log.date)}
+                      </span>
+                    </div>
+                    <p className="mt-2 font-semibold text-foreground">
+                      {log.workout?.title ?? "Unplanned session"}
+                    </p>
+                    <p className="text-sm text-muted">
+                      {[
+                        log.durationMin ? `${log.durationMin} min` : null,
+                        log.distanceKm
+                          ? formatDistance(log.distanceKm, log.discipline)
+                          : null,
+                        log.avgHeartRate ? `${log.avgHeartRate} bpm` : null,
+                      ]
+                        .filter(Boolean)
+                        .join(" · ")}
+                    </p>
+                    <div className="mt-3 flex items-center gap-4">
+                      <Link
+                        href={`/log-workout/${log.id}`}
+                        className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-semibold text-link hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                      >
+                        Edit
+                      </Link>
+                      <DeleteLogButton logId={log.id} />
+                    </div>
+                    <InsightSection
+                      logId={log.id}
+                      insight={insight.success ? insight.data : null}
+                    />
+                  </li>
+                )
+              })}
+            </ul>
+          )}
+        </section>
       </div>
-
-      <section>
-        <h2 className="mb-3 text-xs font-bold uppercase text-muted">
-          Recent sessions
-        </h2>
-        <p className="mb-3 text-xs text-muted">
-          AI feedback sends a session&apos;s duration, distance, pace or speed, heart
-          rate and your plan target, plus averages of your recent sessions, to
-          Google&apos;s Gemini service. Your notes, name and email are never sent.
-        </p>
-        {recentLogs.length === 0 ? (
-          <p className="text-sm text-muted">No sessions logged yet.</p>
-        ) : (
-          <ul className="space-y-3">
-            {recentLogs.map((log) => {
-              const insight = storedInsightSchema.safeParse(log.aiInsight)
-
-              return (
-                <li
-                  key={log.id}
-                  className="rounded-lg border border-border bg-surface p-4"
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <span
-                      className={`rounded-full border px-2 py-0.5 text-xs font-bold ${DISCIPLINE_CHIP_STYLES[log.discipline]}`}
-                    >
-                      {DISCIPLINE_LABELS[log.discipline]}
-                    </span>
-                    <span className="text-sm text-muted">
-                      {formatLogDate(log.date)}
-                    </span>
-                  </div>
-                  <p className="mt-2 font-semibold text-foreground">
-                    {log.workout?.title ?? "Unplanned session"}
-                  </p>
-                  <p className="text-sm text-muted">
-                    {[
-                      log.durationMin ? `${log.durationMin} min` : null,
-                      log.distanceKm
-                        ? formatDistance(log.distanceKm, log.discipline)
-                        : null,
-                      log.avgHeartRate ? `${log.avgHeartRate} bpm` : null,
-                    ]
-                      .filter(Boolean)
-                      .join(" · ")}
-                  </p>
-                  <div className="mt-3 flex items-center gap-4">
-                    <Link
-                      href={`/log-workout/${log.id}`}
-                      className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-semibold text-link hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                    >
-                      Edit
-                    </Link>
-                    <DeleteLogButton logId={log.id} />
-                  </div>
-                  <InsightSection 
-                  logId={log.id}
-                  insight={insight.success ? insight.data: null}
-                  />
-                </li>
-              )
-            })}
-          </ul>
-        )}
-      </section>
     </div>
   )
 }
