@@ -216,6 +216,7 @@ model WorkoutLog {
   notes         String?  @db.Text
 
   aiInsight Json?           // AI-generated analysis for this specific log
+  aiInsightAt DateTime?
 
   createdAt DateTime @default(now())
 }
