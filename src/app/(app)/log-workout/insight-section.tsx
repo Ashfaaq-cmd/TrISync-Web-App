@@ -31,7 +31,7 @@ export default function InsightSection({ logId, insight }: InsightSectionProps) 
       <button
         type="submit"
         disabled={pending}
-        className="text-sm font-medium text-link hover:underline disabled:opacity-60"
+        className="rounded-lg bg-primary px-3 py-1.5 text-sm font-semibold text-primary-foreground hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:opacity-60"
       >
         {pending ? "Getting feedback..." : "Get AI feedback"}
       </button>
