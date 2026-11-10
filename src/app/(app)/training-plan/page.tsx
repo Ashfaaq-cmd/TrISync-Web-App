@@ -73,26 +73,28 @@ async function PlanContent({ searchParams }: PageProps) {
         ))}
       </nav>
 
-      {[1, 2, 3, 4, 5, 6, 7].map((day) => {
-        const dayWorkouts = weekWorkouts.filter((workout) => workout.dayOfWeek === day)
+      <div className="space-y-6 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0">
+        {[1, 2, 3, 4, 5, 6, 7].map((day) => {
+          const dayWorkouts = weekWorkouts.filter((workout) => workout.dayOfWeek === day)
 
-        return (
-          <section key={day}>
-            <h2 className="mb-2 text-xs font-bold uppercase text-muted">
-              {formatWorkoutDate(plan.startDate, week, day)}
-            </h2>
-            {dayWorkouts.length > 0 ? (
-              <div className="grid gap-3 md:grid-cols-2">
-                {dayWorkouts.map((workout) => (
-                  <WorkoutCard key={workout.id} workout={workout} />
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-muted">Nothing planned</p>
-            )}
-          </section>
-        )
-      })}
+          return (
+            <section key={day}>
+              <h2 className="mb-2 text-xs font-bold uppercase text-muted">
+                {formatWorkoutDate(plan.startDate, week, day)}
+              </h2>
+              {dayWorkouts.length > 0 ? (
+                <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-1">
+                  {dayWorkouts.map((workout) => (
+                    <WorkoutCard key={workout.id} workout={workout} />
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-muted">Nothing planned</p>
+              )}
+            </section>
+          )
+        })}
+      </div>
 
       <details className="rounded-lg border border-border bg-surface p-4">
         <summary className="cursor-pointer font-semibold text-foreground">
