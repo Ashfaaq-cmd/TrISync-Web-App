@@ -12,6 +12,8 @@ import { getLoggableWorkouts, getRecentLogs } from "@/lib/workout-log"
 import DeleteLogButton from "./delete-log-button"
 import LogWorkoutForm from "./log-workout-form"
 import SavedWorkoutNotice from "./saved-workout-notice"
+import { storedInsightSchema } from "@/lib/validations/workout-insight"
+import InsightSection from "./insight-section"
 
 type PageProps = {
   searchParams: Promise<{ workoutId?: string; saved?: string }>
@@ -66,50 +68,63 @@ async function LogWorkoutContent({ searchParams }: PageProps) {
         <h2 className="mb-3 text-xs font-bold uppercase text-muted">
           Recent sessions
         </h2>
+        <p className="mb-3 text-xs text-muted">
+          AI feedback sends a session&apos;s duration, distance, pace or speed, heart
+          rate and your plan target, plus averages of your recent sessions, to
+          Google&apos;s Gemini service. Your notes, name and email are never sent.
+        </p>
         {recentLogs.length === 0 ? (
           <p className="text-sm text-muted">No sessions logged yet.</p>
         ) : (
           <ul className="space-y-3">
-            {recentLogs.map((log) => (
-              <li
-                key={log.id}
-                className="rounded-lg border border-border bg-surface p-4"
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <span
-                    className={`rounded-full border px-2 py-0.5 text-xs font-bold ${DISCIPLINE_CHIP_STYLES[log.discipline]}`}
-                  >
-                    {DISCIPLINE_LABELS[log.discipline]}
-                  </span>
-                  <span className="text-sm text-muted">
-                    {formatLogDate(log.date)}
-                  </span>
-                </div>
-                <p className="mt-2 font-semibold text-foreground">
-                  {log.workout?.title ?? "Unplanned session"}
-                </p>
-                <p className="text-sm text-muted">
-                  {[
-                    log.durationMin ? `${log.durationMin} min` : null,
-                    log.distanceKm
-                      ? formatDistance(log.distanceKm, log.discipline)
-                      : null,
-                    log.avgHeartRate ? `${log.avgHeartRate} bpm` : null,
-                  ]
-                    .filter(Boolean)
-                    .join(" · ")}
-                </p>
-                <div className="mt-3 flex items-center gap-4">
-                  <Link
-                    href={`/log-workout/${log.id}`}
-                    className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-semibold text-link hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                  >
-                    Edit
-                  </Link>
-                  <DeleteLogButton logId={log.id} />
-                </div>
-              </li>
-            ))}
+            {recentLogs.map((log) => {
+              const insight = storedInsightSchema.safeParse(log.aiInsight)
+
+              return (
+                <li
+                  key={log.id}
+                  className="rounded-lg border border-border bg-surface p-4"
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <span
+                      className={`rounded-full border px-2 py-0.5 text-xs font-bold ${DISCIPLINE_CHIP_STYLES[log.discipline]}`}
+                    >
+                      {DISCIPLINE_LABELS[log.discipline]}
+                    </span>
+                    <span className="text-sm text-muted">
+                      {formatLogDate(log.date)}
+                    </span>
+                  </div>
+                  <p className="mt-2 font-semibold text-foreground">
+                    {log.workout?.title ?? "Unplanned session"}
+                  </p>
+                  <p className="text-sm text-muted">
+                    {[
+                      log.durationMin ? `${log.durationMin} min` : null,
+                      log.distanceKm
+                        ? formatDistance(log.distanceKm, log.discipline)
+                        : null,
+                      log.avgHeartRate ? `${log.avgHeartRate} bpm` : null,
+                    ]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </p>
+                  <div className="mt-3 flex items-center gap-4">
+                    <Link
+                      href={`/log-workout/${log.id}`}
+                      className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-semibold text-link hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    >
+                      Edit
+                    </Link>
+                    <DeleteLogButton logId={log.id} />
+                  </div>
+                  <InsightSection 
+                  logId={log.id}
+                  insight={insight.success ? insight.data: null}
+                  />
+                </li>
+              )
+            })}
           </ul>
         )}
       </section>
