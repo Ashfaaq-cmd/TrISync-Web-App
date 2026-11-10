@@ -217,6 +217,7 @@ model WorkoutLog {
 
   aiInsight Json?           // AI-generated analysis for this specific log
   aiInsightAt DateTime?
+  legs WorkoutLogLeg[]
 
   createdAt DateTime @default(now())
 }
@@ -293,4 +294,18 @@ model PlanGenerationLog {
   createdAt     DateTime          @default(now())
 
   @@index([userId, createdAt])
+}
+model WorkoutLogLeg {
+  id           String     @id @default(cuid())
+  logId        String
+  log          WorkoutLog @relation(fields: [logId], references: [id], onDelete: Cascade)
+  order        Int
+  discipline   Discipline
+  durationMin  Int
+  distanceKm   Float?
+  avgHeartRate Int?
+  avgPaceSecKm Int?
+  avgSpeedKmh  Float?
+
+  @@index([logId, order])
 }

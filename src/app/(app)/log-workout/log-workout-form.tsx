@@ -1,26 +1,27 @@
 "use client"
+
 import { useActionState, useState } from "react"
 import type { ChangeEvent } from "react"
 import Link from "next/link"
 import { formatEnum } from "@/lib/discipline"
 import { logWorkout, updateWorkoutLog } from "./actions"
 
-type WorkoutOption = { id: string; label: string; discipline: string }
+type Unit = "km" | "m"
 
-type FormValues = {
-  discipline: string
-  date: string
-  distance: string
-  durationMin: string
-  avgHeartRate: string
-  notes: string
-}
+// legs lists the leg disciplines of a planned brick, otherwise it is empty
+type WorkoutOption = { id: string; label: string; discipline: string; legs: string[] }
+
+type MeasureValues = { distance: string; durationMin: string; avgHeartRate: string }
+type LegValues = MeasureValues & { unit: Unit | null }
+type FormValues = MeasureValues & { discipline: string; date: string; notes: string }
 
 type EditDetails = {
   logId: string
   workoutTitle: string | null
-  distanceUnit: "km" | "m"
+  distanceUnit: Unit
   values: FormValues
+  legDisciplines: string[]
+  legs: LegValues[]
 }
 
 type LogWorkoutFormProps = {
@@ -38,9 +39,97 @@ const DISCIPLINES = [
   { value: "STRENGTH", label: "Strength" },
 ]
 
+const EMPTY_LEG: LegValues = { distance: "", durationMin: "", avgHeartRate: "", unit: null }
+const DEFAULT_BRICK_LEGS = ["BIKE", "RUN"]
+
 const inputClass =
   "mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-foreground placeholder:text-muted"
 const labelClass = "block text-sm font-medium text-muted"
+
+type MeasureFieldsProps = {
+  prefix: string
+  values: MeasureValues
+  unit: Unit
+  onChange: (field: keyof MeasureValues, value: string) => void
+  onUnitChange: (unit: Unit) => void
+}
+
+// Duration, distance and heart rate. Used once per session, or once per brick leg.
+function MeasureFields({ prefix, values, unit, onChange, onUnitChange }: MeasureFieldsProps) {
+  return (
+    <>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label htmlFor={`${prefix}durationMin`} className={labelClass}>
+            Duration (minutes)
+          </label>
+          <input
+            id={`${prefix}durationMin`}
+            name={`${prefix}durationMin`}
+            type="number"
+            required
+            min="1"
+            step="1"
+            inputMode="numeric"
+            placeholder="e.g. 45"
+            value={values.durationMin}
+            onChange={(event) => onChange("durationMin", event.target.value)}
+            className={inputClass}
+          />
+        </div>
+
+        <div>
+          <label htmlFor={`${prefix}distance`} className={labelClass}>
+            Distance (optional)
+          </label>
+          <div className="flex gap-2">
+            <input
+              id={`${prefix}distance`}
+              name={`${prefix}distance`}
+              type="number"
+              min="0"
+              step={unit === "m" ? "1" : "0.01"}
+              inputMode="decimal"
+              placeholder={unit === "m" ? "e.g. 1500" : "e.g. 32.5"}
+              value={values.distance}
+              onChange={(event) => onChange("distance", event.target.value)}
+              className={inputClass}
+            />
+            <select
+              name={`${prefix}distanceUnit`}
+              aria-label="Distance unit"
+              value={unit}
+              onChange={(event) => onUnitChange(event.target.value as Unit)}
+              className="mt-1 rounded-lg border border-border bg-surface px-2 py-2 text-foreground"
+            >
+              <option value="km">km</option>
+              <option value="m">m</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor={`${prefix}avgHeartRate`} className={labelClass}>
+          Average heart rate (bpm, optional)
+        </label>
+        <input
+          id={`${prefix}avgHeartRate`}
+          name={`${prefix}avgHeartRate`}
+          type="number"
+          min="30"
+          max="250"
+          step="1"
+          inputMode="numeric"
+          placeholder="e.g. 142"
+          value={values.avgHeartRate}
+          onChange={(event) => onChange("avgHeartRate", event.target.value)}
+          className={inputClass}
+        />
+      </div>
+    </>
+  )
+}
 
 export default function LogWorkoutForm({
   workouts = [],
@@ -64,22 +153,39 @@ export default function LogWorkoutForm({
     }
   )
   // null means "the user has not chosen a unit yet"
-  const [unitChoice, setUnitChoice] = useState<"km" | "m" | null>(
-    edit?.distanceUnit ?? null
-  )
+  const [unitChoice, setUnitChoice] = useState<Unit | null>(edit?.distanceUnit ?? null)
+  const [legs, setLegs] = useState<LegValues[]>(edit?.legs ?? [])
 
   const selected = workouts.find((workout) => workout.id === workoutId)
   const isPlanned = edit ? edit.workoutTitle !== null : Boolean(selected)
+  const discipline = selected?.discipline ?? values.discipline
+  const isBrick = discipline === "BRICK"
+
+  // A brick is logged leg by leg: the plan's legs, the saved legs, or bike then run
+  let legDisciplines: string[] = []
+  if (isBrick) {
+    if (edit && edit.legDisciplines.length > 1) legDisciplines = edit.legDisciplines
+    else if (selected && selected.legs.length > 1) legDisciplines = selected.legs
+    else legDisciplines = DEFAULT_BRICK_LEGS
+  }
 
   // Swims default to metres, everything else to kilometres
-  const currentDiscipline = selected?.discipline ?? values.discipline
-  const unit = unitChoice ?? (currentDiscipline === "SWIM" ? "m" : "km")
+  const unit = unitChoice ?? (discipline === "SWIM" ? "m" : "km")
 
   // Fields are controlled, so a failed submit does not wipe what the user typed
-  function handleChange(field: keyof FormValues) {
+  function handleChange(field: "discipline" | "date" | "notes") {
     return (
       event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
     ) => setValues((previous) => ({ ...previous, [field]: event.target.value }))
+  }
+
+  function changeLeg(index: number, change: (leg: LegValues) => LegValues) {
+    setLegs((previous) => {
+      const next = [...previous]
+      while (next.length <= index) next.push({ ...EMPTY_LEG })
+      next[index] = change(next[index])
+      return next
+    })
   }
 
   return (
@@ -87,9 +193,7 @@ export default function LogWorkoutForm({
       {edit && <input type="hidden" name="logId" value={edit.logId} />}
 
       {edit ? (
-        <p className="text-sm text-muted">
-          {edit.workoutTitle ?? "Unplanned session"}
-        </p>
+        <p className="text-sm text-muted">{edit.workoutTitle ?? "Unplanned session"}</p>
       ) : (
         <div>
           <label htmlFor="workoutId" className={labelClass}>
@@ -114,7 +218,7 @@ export default function LogWorkoutForm({
 
       {isPlanned ? (
         <p className="text-sm text-muted">
-          Discipline: {formatEnum(selected?.discipline ?? values.discipline)} (from your plan)
+          Discipline: {formatEnum(discipline)} (from your plan)
         </p>
       ) : (
         <div>
@@ -130,9 +234,9 @@ export default function LogWorkoutForm({
             className={inputClass}
           >
             <option value="">Choose a discipline</option>
-            {DISCIPLINES.map((discipline) => (
-              <option key={discipline.value} value={discipline.value}>
-                {discipline.label}
+            {DISCIPLINES.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
               </option>
             ))}
           </select>
@@ -154,75 +258,48 @@ export default function LogWorkoutForm({
         />
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <label htmlFor="durationMin" className={labelClass}>
-            Duration (minutes)
-          </label>
-          <input
-            id="durationMin"
-            name="durationMin"
-            type="number"
-            required
-            min="1"
-            step="1"
-            inputMode="numeric"
-            placeholder="e.g. 45"
-            value={values.durationMin}
-            onChange={handleChange("durationMin")}
-            className={inputClass}
-          />
+      {isBrick ? (
+        <div className="space-y-4">
+          <p className="text-sm text-muted">
+            Log each leg separately, so TriSync can compare, for example, your run after
+            the bike with your normal runs.
+          </p>
+          {legDisciplines.map((legDiscipline, index) => {
+            const leg = legs[index] ?? EMPTY_LEG
+            return (
+              <fieldset
+                key={`${index}-${legDiscipline}`}
+                className="space-y-4 rounded-lg border border-border p-4"
+              >
+                <legend className="px-1 text-sm font-semibold text-foreground">
+                  Leg {index + 1}: {formatEnum(legDiscipline)}
+                </legend>
+                <MeasureFields
+                  prefix={`leg${index}_`}
+                  values={leg}
+                  unit={leg.unit ?? (legDiscipline === "SWIM" ? "m" : "km")}
+                  onChange={(field, value) =>
+                    changeLeg(index, (current) => ({ ...current, [field]: value }))
+                  }
+                  onUnitChange={(next) =>
+                    changeLeg(index, (current) => ({ ...current, unit: next }))
+                  }
+                />
+              </fieldset>
+            )
+          })}
         </div>
-
-        <div>
-          <label htmlFor="distance" className={labelClass}>
-            Distance (optional)
-          </label>
-          <div className="flex gap-2">
-            <input
-              id="distance"
-              name="distance"
-              type="number"
-              min="0"
-              step={unit === "m" ? "1" : "0.01"}
-              inputMode="decimal"
-              placeholder={unit === "m" ? "e.g. 1500" : "e.g. 32.5"}
-              value={values.distance}
-              onChange={handleChange("distance")}
-              className={inputClass}
-            />
-            <select
-              name="distanceUnit"
-              aria-label="Distance unit"
-              value={unit}
-              onChange={(event) => setUnitChoice(event.target.value as "km" | "m")}
-              className="mt-1 rounded-lg border border-border bg-surface px-2 py-2 text-foreground"
-            >
-              <option value="km">km</option>
-              <option value="m">m</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="avgHeartRate" className={labelClass}>
-          Average heart rate (bpm, optional)
-        </label>
-        <input
-          id="avgHeartRate"
-          name="avgHeartRate"
-          type="number"
-          min="30"
-          max="250"
-          step="1"
-          inputMode="numeric"
-          placeholder="e.g. 142"
-          value={values.avgHeartRate}
-          onChange={handleChange("avgHeartRate")}
-          className={inputClass}
+      ) : (
+        <MeasureFields
+          prefix=""
+          values={values}
+          unit={unit}
+          onChange={(field, value) =>
+            setValues((previous) => ({ ...previous, [field]: value }))
+          }
+          onUnitChange={setUnitChoice}
         />
-      </div>
+      )}
 
       <div>
         <label htmlFor="notes" className={labelClass}>
@@ -255,10 +332,7 @@ export default function LogWorkoutForm({
           {pending ? "Saving..." : edit ? "Save changes" : "Save workout"}
         </button>
         {edit && (
-          <Link
-            href="/log-workout"
-            className="rounded-lg border border-border bg-surface px-4 py-2 text-center font-semibold text-foreground hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-          >
+          <Link href="/log-workout" className="text-sm text-muted hover:underline">
             Cancel
           </Link>
         )}

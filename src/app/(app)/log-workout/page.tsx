@@ -40,6 +40,10 @@ async function LogWorkoutContent({ searchParams }: PageProps) {
   const options = workouts.map((workout) => ({
     id: workout.id,
     discipline: workout.discipline,
+    legs:
+    workout.discipline === "BRICK"
+    ? workout.segments.map((segment)=> segment.discipline)
+    : [],
     label: `${formatWorkoutDate(workout.plan.startDate, workout.weekNumber, workout.dayOfWeek)} · ${workout.title}`,
   }))
 
@@ -110,6 +114,18 @@ async function LogWorkoutContent({ searchParams }: PageProps) {
                         .filter(Boolean)
                         .join(" · ")}
                     </p>
+                    {log.legs.length > 0 && (
+                      <ul className="mt-1 space-y-0.5 text-sm text-muted">
+                        {log.legs.map((leg) => (
+                          <li key={leg.id}>
+                            {DISCIPLINE_LABELS[leg.discipline]} · {leg.durationMin} min
+                            {leg.distanceKm
+                              ? ` · ${formatDistance(leg.distanceKm, leg.discipline)}`
+                              : ""}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                     <div className="mt-3 flex items-center gap-4">
                       <Link
                         href={`/log-workout/${log.id}`}
