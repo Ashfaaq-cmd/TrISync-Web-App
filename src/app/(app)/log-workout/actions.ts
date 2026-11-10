@@ -1,7 +1,7 @@
 "use server"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
-import type { Discipline } from "@/generated/prisma"
+import { Prisma, type Discipline } from "@/generated/prisma"
 import { prisma } from "@/lib/prisma"
 import { requireOnboardedUser } from "@/lib/session"
 import { getWorkoutForUser } from "@/lib/training-plan"
@@ -103,6 +103,8 @@ export async function updateWorkoutLog(
       distanceKm: distanceKm ?? null,
       avgHeartRate: avgHeartRate ?? null,
       notes: notes ?? null,
+// Old feedback would no longer match the edited numbers
+      aiInsight: Prisma.DbNull,
       ...derivePaceAndSpeed(discipline, durationMin, distanceKm),
     },
   })
