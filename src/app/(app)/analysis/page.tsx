@@ -156,12 +156,13 @@ async function AnalysisContent() {
               {brick.brickRunLegs === 1 ? "" : "s"} and {brick.standaloneRuns} standalone
               run{brick.standaloneRuns === 1 ? "" : "s"}.
             </p>
-            <p>
-              Bricks logged before leg-by-leg logging was added cannot be used.{" "}
-              <Link href="/log-workout" className="text-link hover:underline">
-                Log a session
-              </Link>
-            </p>
+            <p>Bricks logged before leg-by-leg logging was added cannot be used.</p>
+            <Link
+              href="/log-workout"
+              className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              Log a session
+            </Link>
           </div>
         )}
       </Section>
