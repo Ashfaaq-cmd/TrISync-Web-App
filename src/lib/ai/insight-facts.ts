@@ -1,5 +1,6 @@
 import type { Discipline } from "@/generated/prisma"
 import { DISCIPLINE_LABELS } from "@/lib/discipline"
+import { formatMinSec } from "@/lib/format"
 
 export type SessionNumbers = {
   discipline: Discipline
@@ -29,19 +30,14 @@ function num(value: number) {
   return String(Math.round(value * 100) / 100)
 }
 
-function mmss(totalSeconds: number) {
-  const rounded = Math.round(totalSeconds)
-  return `${Math.floor(rounded / 60)}:${String(rounded % 60).padStart(2, "0")}`
-}
-
 // Swims read better in metres, everything else in kilometres
 function distanceText(km: number, discipline: Discipline) {
   return discipline === "SWIM" ? `${Math.round(km * 1000)} m` : `${num(km)} km`
 }
 
 function paceText(discipline: Discipline, secPerKm: number) {
-  if (discipline === "RUN") return `${mmss(secPerKm)} per km`
-  if (discipline === "SWIM") return `${mmss(secPerKm / 10)} per 100 m`
+  if (discipline === "RUN") return `${formatMinSec(secPerKm)} per km`
+  if (discipline === "SWIM") return `${formatMinSec(secPerKm / 10)} per 100 m`
   return null
 }
 

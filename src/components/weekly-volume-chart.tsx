@@ -1,7 +1,7 @@
 "use client"
 import {
   Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis, } from "recharts"
-  import type { WeekVolume, VolumeDiscipline } from "@/lib/dashboard"
+  import type { WeekVolume, VolumeDiscipline } from "@/lib/weekly-volume"
 
 const SERIES: { key: VolumeDiscipline; label: string; color:string }[]=[
   { key: "SWIM", label: "Swim", color: "var(--swim)" },
@@ -20,7 +20,7 @@ export default function WeeklyVolumeChart({ data }: { data: WeekVolume[] }){
         )
     }
   return (
-    <div role="img" aria-label="Stacked bar chart of weekly training hours by discipline over the last 8 weeks" className="h-72 w-full">
+    <div role="img" aria-label={`Stacked bar chart of weekly training hours by discipline over the last ${data.length} weeks`} className="h-72 w-full">
 
         <ResponsiveContainer width="100%" height="100%">
             <BarChart data={data} margin={{ top:8, right:8, left:0, bottom:0 }}>
