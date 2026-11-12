@@ -8,6 +8,7 @@ import {
 } from "@/lib/ai/insight-prompt"
 import { AiUnavailableError, type AiProvider } from "@/lib/ai/provider"
 import { insightSchema, type StoredInsight } from "@/lib/validations/workout-insight"
+import { findInventedNumbers, numbersIn } from "@/lib/ai/number-check"
 
 const MAX_ATTEMPTS = 2
 const TIME_BUDGET_MS = 90_000
@@ -21,11 +22,6 @@ export class InsightError extends Error {
     this.userMessage = userMessage
   }
 }
-
-function numbersIn(text: string) {
-  return text.match(/\d+(?:\.\d+)?/g) ?? []
-}
-
 // Valid JSON, the right shape, and no numbers that were not in the facts
 function checkInsight(text: string, allowedNumbers: Set<string>) {
   let json: unknown
@@ -41,8 +37,9 @@ function checkInsight(text: string, allowedNumbers: Set<string>) {
   }
 
   const { headline, details, suggestion } = parsed.data
-  const invented = numbersIn(`${headline} ${details} ${suggestion}`).filter(
-    (value) => !allowedNumbers.has(value)
+  const invented = findInventedNumbers(
+    `${headline} ${details} ${suggestion}`,
+    allowedNumbers
   )
   if (invented.length > 0) {
     return { problem: `It used numbers that are not in the facts: ${invented.join(", ")}` }
