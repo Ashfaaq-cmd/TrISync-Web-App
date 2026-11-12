@@ -231,10 +231,20 @@ model PerformanceInsight {
 
   periodStart DateTime
   periodEnd   DateTime
-  summary     String   @db.Text
 
-  createdAt DateTime @default(now())
+  // Empty until the AI has produced a summary
+  summary       String? @db.Text
+  headline      String?
+  suggestion    String?
+  facts         Json?
+  aiModel       String?
+  promptVersion String?
 
+  lastAttemptAt DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now()) @updatedAt
+
+  @@unique([userId, periodStart])
   @@index([userId, periodStart, periodEnd])
 }
 
