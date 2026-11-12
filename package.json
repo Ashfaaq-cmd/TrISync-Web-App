@@ -18,7 +18,8 @@
     "ai:test-plan": "tsx scripts/test-generate-plan.ts",
     "test:plan-repair": "tsx scripts/test-plan-repair.ts",
     "ai:insight-facts": "tsx scripts/test-insight-facts.ts",
-    "test:analysis": "tsx scripts/test-analysis.ts"
+    "test:analysis": "tsx scripts/test-analysis.ts",
+    "test:monthly-facts": "tsx scripts/test-monthly-facts.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.3",
