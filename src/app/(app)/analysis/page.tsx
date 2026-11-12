@@ -13,6 +13,7 @@ import {
 } from "@/lib/analysis"
 import { formatMinSec } from "@/lib/format"
 import { requireOnboardedUser } from "@/lib/session"
+import MonthlySummarySection from "./monthly-summary-section"
 
 export default function AnalysisPage() {
   return (
@@ -72,6 +73,7 @@ async function AnalysisContent() {
 
   return (
     <div className="space-y-6 p-6 md:p-10">
+      <MonthlySummarySection userId={user.id} />
       <Section title={`Training volume, last ${ANALYSIS_WEEKS} weeks`}>
         <WeeklyVolumeChart data={volume} />
       </Section>
