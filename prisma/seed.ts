@@ -28,20 +28,20 @@ const lessons: SeedLesson[] = [
     discipline: "BRICK",
     muscleGroups: ["QUADRICEPS", "CALVES", "HIP_FLEXORS"],
     topicTags: ["brick training", "transitions"],
-    content: `## What is a brick session?
+    content: `## What a brick session is
 
-A brick session joins two disciplines back to back, most often a bike ride followed straight away by a run.
+A brick session combines two disciplines in a row, most often a bike ride followed immediately by a run.
 
-## Why practise it?
+## Why it matters
 
-Running right after cycling feels very different from running on fresh legs. Your legs can feel heavy and your stride can feel unfamiliar for the first few minutes. Practising this in training helps your body and your pacing adjust before race day.
+Running off the bike feels very different from running on fresh legs. The first few minutes can feel heavy and awkward as your muscles adjust to a new rhythm. Practising this in training helps your body adapt before race day.
 
-## Your first brick
+## How to approach your first one
 
 - Keep the bike leg easy to moderate.
 - Change shoes quickly and start the run at an easy effort.
-- Expect the first few minutes to feel awkward. That is normal.
-- Note how your legs feel and use it to set your race pacing.`,
+- Expect the first few minutes to feel strange. That is normal.
+- Pay attention to what your legs feel like and use that feedback to set your race pacing.`,
   },
   {
     id: "seed-lesson-swim-breathing",
@@ -51,17 +51,17 @@ Running right after cycling feels very different from running on fresh legs. You
     discipline: "SWIM",
     muscleGroups: ["SHOULDERS", "BACK", "CORE"],
     topicTags: ["swim technique", "breathing"],
-    content: `## Breathe out under water
+    content: `## Breathe out underwater
 
-Many swimmers hold their breath and then try to breathe in and out in the short moment their face is out of the water. Instead, breathe out steadily while your face is in the water, so you only need to breathe in when you turn to the side.
+A lot of swimmers hold their breath and then try to inhale and exhale in the short moment their face is out of the water. Instead, exhale steadily while your face remains in the water so you only need to inhale when you turn to the side.
 
-## Keep your head low
+## Keep your head quiet
 
-Turn your head to the side while keeping one goggle in the water. Lifting your head pushes your hips down and makes you work harder.
+Turn your head to the side while keeping one goggle in the water. Lifting your head pushes your hips down and makes the whole stroke feel harder.
 
-## Find a rhythm
+## Build a rhythm you can repeat
 
-Choose a pattern you can keep, such as breathing every second or third stroke, and practise it in easy swims before using it in a race.`,
+Choose a pattern that feels sustainable, such as breathing every second or third stroke. Practise it in easy swims before using it under race pressure.`,
   },
   {
     id: "seed-lesson-easy-runs",
@@ -71,20 +71,20 @@ Choose a pattern you can keep, such as breathing every second or third stroke, a
     discipline: "RUN",
     muscleGroups: ["QUADRICEPS", "HAMSTRINGS", "CALVES"],
     topicTags: ["run training", "pacing"],
-    content: `## What easy means
+    content: `## What easy really means
 
-An easy run is one where you could hold a conversation. If you are out of breath, you are going too fast.
+An easy run is one where you could hold a conversation. If you are breathing hard enough that you cannot speak in full sentences, you are probably moving too quickly.
 
-## Why slow down?
+## Why it helps
 
-Easy running builds your aerobic base without adding much strain, so you recover in time for your harder sessions. Many athletes make their easy days too hard and their hard days not hard enough.
+Easy running builds your aerobic base without adding much strain, which helps you recover in time for your harder sessions. Many athletes make their easy days too hard and their hard days not hard enough.
 
 ## A simple check
 
 - Can you speak in full sentences?
 - Do you finish feeling like you could do more?
 
-If the answer is yes, your pace is probably right.`,
+If the answer is yes, the effort is likely in the right range.`,
   },
   {
     id: "seed-lesson-core-hips",
@@ -94,14 +94,14 @@ If the answer is yes, your pace is probably right.`,
     discipline: "STRENGTH",
     muscleGroups: ["CORE", "GLUTES", "HIP_FLEXORS"],
     topicTags: ["strength", "injury prevention"],
-    content: `## Why it matters
+    content: `## Why the trunk and hips matter
 
-A stable trunk helps you hold a good position when swimming, stay balanced on the bike and keep your stride steady when running.
+A stable core and strong hips help you hold a better position in the water, stay balanced on the bike and keep your stride steady when running.
 
-## Where to start
+## A good starting point
 
-- Short sessions of bodyweight exercises, such as planks and glute bridges
-- Keep movements slow and controlled
+- Short sessions of bodyweight exercises such as planks and glute bridges
+- Slow, controlled movements with good form
 - Stop if anything hurts and ask a qualified professional for advice
 
 Strength work supports your training. It does not replace it.`,
