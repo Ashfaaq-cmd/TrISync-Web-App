@@ -19,9 +19,6 @@ type SeedLesson = {
   content: string
 }
 
-const SAMPLE_NOTE =
-  "*Sample content for development. To be replaced with material written or reviewed by a qualified coach.*"
-
 const lessons: SeedLesson[] = [
   {
     id: "seed-lesson-brick-basics",
@@ -31,9 +28,7 @@ const lessons: SeedLesson[] = [
     discipline: "BRICK",
     muscleGroups: ["QUADRICEPS", "CALVES", "HIP_FLEXORS"],
     topicTags: ["brick training", "transitions"],
-    content: `${SAMPLE_NOTE}
-
-## What is a brick session?
+    content: `## What is a brick session?
 
 A brick session joins two disciplines back to back, most often a bike ride followed straight away by a run.
 
@@ -56,9 +51,7 @@ Running right after cycling feels very different from running on fresh legs. You
     discipline: "SWIM",
     muscleGroups: ["SHOULDERS", "BACK", "CORE"],
     topicTags: ["swim technique", "breathing"],
-    content: `${SAMPLE_NOTE}
-
-## Breathe out under water
+    content: `## Breathe out under water
 
 Many swimmers hold their breath and then try to breathe in and out in the short moment their face is out of the water. Instead, breathe out steadily while your face is in the water, so you only need to breathe in when you turn to the side.
 
@@ -78,9 +71,7 @@ Choose a pattern you can keep, such as breathing every second or third stroke, a
     discipline: "RUN",
     muscleGroups: ["QUADRICEPS", "HAMSTRINGS", "CALVES"],
     topicTags: ["run training", "pacing"],
-    content: `${SAMPLE_NOTE}
-
-## What easy means
+    content: `## What easy means
 
 An easy run is one where you could hold a conversation. If you are out of breath, you are going too fast.
 
@@ -103,9 +94,7 @@ If the answer is yes, your pace is probably right.`,
     discipline: "STRENGTH",
     muscleGroups: ["CORE", "GLUTES", "HIP_FLEXORS"],
     topicTags: ["strength", "injury prevention"],
-    content: `${SAMPLE_NOTE}
-
-## Why it matters
+    content: `## Why it matters
 
 A stable trunk helps you hold a good position when swimming, stay balanced on the bike and keep your stride steady when running.
 
