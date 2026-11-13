@@ -15,6 +15,7 @@ import SavedWorkoutNotice from "./saved-workout-notice"
 import { storedInsightSchema } from "@/lib/validations/workout-insight"
 import InsightSection from "./insight-section"
 
+export const maxDuration = 120
 type PageProps = {
   searchParams: Promise<{ workoutId?: string; saved?: string }>
 }

@@ -8,6 +8,7 @@ import { requireOnboardedUser } from "@/lib/session"
 import { getActiveTrainingPlan } from "@/lib/training-plan"
 import GeneratePlanForm from "./generate-plan-form"
 
+export const maxDuration = 300
 const MS_PER_WEEK = 7 * 24 * 60 * 60 * 1000
 
 type PageProps = { searchParams: Promise<{ week?: string }> }

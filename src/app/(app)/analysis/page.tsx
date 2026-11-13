@@ -15,6 +15,7 @@ import { formatMinSec } from "@/lib/format"
 import { requireOnboardedUser } from "@/lib/session"
 import MonthlySummarySection from "./monthly-summary-section"
 
+export const maxDuration = 120
 export default function AnalysisPage() {
   return (
     <ProtectedPage>
