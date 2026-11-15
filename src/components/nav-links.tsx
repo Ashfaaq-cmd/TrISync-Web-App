@@ -1,33 +1,17 @@
 "use client"
 
-import { Suspense } from "react"
+import { Suspense, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { NAV_ITEMS } from "@/components/nav-items"
 
-const links = [
-  { href: "/dashboard", label: "Dashboard" },
-  { href: "/training-plan", label: "Training Plan" },
-  { href: "/log-workout", label: "Log Workout" },
-  { href: "/analysis", label: "Analysis" },
-  { href: "/learning-hub", label: "Learning Hub" },
-  { href: "/profile", label: "Profile" },
-]
-
-type NavLinksProps = { orientation?: "vertical" | "horizontal" }
-
+type NavLinksProps = { label?: string; onNavigate?: () => void }
 type NavListProps = NavLinksProps & { pathname: string | null }
 
-function NavList({ orientation = "vertical", pathname }: NavListProps) {
+function NavList({ label = "Main", pathname, onNavigate }: NavListProps) {
   return (
-    <nav
-      aria-label="Main"
-      className={
-        orientation === "vertical"
-          ? "flex flex-col gap-1"
-          : "flex gap-1 overflow-x-auto"
-      }
-    >
-      {links.map(({ href, label }) => {
+    <nav aria-label={label} className="flex flex-col gap-1">
+      {NAV_ITEMS.map(({ href, label: itemLabel, icon: Icon }) => {
         // Also highlight the section when viewing a page inside it
         const active =
           pathname !== null &&
@@ -37,14 +21,16 @@ function NavList({ orientation = "vertical", pathname }: NavListProps) {
           <Link
             key={href}
             href={href}
+            onClick={onNavigate}
             aria-current={active ? "page" : undefined}
-            className={`whitespace-nowrap rounded-lg px-3 py-2 text-sm ${
+            className={`flex items-center justify-between gap-3 whitespace-nowrap rounded-lg px-3 py-2 text-sm ${
               active
                 ? "bg-sidebar-active font-semibold text-sidebar-active-foreground"
                 : "text-sidebar-foreground hover:bg-sidebar-active"
             }`}
           >
-            {label}
+            <span>{itemLabel}</span>
+            <Icon className="size-4 shrink-0" aria-hidden="true" />
           </Link>
         )
       })}
@@ -55,6 +41,13 @@ function NavList({ orientation = "vertical", pathname }: NavListProps) {
 // Reading the current path has to wait for the request, so it sits inside Suspense
 function NavWithPath(props: NavLinksProps) {
   const pathname = usePathname()
+  const { onNavigate } = props
+
+  // Also closes the mobile menu when the page changes another way, such as the Back button
+  useEffect(() => {
+    onNavigate?.()
+  }, [pathname, onNavigate])
+
   return <NavList {...props} pathname={pathname} />
 }
 
