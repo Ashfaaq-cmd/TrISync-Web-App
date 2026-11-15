@@ -20,10 +20,10 @@
   --run: #16A34A;
   --brick: #7C3AED;
   --strength: #64748B;
-  --sidebar: #111827;
-  --sidebar-foreground: #CBD5E1;
-  --sidebar-active: #1F2937;
-  --sidebar-active-foreground: #FFFFFF;
+  --sidebar: #F3F4F6;
+  --sidebar-foreground: #374151;
+  --sidebar-active: #E5E7EB;
+  --sidebar-active-foreground: #111827;
   color-scheme: light;
 }
 
@@ -45,9 +45,9 @@
   --run: #4ADE80;
   --brick: #A78BFA;
   --strength: #94A3B8;
-  --sidebar: #070D1A;
+  --sidebar: #050913;
   --sidebar-foreground: #CBD5E1;
-  --sidebar-active: #16213A;
+  --sidebar-active: #111B2E;
   --sidebar-active-foreground: #FFFFFF;
   color-scheme: dark;
 }

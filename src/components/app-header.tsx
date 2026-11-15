@@ -20,7 +20,7 @@ async function HeaderAvatar() {
 
 export default function AppHeader() {
   return (
-    <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-3 border-b border-border bg-surface px-4 md:justify-end md:px-10">
+    <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-3 border-b border-border bg-background px-4 text-foreground md:justify-end md:px-10">
       {/* Small screens only: the menu button and the logo */}
       <div className="flex items-center gap-2 md:hidden">
         <MobileNav />

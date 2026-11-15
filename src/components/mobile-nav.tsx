@@ -1,10 +1,10 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
-import Image from "next/image"
 import { Menu, X } from "lucide-react"
 import NavLinks from "@/components/nav-links"
 import SignOutButton from "@/components/sign-out-button"
+import ThemedLogo from "@/components/themed-logo"
 
 export default function MobileNav() {
   const [open, setOpen] = useState(false)
@@ -73,18 +73,12 @@ export default function MobileNav() {
           aria-label="Navigation menu"
           // While closed, its links cannot be reached with the keyboard
           inert={!open}
-          className={`fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] flex-col bg-sidebar p-4 shadow-xl transition-transform duration-200 ease-out motion-reduce:transition-none ${
+          className={`fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] flex-col bg-sidebar p-4 text-sidebar-foreground shadow-xl transition-transform duration-200 ease-out motion-reduce:transition-none ${
             open ? "translate-x-0" : "-translate-x-full"
           }`}
         >
           <div className="mb-6 flex items-center justify-between px-2">
-            <Image
-              src="/trisync-logo-light.svg"
-              alt="TriSync"
-              width={200}
-              height={100}
-              className="h-auto w-28"
-            />
+            <ThemedLogo className="h-auto w-28" />
             <button
               ref={closeButton}
               type="button"
