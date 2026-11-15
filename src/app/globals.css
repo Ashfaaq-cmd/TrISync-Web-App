@@ -24,6 +24,7 @@
   --sidebar-foreground: #CBD5E1;
   --sidebar-active: #1F2937;
   --sidebar-active-foreground: #FFFFFF;
+  color-scheme: light;
 }
 
 .dark {
@@ -48,6 +49,7 @@
   --sidebar-foreground: #CBD5E1;
   --sidebar-active: #16213A;
   --sidebar-active-foreground: #FFFFFF;
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -83,5 +85,19 @@ body {
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
+  }
+}
+/* Switching theme fades the colours instead of snapping */
+@media (prefers-reduced-motion: no-preference) {
+  .theme-transition,
+  .theme-transition *,
+  .theme-transition *::before,
+  .theme-transition *::after {
+    transition:
+      background-color 200ms ease,
+      border-color 200ms ease,
+      color 200ms ease,
+      fill 200ms ease,
+      stroke 200ms ease !important;
   }
 }
