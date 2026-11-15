@@ -21,7 +21,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
           />
         </Link>
         <NavLinks />
-        <div className="mt-auto">
+        <div className="mt-2">
           <SignOutButton />
         </div>
       </aside>

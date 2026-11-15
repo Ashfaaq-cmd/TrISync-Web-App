@@ -98,7 +98,7 @@ export default function MobileNav() {
 
           <NavLinks label="Mobile menu" onNavigate={close} />
 
-          <div className="mt-auto">
+          <div className="mt-2">
             <SignOutButton />
           </div>
         </div>
