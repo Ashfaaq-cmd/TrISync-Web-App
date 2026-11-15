@@ -20,7 +20,7 @@ return(
             </Link>
             <NavLinks />
             <div className="mt-3">
-                <SignOutButton className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-left text-sm font-semibold text-foreground hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" />
+                <SignOutButton />
             </div>
         </aside>
 
@@ -37,7 +37,7 @@ return(
             className="h-auto w-24"
             />
             </Link>
-                <SignOutButton className="rounded-lg px-3 py-1 text-sm text-sidebar-foreground hover:bg-sidebar-active" />
+                <SignOutButton />
             </div>
             <NavLinks orientation="horizontal"/>
         </header>
