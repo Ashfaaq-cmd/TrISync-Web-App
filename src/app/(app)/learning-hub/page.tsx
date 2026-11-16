@@ -1,5 +1,4 @@
 import Link from "next/link"
-import type { ReactNode } from "react"
 import PageHeader from "@/components/page-header"
 import ProtectedPage from "@/components/protected-page"
 import ResourceCard from "@/components/resource-card"
@@ -10,30 +9,6 @@ import { LOG_DISCIPLINES } from "@/lib/validations/workout-log"
 
 type PageProps = {
   searchParams: Promise<{ discipline?: string; muscle?: string }>
-}
-function buildHref(discipline?:string,muscle?:string){
-  const query = new URLSearchParams()
-  if(discipline) query.set("discipline", discipline)
-    if(muscle) query.set("muscle", muscle)
-      const text = query.toString()
-    return text ? `/learning-hub?${text}` : "/learning-hub"
-}
-function FilterChip({
-  href,active,children,}:{ 
-    href: string
-    active: boolean
-    children: ReactNode
-}){
-  return (
-    <Link href={href}
-    aria-current={active ? "true" : undefined}
-    className={`whitespace-nowrap rounded-full border px-3 py-1 text-sm font-semibold ${
-        active
-          ? "border-primary bg-primary text-primary-foreground"
-          : "border-border bg-surface text-foreground hover:bg-background"
-      }`}>{children}
-      </Link>
-  )
 }
 
 export default function LearningHubPage({ searchParams }: PageProps) {
@@ -49,44 +24,103 @@ export default function LearningHubPage({ searchParams }: PageProps) {
 }
 async function LearningHubContent({ searchParams }:PageProps) {
   const params = await searchParams
-    // Only accept values from the known lists; anything else is ignored
-    const discipline = LOG_DISCIPLINES.find((value)=> value === params.discipline)
-    const muscle = MUSCLE_GROUPS.find((value)=> value === params.muscle)
+  // Only accept values from the known lists; anything else is ignored
+  const discipline = LOG_DISCIPLINES.find((value) => value === params.discipline)
+  const muscle = MUSCLE_GROUPS.find((value) => value === params.muscle)
 
-    const resources = await getLearningResources({ discipline, muscle })
-    return (
+  const resources = await getLearningResources({ discipline, muscle })
+  const hasFilters = Boolean(discipline || muscle)
+
+  return (
     <div className="space-y-6 p-6 md:p-10">
-      <div className="space-y-3">
-        <nav aria-label="Filter by discipline" className="flex gap-2 overflow-x-auto">
-          <FilterChip href={buildHref(undefined, muscle)} active={!discipline}>
-            All
-          </FilterChip>
-          {LOG_DISCIPLINES.map((value) => (
-            <FilterChip
-              key={value}
-              href={buildHref(value, muscle)}
-              active={discipline === value}
+      <section
+        aria-labelledby="resource-filters-title"
+        className="rounded-xl border border-border bg-surface p-4 sm:p-5"
+      >
+        <div className="mb-4 flex items-start justify-between gap-4">
+          <div>
+            <h2 id="resource-filters-title" className="text-sm font-semibold text-foreground">
+              Filter resources
+            </h2>
+            <p className="mt-1 text-xs text-muted">
+              Combine a discipline and muscle group to narrow your results.
+            </p>
+          </div>
+          {hasFilters && (
+            <Link
+              href="/learning-hub"
+              className="shrink-0 text-sm font-semibold text-link hover:underline"
             >
-              {DISCIPLINE_LABELS[value]}
-            </FilterChip>
-          ))}
-        </nav>
+              Clear all
+            </Link>
+          )}
+        </div>
 
-        <nav aria-label="Filter by muscle group" className="flex gap-2 overflow-x-auto">
-          <FilterChip href={buildHref(discipline, undefined)} active={!muscle}>
-            Any muscle
-          </FilterChip>
-          {MUSCLE_GROUPS.map((value) => (
-            <FilterChip
-              key={value}
-              href={buildHref(discipline, value)}
-              active={muscle === value}
+        <form
+          action="/learning-hub"
+          method="get"
+          className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] sm:items-end"
+        >
+          <div>
+            <label
+              htmlFor="discipline-filter"
+              className="block text-xs font-semibold text-muted"
             >
-              {formatEnum(value)}
-            </FilterChip>
-          ))}
-        </nav>
-      </div>
+              Discipline
+            </label>
+            <select
+              id="discipline-filter"
+              name="discipline"
+              defaultValue={discipline ?? ""}
+              className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <option value="">All disciplines</option>
+              {LOG_DISCIPLINES.map((value) => (
+                <option key={value} value={value}>
+                  {DISCIPLINE_LABELS[value]}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label
+              htmlFor="muscle-filter"
+              className="block text-xs font-semibold text-muted"
+            >
+              Muscle group
+            </label>
+            <select
+              id="muscle-filter"
+              name="muscle"
+              defaultValue={muscle ?? ""}
+              className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <option value="">Any muscle group</option>
+              {MUSCLE_GROUPS.map((value) => (
+                <option key={value} value={value}>
+                  {formatEnum(value)}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <button
+            type="submit"
+            className="rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            Apply filters
+          </button>
+        </form>
+        {hasFilters && (
+          <p className="mt-3 text-xs font-medium text-muted" role="status">
+            Active:{" "}
+            {[discipline ? DISCIPLINE_LABELS[discipline] : null, muscle ? formatEnum(muscle) : null]
+              .filter(Boolean)
+              .join(" · ")}
+          </p>
+        )}
+      </section>
 
       {resources.length === 0 ? (
         <p className="text-sm text-muted">
