@@ -1,5 +1,3 @@
-import Link from "next/link"
-import { ChevronLeft, ChevronRight } from "lucide-react"
 import PageHeader from "@/components/page-header"
 import ProtectedPage from "@/components/protected-page"
 import WorkoutCard from "@/components/workout-card"
@@ -8,6 +6,7 @@ import { formatEnum } from "@/lib/discipline"
 import { requireOnboardedUser } from "@/lib/session"
 import { getActiveTrainingPlan } from "@/lib/training-plan"
 import GeneratePlanForm from "./generate-plan-form"
+import WeekNavigation from "./week-navigation"
 
 export const maxDuration = 300
 const MS_PER_WEEK = 7 * 24 * 60 * 60 * 1000
@@ -43,7 +42,6 @@ async function PlanContent({ searchParams }: PageProps) {
       ? requested
       : currentWeek
 
-  const weeks = Array.from({ length: plan.totalWeeks }, (_, index) => index + 1)
   const weekWorkouts = plan.workouts.filter((workout) => workout.weekNumber === week)
 
   return (
@@ -58,87 +56,7 @@ async function PlanContent({ searchParams }: PageProps) {
         replace a qualified coach. Stop and seek advice if you feel pain or unwell.
       </p>
 
-      <section
-        aria-label="Training plan week"
-        className="rounded-xl border border-border bg-surface p-4 sm:flex sm:items-center sm:justify-between sm:gap-6"
-      >
-        <div className="mb-3 sm:mb-0">
-          <h2 className="text-sm font-semibold text-foreground">Plan week</h2>
-          <p className="mt-1 text-xs text-muted">
-            Week {week} of {plan.totalWeeks}
-          </p>
-        </div>
-        <nav
-          aria-label="Week navigation"
-          className="flex w-full items-center gap-2 sm:w-auto"
-        >
-          {week > 1 ? (
-            <Link
-              href={`/training-plan?week=${week - 1}`}
-              aria-label={`Previous week, week ${week - 1}`}
-              className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-background text-foreground transition-colors hover:bg-sidebar focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              <ChevronLeft aria-hidden="true" size={18} />
-            </Link>
-          ) : (
-            <button
-              type="button"
-              aria-label="No previous week"
-              disabled
-              className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-background text-muted opacity-50"
-            >
-              <ChevronLeft aria-hidden="true" size={18} />
-            </button>
-          )}
-
-          <form
-            action="/training-plan"
-            method="get"
-            className="flex min-w-0 flex-1 items-center gap-2 sm:flex-none"
-          >
-            <label htmlFor="training-week" className="sr-only">
-              Choose a week
-            </label>
-            <select
-              id="training-week"
-              name="week"
-              defaultValue={String(week)}
-              className="min-w-0 flex-1 rounded-lg border border-border bg-background px-3 py-2.5 text-sm text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-40 sm:flex-none"
-            >
-              {weeks.map((weekNumber) => (
-                <option key={weekNumber} value={weekNumber}>
-                  Week {weekNumber}
-                </option>
-              ))}
-            </select>
-            <button
-              type="submit"
-              className="shrink-0 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              Go
-            </button>
-          </form>
-
-          {week < plan.totalWeeks ? (
-            <Link
-              href={`/training-plan?week=${week + 1}`}
-              aria-label={`Next week, week ${week + 1}`}
-              className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-background text-foreground transition-colors hover:bg-sidebar focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              <ChevronRight aria-hidden="true" size={18} />
-            </Link>
-          ) : (
-            <button
-              type="button"
-              aria-label="No next week"
-              disabled
-              className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-border bg-background text-muted opacity-50"
-            >
-              <ChevronRight aria-hidden="true" size={18} />
-            </button>
-          )}
-        </nav>
-      </section>
+      <WeekNavigation key={week} week={week} totalWeeks={plan.totalWeeks} />
 
       <div className="space-y-6 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0">
         {[1, 2, 3, 4, 5, 6, 7].map((day) => {
