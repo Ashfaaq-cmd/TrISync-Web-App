@@ -12,14 +12,13 @@ const listSelect = {
   youtubeVideoId: true,
 } as const
 
-type Filters = { discipline?: Discipline; muscle?: MuscleGroup }
+type Filters = { discipline?: Discipline; muscles?: MuscleGroup[] }
 
-export async function getLearningResources({ discipline, muscle }: Filters) {
+export async function getLearningResources({ discipline, muscles }: Filters) {
   return prisma.learningResource.findMany({
     where: {
       discipline,
-      // "has" matches resources whose muscle list contains this muscle
-      muscleGroups: muscle ? { has: muscle } : undefined,
+      muscleGroups: muscles?.length ? { hasSome: muscles } : undefined,
     },
     orderBy: { title: "asc" },
     select: listSelect,
