@@ -130,7 +130,7 @@ async function LogWorkoutContent({ searchParams }: PageProps) {
                     <div className="mt-3 flex items-center gap-4">
                       <Link
                         href={`/log-workout/${log.id}`}
-                        className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-semibold text-link hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                        className="inline-flex items-center rounded-lg border border-green-700 bg-green-700 px-3 py-1.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-green-800 hover:bg-green-800 hover:shadow-md active:translate-y-0 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700 motion-reduce:transform-none motion-reduce:transition-none"
                       >
                         Edit
                       </Link>

@@ -11,7 +11,7 @@ export default function DeleteLogButton({ logId }: { logId: string }) {
       <button
         type="button"
         onClick={() => setConfirming(true)}
-        className="rounded-lg border border-danger bg-surface px-3 py-1.5 text-sm font-semibold text-danger hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        className="rounded-lg border border-red-600 bg-red-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-red-700 hover:bg-red-700 hover:shadow-md active:translate-y-0 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 motion-reduce:transform-none motion-reduce:transition-none"
       >
         Delete
       </button>
@@ -24,7 +24,7 @@ export default function DeleteLogButton({ logId }: { logId: string }) {
       <span className="text-muted">Delete this session?</span>
       <button
         type="submit"
-        className="rounded-lg border border-danger bg-surface px-3 py-1.5 font-semibold text-danger hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        className="rounded-lg border border-red-600 bg-red-600 px-3 py-1.5 font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-red-700 hover:bg-red-700 hover:shadow-md active:translate-y-0 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 motion-reduce:transform-none motion-reduce:transition-none"
       >
         Yes, delete
       </button>
