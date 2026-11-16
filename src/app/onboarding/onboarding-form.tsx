@@ -3,6 +3,13 @@
 import { useActionState, useState } from "react"
 import { saveOnboarding } from "./actions"
 import { DAYS, GOALS, LEVELS, MINUTES } from "@/lib/onboarding-options"
+import AvatarUploader from "@/components/avatar-uploader"
+
+type OnboardingFormProps = {
+    image: string | null
+    name?: string | null
+    email?: string | null
+}
 
 type OptionCardProps ={
     name: string
@@ -27,7 +34,7 @@ function OptionCard({name,value,label,description,checked, onChange}: OptionCard
     )
 }
 
-export default function OnboardingForm(){
+export default function OnboardingForm({ image, name, email }: OnboardingFormProps){
     const [state,formAction, pending] = useActionState(saveOnboarding,undefined)
     const [step,setStep] = useState(1)
     const [level,setLevel] = useState("")
@@ -36,11 +43,15 @@ export default function OnboardingForm(){
     const [minutes,setMinutes] = useState("")
 
     //Next button stays disabled until current step has an answer
-    const canContinue = step ===1? level!=="" : step ===2? raceGoal !== "" : days !== "" && minutes !== ""
+        const canContinue =
+        step === 1 ? level !== "" :
+        step === 2 ? raceGoal !== "" :
+        step === 3 ? days !== "" && minutes !== "" :
+        true
 
     return(
         <form action={formAction}>
-            <p className="text-xs font-bold uppercase text-link">Step {step} of 3</p>
+            <p className="text-xs font-bold uppercase text-link">Step {step} of 4</p>
 
             {/* All steps stays in the form.. every answer is submitted, only 1 is visible */}
             <div className={step === 1 ? "mt-2 space-y-3" : "hidden"}>
@@ -112,6 +123,13 @@ export default function OnboardingForm(){
                 ))}
                 </div>
                 </div>
+                <div className={step === 4 ? "mt-2 space-y-3" : "hidden"}>
+                <h1 className="text-2xl font-bold text-foreground">Add a profile picture</h1>
+                <p className="text-sm text-muted">
+                    This is optional. You can skip it and add one later from your profile.
+                </p>
+                <AvatarUploader image={image} name={name} email={email} />
+            </div>
                 {state?.error && (
                     <p role="alert" className="mt-4 text-sm text-danger">{state.error}</p>
                 )}
@@ -123,7 +141,7 @@ export default function OnboardingForm(){
                             Back
                         </button>
                     )}
-                     {step < 3 ? (
+                     {step < 4 ? (
                         <button type="button"
                         disabled={!canContinue}
                         onClick={()=> setStep(step+1)}

@@ -25,7 +25,7 @@ export default function AppHeader() {
       <div className="flex items-center gap-2 md:hidden">
         <MobileNav />
         <Link href="/dashboard" aria-label="TriSync home">
-          <ThemedLogo className="h-auto w-24" />
+          <ThemedLogo className="h-auto w-24" priority />
         </Link>
       </div>
 

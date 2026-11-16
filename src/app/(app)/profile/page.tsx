@@ -2,6 +2,8 @@ import PageHeader from "@/components/page-header"
 import ProtectedPage from "@/components/protected-page"
 import { requireOnboardedUser } from "@/lib/session"
 import ProfileForm from "./profile-form"
+import AvatarUploader from "@/components/avatar-uploader"
+import { getHeaderUser } from "@/lib/header-user"
 
 export default function ProfilePage() {
   return (
@@ -14,9 +16,14 @@ export default function ProfilePage() {
 
 async function ProfileContent() {
   const { user, profile } = await requireOnboardedUser()
+  const account = await getHeaderUser()
 
   return (
     <div className="max-w-2xl space-y-6 p-6 md:p-10">
+      <section className="rounded-xl border border-border bg-surface p-6">
+        <h2 className="mb-4 text-xs font-bold uppercase text-muted">Profile picture</h2>
+        <AvatarUploader image={account?.image ?? null} name={user.name} email={user.email} />
+      </section>
       <section className="rounded-xl border border-border bg-surface p-6">
         <h2 className="mb-1 text-xs font-bold uppercase text-muted">Account</h2>
         <p className="text-foreground">{user.email}</p>

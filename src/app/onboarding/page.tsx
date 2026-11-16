@@ -4,6 +4,7 @@ import { connection } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/session";
 import OnboardingForm from "./onboarding-form"; 
+import { getHeaderUser } from "@/lib/header-user"
 
 export default function OnboardingPage(){
     return(
@@ -20,9 +21,10 @@ export default function OnboardingPage(){
 async function OnboardingContent() {
     await connection()
     const user = await requireUser()
+    const account = await getHeaderUser()
 
     // Users who already finished onboarding dont see it again
     const profile = await prisma.profile.findUnique({ where: { userId: user.id } })
     if(profile) redirect ("/dashboard")
-        return <OnboardingForm/> 
+    return <OnboardingForm image={account?.image ?? null} name={account?.name} email={account?.email} />
 }
