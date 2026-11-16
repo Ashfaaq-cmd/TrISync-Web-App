@@ -4,6 +4,8 @@ import { requireOnboardedUser } from "@/lib/session"
 import ProfileForm from "./profile-form"
 import AvatarUploader from "@/components/avatar-uploader"
 import { getHeaderUser } from "@/lib/header-user"
+import Link from "next/link"
+import DeleteAccountForm from "./delete-account-form"
 
 export default function ProfilePage() {
   return (
@@ -48,6 +50,28 @@ async function ProfileContent() {
           Changing these settings does not change your current plan. You will be
           able to generate a new plan from your updated profile on the Training Plan page.
         </p>
+      </section>
+            <section className="space-y-3 rounded-xl border border-border bg-surface p-6">
+        <h2 className="text-xs font-bold uppercase text-muted">Your data</h2>
+        <p className="text-sm text-muted">
+          See how we use your data in the{" "}
+          <Link href="/privacy" className="text-link hover:underline">
+            privacy notice
+          </Link>
+          . You can download everything we hold about you.
+        </p>
+        <a
+          href="/api/export"
+          download
+          className="inline-flex items-center rounded-lg border border-green-700 bg-green-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-green-800 hover:bg-green-800 hover:shadow-md active:translate-y-0 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700 motion-reduce:transform-none motion-reduce:transition-none"
+        >
+          Download my data
+        </a>
+      </section>
+
+      <section className="rounded-xl border border-danger/40 bg-surface p-6">
+        <h2 className="mb-3 text-xs font-bold uppercase text-danger">Delete account</h2>
+        <DeleteAccountForm email={user.email ?? ""} />
       </section>
     </div>
   )

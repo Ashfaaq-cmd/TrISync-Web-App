@@ -5,8 +5,17 @@ import { useSearchParams } from "next/navigation"
 export default function LoginError() {
   // Auth.js redirects to /login?error=... when Google sign-in fails
   const searchParams = useSearchParams()
-  const error = searchParams.get("error")
+    const params = useSearchParams()
 
+  if (params.get("deleted")) {
+    return (
+      <p role="status" className="mb-4 text-sm text-success">
+        Your account and data have been deleted.
+      </p>
+    )
+  }
+
+  const error = params.get("error")
   if (!error) return null
 
   const message =

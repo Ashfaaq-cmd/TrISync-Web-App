@@ -1,6 +1,7 @@
 import RegisterForm from "./register-form"
 import ThemedLogo from "@/components/themed-logo";
 import GoogleButton from "@/components/google-btn"
+import Link from "next/link"
 
 export default function RegisterPage() {
   return (
@@ -14,6 +15,13 @@ export default function RegisterPage() {
            <RegisterForm />
             <p className="my-4 text-center text-sm text-muted">or</p>
             <GoogleButton />
+                            <p className="mt-4 text-center text-xs text-muted">
+                  By continuing you agree to the{" "}
+                  <Link href="/privacy" className="text-link hover:underline">
+                    privacy notice
+                  </Link>
+                  .
+                </p>
       </div>
     </main>
   )
