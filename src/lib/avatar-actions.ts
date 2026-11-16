@@ -1,33 +1,13 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { del, put } from "@vercel/blob"
+import { put } from "@vercel/blob"
 import { looksLikeJpeg, MAX_UPLOAD_BYTES } from "@/lib/avatar"
 import { prisma } from "@/lib/prisma"
 import { requireUser } from "@/lib/session"
+import { deleteAvatarFile } from "@/lib/avatar-storage"
 
 export type AvatarResult = { error?: string; url?: string | null }
-
-// Only files we stored ourselves are ever deleted: never a Google photo or another site's URL
-function isOurAvatar(url: string | null | undefined) {
-  if (!url) return false
-  try {
-    const { hostname, pathname } = new URL(url)
-    return hostname.endsWith(".public.blob.vercel-storage.com") && pathname.startsWith("/avatars/")
-  } catch {
-    return false
-  }
-}
-
-// A failed clean-up is logged, never shown to the user
-async function deleteAvatarFile(url: string | null | undefined) {
-  if (!isOurAvatar(url)) return
-  try {
-    await del(url as string)
-  } catch (error) {
-    console.error("Could not delete an avatar file:", (error as Error).message)
-  }
-}
 
 export async function uploadAvatar(formData: FormData): Promise<AvatarResult> {
   // The user always comes from the session, never from the form
