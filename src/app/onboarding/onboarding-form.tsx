@@ -50,7 +50,15 @@ export default function OnboardingForm({ image, name, email }: OnboardingFormPro
         true
 
     return(
-        <form action={formAction}>
+        <form
+            action={formAction}
+            onSubmit={(event) => {
+                if (step < 4) {
+                    event.preventDefault()
+                    if (canContinue) setStep((currentStep) => currentStep + 1)
+                }
+            }}
+        >
             <p className="text-xs font-bold uppercase text-link">Step {step} of 4</p>
 
             {/* All steps stays in the form.. every answer is submitted, only 1 is visible */}
@@ -142,14 +150,14 @@ export default function OnboardingForm({ image, name, email }: OnboardingFormPro
                         </button>
                     )}
                      {step < 4 ? (
-                        <button type="button"
+                        <button key="next" type="button"
                         disabled={!canContinue}
                         onClick={()=> setStep(step+1)}
                         className="flex rounded-lg bg-primary px-4 py-2 font-semibold text-primary-foreground disabled:opacity-60">
                             Next
                         </button>
                     ): (
-                        <button type="submit"
+                        <button key="finish" type="submit"
                         disabled={!canContinue || pending}
                         className="flex-1 rounded-lg bg-primary py-2 font-semibold text-primary-foreground disabled:opacity-60">{pending? "Saving..." : "Finish"}</button>
                     )}
