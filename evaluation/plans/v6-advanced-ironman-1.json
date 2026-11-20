@@ -1,0 +1,2676 @@
+{
+  "scenario": "Advanced, Ironman, 6 days, 150 min (the longest plan)",
+  "input": {
+    "experienceLevel": "ADVANCED",
+    "goal": "IRONMAN",
+    "daysPerWeek": 6,
+    "minutesPerSession": 150,
+    "targetRaceDate": null,
+    "isUnwell": false
+  },
+  "record": {
+    "promptVersion": "v6",
+    "label": "baseline",
+    "scenarioId": "advanced-ironman",
+    "run": 1,
+    "startedAt": "2026-11-20T06:07:25.411Z",
+    "primaryModel": "gemini-3.5-flash-lite",
+    "outcome": "SUCCESS",
+    "attempts": 2,
+    "repairs": 4,
+    "repairList": [
+      "Week 17, day 6: shortened from 155 to 149 minutes to fit the session limit",
+      "Week 18, day 6: shortened from 160 to 149 minutes to fit the session limit",
+      "Week 19, day 6: shortened from 165 to 149 minutes to fit the session limit",
+      "Week 3: shortened from 300 to 279 minutes to keep the build gradual"
+    ],
+    "model": "gemini-3.5-flash-lite",
+    "durationSec": 61,
+    "rejected": [
+      {
+        "model": "gemini-3.5-flash-lite",
+        "problems": [
+          "Week 4 has 4 training days; it must have at least 5 (one fewer than the athlete's 6 available days)",
+          "Week 8 has 4 training days; it must have at least 5 (one fewer than the athlete's 6 available days)",
+          "Week 12 has 4 training days; it must have at least 5 (one fewer than the athlete's 6 available days)",
+          "Week 16 has 4 training days; it must have at least 5 (one fewer than the athlete's 6 available days)"
+        ]
+      }
+    ],
+    "message": null,
+    "plan": {
+      "weeks": 20,
+      "workouts": 140,
+      "weeklyMinutes": [
+        225,
+        245,
+        279,
+        175,
+        310,
+        325,
+        355,
+        185,
+        360,
+        365,
+        390,
+        205,
+        405,
+        410,
+        435,
+        230,
+        444,
+        439,
+        459,
+        330
+      ],
+      "maxWorkoutMinutes": 149,
+      "brickSessions": 15,
+      "hardSessions": 10
+    }
+  },
+  "plan": {
+    "title": "20-week Ironman plan",
+    "goal": "IRONMAN",
+    "totalWeeks": 20,
+    "workouts": [
+      {
+        "weekNumber": 1,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Easy Swim",
+        "description": "An easy swim focusing on steady breathing and relaxing your stroke.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.2,
+            "targetDurationMin": 30,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 1,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Aerobic Bike",
+        "description": "Steady indoor or outdoor ride to build basic cardiovascular endurance.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 20,
+            "targetDurationMin": 45,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 1,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Easy Run",
+        "description": "Comfortable conversational pace run with walking breaks as needed.",
+        "muscleGroups": [
+          "CALVES",
+          "HAMSTRINGS",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 4,
+            "targetDurationMin": 30,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 1,
+        "dayOfWeek": 4,
+        "discipline": "STRENGTH",
+        "title": "Core and Leg Strength",
+        "description": "Bodyweight strength session to protect joints and improve posture.",
+        "muscleGroups": [
+          "CORE",
+          "GLUTES",
+          "HIP_FLEXORS"
+        ],
+        "segments": [
+          {
+            "discipline": "STRENGTH",
+            "targetDurationMin": 30,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 1,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Technique Swim",
+        "description": "Focus on smooth arm recovery and good body rotation in the water.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1,
+            "targetDurationMin": 30,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 1,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "Bike-Run Brick",
+        "description": "Short bike ride followed immediately by a short run to practice leg transition.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 15,
+            "targetDurationMin": 40,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 2.5,
+            "targetDurationMin": 20,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 1,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Complete rest day to let your muscles recover and adapt to the training.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 2,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Endurance Swim",
+        "description": "Continuous swimming at an easy conversational pace to build endurance.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.4,
+            "targetDurationMin": 35,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 2,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Steady Bike",
+        "description": "Moderate intensity ride focusing on maintaining a smooth pedal stroke.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 24,
+            "targetDurationMin": 50,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 2,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Easy Run",
+        "description": "Relaxed jog focusing on good posture and light footstrikes.",
+        "muscleGroups": [
+          "CALVES",
+          "HAMSTRINGS",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 5,
+            "targetDurationMin": 35,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 2,
+        "dayOfWeek": 4,
+        "discipline": "STRENGTH",
+        "title": "Full Body Strength",
+        "description": "Strength training targeting hips, core, and upper body for triathlon.",
+        "muscleGroups": [
+          "CORE",
+          "GLUTES",
+          "CHEST"
+        ],
+        "segments": [
+          {
+            "discipline": "STRENGTH",
+            "targetDurationMin": 30,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 2,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Drill Swim",
+        "description": "Swim drills focusing on catch and pull mechanics.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "ARMS",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.2,
+            "targetDurationMin": 35,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 2,
+        "dayOfWeek": 6,
+        "discipline": "BIKE",
+        "title": "Longer Bike",
+        "description": "Slightly longer weekend ride at an easy aerobic pace.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 28,
+            "targetDurationMin": 60,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 2,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Take today completely off to rest and recharge for the next week.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 3,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Interval Swim",
+        "description": "Swimming with short fast efforts followed by easy recovery swimming.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.4,
+            "targetDurationMin": 37,
+            "targetIntensity": "HARD"
+          }
+        ]
+      },
+      {
+        "weekNumber": 3,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Moderate Bike",
+        "description": "Steady ride focusing on building sustainable power output.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 26.3,
+            "targetDurationMin": 56,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 3,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Interval Run",
+        "description": "Easy warm up followed by short running intervals and a cool down.",
+        "muscleGroups": [
+          "CALVES",
+          "QUADRICEPS",
+          "HAMSTRINGS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 5.6,
+            "targetDurationMin": 37,
+            "targetIntensity": "HARD"
+          }
+        ]
+      },
+      {
+        "weekNumber": 3,
+        "dayOfWeek": 4,
+        "discipline": "STRENGTH",
+        "title": "Core Workout",
+        "description": "Focused core session to support your posture during long endurance days.",
+        "muscleGroups": [
+          "CORE",
+          "HIP_FLEXORS",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "STRENGTH",
+            "targetDurationMin": 28,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 3,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Easy Swim",
+        "description": "Recovery swim to loosen up muscles after hard interval sessions.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.1,
+            "targetDurationMin": 32,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 3,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "Long Brick",
+        "description": "Moderate bike ride followed by a steady run to build race readiness.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 28.2,
+            "targetDurationMin": 61,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 3.8,
+            "targetDurationMin": 28,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 3,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Enjoy a well-earned rest day to let your body recover.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 4,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Recovery Swim",
+        "description": "Easy technique-focused swim to start your recovery week fresh.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1,
+            "targetDurationMin": 30,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 4,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Easy Bike",
+        "description": "Light spin on the bike to keep blood flowing without high fatigue.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 20,
+            "targetDurationMin": 45,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 4,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Short Easy Run",
+        "description": "Short and gentle run keeping your heart rate very low.",
+        "muscleGroups": [
+          "CALVES",
+          "HAMSTRINGS",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 3,
+            "targetDurationMin": 25,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 4,
+        "dayOfWeek": 4,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Mid-week rest day to absorb training and recover.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 4,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Easy Swim",
+        "description": "Relaxed swim focusing on feeling smooth in the water.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1,
+            "targetDurationMin": 30,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 4,
+        "dayOfWeek": 6,
+        "discipline": "BIKE",
+        "title": "Short Recovery Ride",
+        "description": "Light weekend ride to maintain momentum without stress.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 20,
+            "targetDurationMin": 45,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 4,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Rest day to wrap up your recovery week.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 5,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Endurance Swim",
+        "description": "Build aerobic capacity with steady distance swimming.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.6,
+            "targetDurationMin": 40,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 5,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Steady Bike",
+        "description": "Moderate endurance ride to build leg strength and stamina.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 32,
+            "targetDurationMin": 70,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 5,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Aerobic Run",
+        "description": "Steady endurance run at an easy conversational pace.",
+        "muscleGroups": [
+          "CALVES",
+          "HAMSTRINGS",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 6,
+            "targetDurationMin": 40,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 5,
+        "dayOfWeek": 4,
+        "discipline": "STRENGTH",
+        "title": "Lower Body Strength",
+        "description": "Strength exercises focusing on glutes and hamstrings for running power.",
+        "muscleGroups": [
+          "GLUTES",
+          "HAMSTRINGS",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "STRENGTH",
+            "targetDurationMin": 30,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 5,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Technique Swim",
+        "description": "Focus on stroke efficiency and breathing bilaterally.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.4,
+            "targetDurationMin": 35,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 5,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "Bike-Run Brick",
+        "description": "Moderate bike ride followed by a steady run practice.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 30,
+            "targetDurationMin": 65,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 4,
+            "targetDurationMin": 30,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 5,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Take a rest day to recover from the week's training load.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 6,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Interval Swim",
+        "description": "Hard swim intervals to boost speed and cardiovascular fitness.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "ARMS"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.6,
+            "targetDurationMin": 40,
+            "targetIntensity": "HARD"
+          }
+        ]
+      },
+      {
+        "weekNumber": 6,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Endurance Bike",
+        "description": "Long steady ride to improve aerobic endurance.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 35,
+            "targetDurationMin": 75,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 6,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Easy Run",
+        "description": "Relaxed recovery run to help your legs bounce back.",
+        "muscleGroups": [
+          "CALVES",
+          "HAMSTRINGS",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 5,
+            "targetDurationMin": 35,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 6,
+        "dayOfWeek": 4,
+        "discipline": "STRENGTH",
+        "title": "Core and Stability",
+        "description": "Stability workout to maintain good form during fatigue.",
+        "muscleGroups": [
+          "CORE",
+          "BACK",
+          "HIP_FLEXORS"
+        ],
+        "segments": [
+          {
+            "discipline": "STRENGTH",
+            "targetDurationMin": 30,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 6,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Easy Swim",
+        "description": "Easy aerobic swim focusing on long and smooth strokes.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.2,
+            "targetDurationMin": 35,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 6,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "Long Brick Workout",
+        "description": "Substantial bike ride followed by an aerobic run off the bike.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 35,
+            "targetDurationMin": 75,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 5,
+            "targetDurationMin": 35,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 6,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Completely disconnect and rest your body today.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 7,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Distance Swim",
+        "description": "Continuous swimming to build stamina for the swim leg.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.8,
+            "targetDurationMin": 45,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 7,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Moderate Bike",
+        "description": "Steady ride keeping heart rate in zone 2.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 38,
+            "targetDurationMin": 80,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 7,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Tempo Run",
+        "description": "Easy warm up, a steady tempo block, and an easy cool down.",
+        "muscleGroups": [
+          "CALVES",
+          "HAMSTRINGS",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 7,
+            "targetDurationMin": 45,
+            "targetIntensity": "HARD"
+          }
+        ]
+      },
+      {
+        "weekNumber": 7,
+        "dayOfWeek": 4,
+        "discipline": "STRENGTH",
+        "title": "Triathlon Strength",
+        "description": "Strength workout focusing on overall muscular balance.",
+        "muscleGroups": [
+          "CORE",
+          "GLUTES",
+          "SHOULDERS"
+        ],
+        "segments": [
+          {
+            "discipline": "STRENGTH",
+            "targetDurationMin": 30,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 7,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Drill Swim",
+        "description": "Water confidence and technique drills.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "ARMS",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.4,
+            "targetDurationMin": 40,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 7,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "Endurance Brick",
+        "description": "Solid bike ride followed by an easy run to practice transitions.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 38,
+            "targetDurationMin": 80,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 5,
+            "targetDurationMin": 35,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 7,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Rest day to recover and prepare for recovery week.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 8,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Easy Recovery Swim",
+        "description": "Gentle swimming to loosen up at the start of your recovery week.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1,
+            "targetDurationMin": 30,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 8,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Easy Spin",
+        "description": "Light and easy ride to maintain leg turnover.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 20,
+            "targetDurationMin": 45,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 8,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Easy Jog",
+        "description": "Short easy run keeping fatigue levels low.",
+        "muscleGroups": [
+          "CALVES",
+          "HAMSTRINGS",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 4,
+            "targetDurationMin": 30,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 8,
+        "dayOfWeek": 4,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Rest and recuperation day.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 8,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Easy Swim",
+        "description": "Relaxed swim focusing on feeling good in the water.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.2,
+            "targetDurationMin": 30,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 8,
+        "dayOfWeek": 6,
+        "discipline": "BIKE",
+        "title": "Light Ride",
+        "description": "Easy weekend spin to keep legs moving.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 22,
+            "targetDurationMin": 50,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 8,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Rest day to finish the recovery week strongly.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 9,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Endurance Swim",
+        "description": "Steady swimming to build back into the training block.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.8,
+            "targetDurationMin": 45,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 9,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Endurance Bike",
+        "description": "Solid ride to build aerobic stamina.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 40,
+            "targetDurationMin": 85,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 9,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Aerobic Run",
+        "description": "Comfortable run maintaining a steady cadence.",
+        "muscleGroups": [
+          "CALVES",
+          "HAMSTRINGS",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 7,
+            "targetDurationMin": 45,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 9,
+        "dayOfWeek": 4,
+        "discipline": "STRENGTH",
+        "title": "Core and Leg Strength",
+        "description": "Strength training to support increased training volume.",
+        "muscleGroups": [
+          "CORE",
+          "GLUTES",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "STRENGTH",
+            "targetDurationMin": 30,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 9,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Technique Swim",
+        "description": "Focus on stroke mechanics and efficient breathing.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.5,
+            "targetDurationMin": 40,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 9,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "Bike-Run Brick",
+        "description": "Moderate ride followed by a solid run off the bike.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 38,
+            "targetDurationMin": 80,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 5,
+            "targetDurationMin": 35,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 9,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Take today off to recover and absorb training.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 10,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Interval Swim",
+        "description": "Swim intervals focusing on speed and threshold effort.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "ARMS"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.8,
+            "targetDurationMin": 45,
+            "targetIntensity": "HARD"
+          }
+        ]
+      },
+      {
+        "weekNumber": 10,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Endurance Bike",
+        "description": "Long steady ride building aerobic foundation.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 42,
+            "targetDurationMin": 90,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 10,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Easy Run",
+        "description": "Recovery run keeping effort light and easy.",
+        "muscleGroups": [
+          "CALVES",
+          "HAMSTRINGS",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 6,
+            "targetDurationMin": 40,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 10,
+        "dayOfWeek": 4,
+        "discipline": "STRENGTH",
+        "title": "Full Body Strength",
+        "description": "Maintain muscular strength and joint stability.",
+        "muscleGroups": [
+          "CORE",
+          "GLUTES",
+          "CHEST"
+        ],
+        "segments": [
+          {
+            "discipline": "STRENGTH",
+            "targetDurationMin": 30,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 10,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Easy Swim",
+        "description": "Relaxed swim to loosen up the shoulders.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.4,
+            "targetDurationMin": 35,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 10,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "Long Brick Workout",
+        "description": "Challenging bike and run combination.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 40,
+            "targetDurationMin": 85,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 6,
+            "targetDurationMin": 40,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 10,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Complete rest day to recover from the weekend.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 11,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Distance Swim",
+        "description": "Continuous endurance swim at a steady pace.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 2,
+            "targetDurationMin": 50,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 11,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Moderate Bike",
+        "description": "Steady ride focusing on endurance and fueling.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 45,
+            "targetDurationMin": 95,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 11,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Tempo Run",
+        "description": "Interval run to build speed and running economy.",
+        "muscleGroups": [
+          "CALVES",
+          "HAMSTRINGS",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 8,
+            "targetDurationMin": 50,
+            "targetIntensity": "HARD"
+          }
+        ]
+      },
+      {
+        "weekNumber": 11,
+        "dayOfWeek": 4,
+        "discipline": "STRENGTH",
+        "title": "Core Workout",
+        "description": "Core stability and hip strength session.",
+        "muscleGroups": [
+          "CORE",
+          "HIP_FLEXORS",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "STRENGTH",
+            "targetDurationMin": 30,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 11,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Technique Swim",
+        "description": "Drill-focused swim to refine your stroke.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "ARMS",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.5,
+            "targetDurationMin": 40,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 11,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "Endurance Brick",
+        "description": "Longer bike ride followed by an easy transition run.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 42,
+            "targetDurationMin": 90,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 5,
+            "targetDurationMin": 35,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 11,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Rest day to recharge before the recovery week.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 12,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Easy Recovery Swim",
+        "description": "Light swimming to kick off your recovery week.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1,
+            "targetDurationMin": 30,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 12,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Easy Spin",
+        "description": "Easy recovery spin on the bike.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 22,
+            "targetDurationMin": 50,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 12,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Easy Jog",
+        "description": "Short easy run keeping legs fresh.",
+        "muscleGroups": [
+          "CALVES",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 4,
+            "targetDurationMin": 30,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 12,
+        "dayOfWeek": 4,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Mid-week rest day.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 12,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Easy Swim",
+        "description": "Relaxed swim focusing on good technique.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.2,
+            "targetDurationMin": 35,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 12,
+        "dayOfWeek": 6,
+        "discipline": "BIKE",
+        "title": "Light Ride",
+        "description": "Easy weekend bike ride.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 25,
+            "targetDurationMin": 60,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 12,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Rest day to complete recovery week.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 13,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Endurance Swim",
+        "description": "Return to steady endurance swimming.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 2,
+            "targetDurationMin": 50,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 13,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Endurance Bike",
+        "description": "Longer aerobic ride building triathlon specific fitness.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 48,
+            "targetDurationMin": 100,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 13,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Aerobic Run",
+        "description": "Steady run focusing on comfortable breathing.",
+        "muscleGroups": [
+          "CALVES",
+          "HAMSTRINGS",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 8,
+            "targetDurationMin": 50,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 13,
+        "dayOfWeek": 4,
+        "discipline": "STRENGTH",
+        "title": "Lower Body Strength",
+        "description": "Strength session targeting legs and core.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "STRENGTH",
+            "targetDurationMin": 30,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 13,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Technique Swim",
+        "description": "Stroke efficiency and rotation focus.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.6,
+            "targetDurationMin": 40,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 13,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "Bike-Run Brick",
+        "description": "Substantial bike ride followed by an aerobic run.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 45,
+            "targetDurationMin": 95,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 6,
+            "targetDurationMin": 40,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 13,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Rest day to recover from the training volume.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 14,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Interval Swim",
+        "description": "Hard swim intervals to build race speed.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "ARMS"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 2,
+            "targetDurationMin": 50,
+            "targetIntensity": "HARD"
+          }
+        ]
+      },
+      {
+        "weekNumber": 14,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Endurance Bike",
+        "description": "Long steady ride building aerobic power.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 50,
+            "targetDurationMin": 105,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 14,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Easy Run",
+        "description": "Recovery run keeping heart rate low.",
+        "muscleGroups": [
+          "CALVES",
+          "HAMSTRINGS",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 7,
+            "targetDurationMin": 45,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 14,
+        "dayOfWeek": 4,
+        "discipline": "STRENGTH",
+        "title": "Full Body Strength",
+        "description": "Maintain strength and injury prevention.",
+        "muscleGroups": [
+          "CORE",
+          "GLUTES",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "STRENGTH",
+            "targetDurationMin": 30,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 14,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Easy Swim",
+        "description": "Relaxed recovery swim.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.5,
+            "targetDurationMin": 40,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 14,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "Long Brick Workout",
+        "description": "Advanced bike and run combination for race prep.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 48,
+            "targetDurationMin": 100,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 6,
+            "targetDurationMin": 40,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 14,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Complete rest day to recover.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 15,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Distance Swim",
+        "description": "Continuous endurance swim at a steady tempo.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 2.2,
+            "targetDurationMin": 55,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 15,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Moderate Bike",
+        "description": "Steady ride building Olympic distance stamina.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 52,
+            "targetDurationMin": 110,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 15,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Tempo Run",
+        "description": "Tempo run to build lactate threshold.",
+        "muscleGroups": [
+          "CALVES",
+          "HAMSTRINGS",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 9,
+            "targetDurationMin": 55,
+            "targetIntensity": "HARD"
+          }
+        ]
+      },
+      {
+        "weekNumber": 15,
+        "dayOfWeek": 4,
+        "discipline": "STRENGTH",
+        "title": "Core Workout",
+        "description": "Core stability for efficient endurance pacing.",
+        "muscleGroups": [
+          "CORE",
+          "HIP_FLEXORS",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "STRENGTH",
+            "targetDurationMin": 30,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 15,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Technique Swim",
+        "description": "Drill-focused swim for smooth technique.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "ARMS",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.6,
+            "targetDurationMin": 40,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 15,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "Endurance Brick",
+        "description": "Long bike ride followed by an easy run off the bike.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 50,
+            "targetDurationMin": 105,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 6,
+            "targetDurationMin": 40,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 15,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Rest day before recovery week.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 16,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Easy Recovery Swim",
+        "description": "Light swimming to start recovery week.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.2,
+            "targetDurationMin": 35,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 16,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Easy Spin",
+        "description": "Easy recovery spin on the bike.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 25,
+            "targetDurationMin": 60,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 16,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Easy Jog",
+        "description": "Short easy run keeping legs fresh.",
+        "muscleGroups": [
+          "CALVES",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 5,
+            "targetDurationMin": 35,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 16,
+        "dayOfWeek": 4,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Mid-week rest day.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 16,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Easy Swim",
+        "description": "Relaxed swim focusing on technique.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.4,
+            "targetDurationMin": 35,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 16,
+        "dayOfWeek": 6,
+        "discipline": "BIKE",
+        "title": "Light Ride",
+        "description": "Easy weekend bike ride.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 28,
+            "targetDurationMin": 65,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 16,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Rest day to complete recovery week.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 17,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Endurance Swim",
+        "description": "Peak training block begins with a steady endurance swim.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 2.2,
+            "targetDurationMin": 55,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 17,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Endurance Bike",
+        "description": "Peak long ride simulating Olympic distance requirements.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 55,
+            "targetDurationMin": 115,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 17,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Aerobic Run",
+        "description": "Steady aerobic run to maintain running fitness.",
+        "muscleGroups": [
+          "CALVES",
+          "HAMSTRINGS",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 9,
+            "targetDurationMin": 55,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 17,
+        "dayOfWeek": 4,
+        "discipline": "STRENGTH",
+        "title": "Lower Body Strength",
+        "description": "Strength maintenance workout.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "GLUTES",
+          "HAMSTRINGS"
+        ],
+        "segments": [
+          {
+            "discipline": "STRENGTH",
+            "targetDurationMin": 30,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 17,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Technique Swim",
+        "description": "Drill swim focusing on efficiency.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.6,
+            "targetDurationMin": 40,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 17,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "Peak Brick Workout",
+        "description": "Long bike and run simulation for peak fitness.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 50.3,
+            "targetDurationMin": 106,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 6.8,
+            "targetDurationMin": 43,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 17,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Rest day to recover from big training load.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 18,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Interval Swim",
+        "description": "High intensity swim intervals.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "ARMS"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 2.2,
+            "targetDurationMin": 55,
+            "targetIntensity": "HARD"
+          }
+        ]
+      },
+      {
+        "weekNumber": 18,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Endurance Bike",
+        "description": "Steady endurance ride maintaining strong aerobic output.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 55,
+            "targetDurationMin": 115,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 18,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Easy Run",
+        "description": "Recovery run keeping effort light.",
+        "muscleGroups": [
+          "CALVES",
+          "HAMSTRINGS",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 8,
+            "targetDurationMin": 50,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 18,
+        "dayOfWeek": 4,
+        "discipline": "STRENGTH",
+        "title": "Full Body Strength",
+        "description": "Strength maintenance session.",
+        "muscleGroups": [
+          "CORE",
+          "GLUTES",
+          "CHEST"
+        ],
+        "segments": [
+          {
+            "discipline": "STRENGTH",
+            "targetDurationMin": 30,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 18,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Easy Swim",
+        "description": "Relaxed recovery swim.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.6,
+            "targetDurationMin": 40,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 18,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "Peak Brick Workout",
+        "description": "Strong bike and run simulation.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 48.8,
+            "targetDurationMin": 103,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 7.5,
+            "targetDurationMin": 46,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 18,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Complete rest day to absorb training.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 19,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Distance Swim",
+        "description": "Continuous endurance swim at steady pace.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 2.4,
+            "targetDurationMin": 60,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 19,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Moderate Bike",
+        "description": "Steady endurance ride.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 58,
+            "targetDurationMin": 120,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 19,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Tempo Run",
+        "description": "Final hard tempo run to test fitness.",
+        "muscleGroups": [
+          "CALVES",
+          "HAMSTRINGS",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 10,
+            "targetDurationMin": 60,
+            "targetIntensity": "HARD"
+          }
+        ]
+      },
+      {
+        "weekNumber": 19,
+        "dayOfWeek": 4,
+        "discipline": "STRENGTH",
+        "title": "Core Workout",
+        "description": "Core stability session.",
+        "muscleGroups": [
+          "CORE",
+          "HIP_FLEXORS",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "STRENGTH",
+            "targetDurationMin": 30,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 19,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Technique Swim",
+        "description": "Drill swim for stroke refinement.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "ARMS",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.6,
+            "targetDurationMin": 40,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 19,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "Endurance Brick",
+        "description": "Solid final brick workout.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 50,
+            "targetDurationMin": 104,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 7.3,
+            "targetDurationMin": 45,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 19,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Rest day before final week.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 20,
+        "dayOfWeek": 1,
+        "discipline": "SWIM",
+        "title": "Easy Swim",
+        "description": "Relaxed swim to start the final week.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "BACK",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.5,
+            "targetDurationMin": 40,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 20,
+        "dayOfWeek": 2,
+        "discipline": "BIKE",
+        "title": "Steady Bike",
+        "description": "Comfortable ride keeping legs active.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "GLUTES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 40,
+            "targetDurationMin": 90,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 20,
+        "dayOfWeek": 3,
+        "discipline": "RUN",
+        "title": "Aerobic Run",
+        "description": "Smooth and easy run.",
+        "muscleGroups": [
+          "CALVES",
+          "QUADRICEPS"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 7,
+            "targetDurationMin": 45,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 20,
+        "dayOfWeek": 4,
+        "discipline": "STRENGTH",
+        "title": "Light Core Workout",
+        "description": "Light core session to finish training.",
+        "muscleGroups": [
+          "CORE",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "STRENGTH",
+            "targetDurationMin": 25,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 20,
+        "dayOfWeek": 5,
+        "discipline": "SWIM",
+        "title": "Easy Swim",
+        "description": "Easy final swim session.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 1.2,
+            "targetDurationMin": 35,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 20,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "Final Brick Workout",
+        "description": "Short and crisp final brick session.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 30,
+            "targetDurationMin": 65,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 4,
+            "targetDurationMin": 30,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 20,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Rest Day",
+        "description": "Celebrate completing your 20-week triathlon plan with a rest day!",
+        "muscleGroups": [],
+        "segments": []
+      }
+    ]
+  }
+}

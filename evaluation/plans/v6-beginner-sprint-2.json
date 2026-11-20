@@ -1,0 +1,836 @@
+{
+  "scenario": "Beginner, sprint, 3 days, 45 min",
+  "input": {
+    "experienceLevel": "BEGINNER",
+    "goal": "SPRINT",
+    "daysPerWeek": 3,
+    "minutesPerSession": 45,
+    "targetRaceDate": null,
+    "isUnwell": false
+  },
+  "record": {
+    "promptVersion": "v6",
+    "label": "baseline",
+    "scenarioId": "beginner-sprint",
+    "run": 2,
+    "startedAt": "2026-11-20T06:09:08.863Z",
+    "primaryModel": "gemini-3.5-flash-lite",
+    "outcome": "SUCCESS",
+    "attempts": 1,
+    "repairs": 0,
+    "repairList": [],
+    "model": "gemini-3.5-flash-lite",
+    "durationSec": 14,
+    "rejected": [],
+    "message": null,
+    "plan": {
+      "weeks": 8,
+      "workouts": 56,
+      "weeklyMinutes": [
+        75,
+        80,
+        88,
+        53,
+        103,
+        111,
+        117,
+        65
+      ],
+      "maxWorkoutMinutes": 45,
+      "brickSessions": 3,
+      "hardSessions": 2
+    }
+  },
+  "plan": {
+    "title": "8-week Sprint plan",
+    "goal": "SPRINT",
+    "totalWeeks": 8,
+    "workouts": [
+      {
+        "weekNumber": 1,
+        "dayOfWeek": 1,
+        "discipline": "REST",
+        "title": "Monday Rest Day",
+        "description": "Take today completely off to let your body recover from the weekend and prepare for the upcoming week of training.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 1,
+        "dayOfWeek": 2,
+        "discipline": "SWIM",
+        "title": "Easy Technique Swim",
+        "description": "Focus on smooth breathing and steady arm pulls in the pool to build your swimming confidence and endurance.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 0.5,
+            "targetDurationMin": 20,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 1,
+        "dayOfWeek": 3,
+        "discipline": "REST",
+        "title": "Wednesday Recovery",
+        "description": "Rest your muscles today and focus on drinking plenty of water to stay hydrated for your next session.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 1,
+        "dayOfWeek": 4,
+        "discipline": "BIKE",
+        "title": "Steady Bike Ride",
+        "description": "Ride at a comfortable and consistent pace on a flat route to build basic leg strength and endurance.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "GLUTES",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 10,
+            "targetDurationMin": 30,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 1,
+        "dayOfWeek": 5,
+        "discipline": "REST",
+        "title": "Friday Rest",
+        "description": "Relax and take a day off from structured training so your legs feel fresh for the weekend run.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 1,
+        "dayOfWeek": 6,
+        "discipline": "RUN",
+        "title": "Walk-Run Workout",
+        "description": "Alternate between jogging slowly and walking to safely build your running fitness without overloading your joints.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 3,
+            "targetDurationMin": 25,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 1,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Sunday Rest",
+        "description": "Reflect on your first completed week of training and enjoy a restful day before starting week two.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 2,
+        "dayOfWeek": 1,
+        "discipline": "REST",
+        "title": "Monday Rest",
+        "description": "Start the week with a restful day off to let your body adapt to the training you completed.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 2,
+        "dayOfWeek": 2,
+        "discipline": "SWIM",
+        "title": "Endurance Swim",
+        "description": "Swim continuous laps at a relaxed pace to improve your breathing rhythm and overall swimming stamina.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 0.6,
+            "targetDurationMin": 22,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 2,
+        "dayOfWeek": 3,
+        "discipline": "REST",
+        "title": "Wednesday Rest",
+        "description": "Take a complete rest day to keep your energy high for the upcoming cycling session.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 2,
+        "dayOfWeek": 4,
+        "discipline": "BIKE",
+        "title": "Outdoor Bike Ride",
+        "description": "Pedal steadily on your bicycle to strengthen your leg muscles and improve your balance on two wheels.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "GLUTES",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 12,
+            "targetDurationMin": 32,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 2,
+        "dayOfWeek": 5,
+        "discipline": "REST",
+        "title": "Friday Rest",
+        "description": "Rest today so your running legs will feel fresh and ready for tomorrow's workout.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 2,
+        "dayOfWeek": 6,
+        "discipline": "RUN",
+        "title": "Continuous Jog",
+        "description": "Run at a conversational pace for the entire duration to build your aerobic endurance and stamina.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 3.5,
+            "targetDurationMin": 26,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 2,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Sunday Rest",
+        "description": "Take today off to recover fully and prepare for another great week of training ahead.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 3,
+        "dayOfWeek": 1,
+        "discipline": "REST",
+        "title": "Monday Rest",
+        "description": "Enjoy a quiet rest day to let your muscles recover and rebuild after the weekend.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 3,
+        "dayOfWeek": 2,
+        "discipline": "SWIM",
+        "title": "Technique and Swim",
+        "description": "Practice good body position in the water while swimming laps at a moderate, steady effort.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 0.7,
+            "targetDurationMin": 25,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 3,
+        "dayOfWeek": 3,
+        "discipline": "REST",
+        "title": "Wednesday Rest",
+        "description": "Take today off to keep your legs fresh and ready for your upcoming bike workout.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 3,
+        "dayOfWeek": 4,
+        "discipline": "BIKE",
+        "title": "Hill Practice Bike",
+        "description": "Ride on rolling terrain to build extra leg power and confidence when going up gentle inclines.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "GLUTES",
+          "HIP_FLEXORS"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 14,
+            "targetDurationMin": 35,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 3,
+        "dayOfWeek": 5,
+        "discipline": "REST",
+        "title": "Friday Rest",
+        "description": "Rest and relax today so your body can absorb the training benefits from earlier in the week.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 3,
+        "dayOfWeek": 6,
+        "discipline": "RUN",
+        "title": "Steady Distance Run",
+        "description": "Maintain a smooth, easy running rhythm for the entire session to boost your overall cardiovascular fitness.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 4,
+            "targetDurationMin": 28,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 3,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Sunday Rest",
+        "description": "Spend today resting and stretching lightly to prepare your body for the next training week.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 4,
+        "dayOfWeek": 1,
+        "discipline": "REST",
+        "title": "Monday Rest",
+        "description": "Start your recovery week with a complete day of rest to help your muscles fully repair.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 4,
+        "dayOfWeek": 2,
+        "discipline": "SWIM",
+        "title": "Easy Recovery Swim",
+        "description": "Swim at a very relaxed pace, focusing purely on feeling comfortable and smooth in the water.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 0.4,
+            "targetDurationMin": 15,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 4,
+        "dayOfWeek": 3,
+        "discipline": "REST",
+        "title": "Wednesday Rest",
+        "description": "Take a restful day off to let your legs recover during this lighter recovery week.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 4,
+        "dayOfWeek": 4,
+        "discipline": "BIKE",
+        "title": "Light Recovery Spin",
+        "description": "Spin your pedals easily on a flat road or stationary bike to flush out your legs without strain.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 8,
+            "targetDurationMin": 20,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 4,
+        "dayOfWeek": 5,
+        "discipline": "REST",
+        "title": "Friday Rest",
+        "description": "Enjoy a peaceful day off with no training to ensure you are fully rested for the weekend.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 4,
+        "dayOfWeek": 6,
+        "discipline": "RUN",
+        "title": "Short Recovery Jog",
+        "description": "Run a very short and easy distance to keep your running form feeling natural during this recovery week.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 2.5,
+            "targetDurationMin": 18,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 4,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Sunday Rest",
+        "description": "Complete your recovery week with a restful Sunday, setting yourself up for a strong second half.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 5,
+        "dayOfWeek": 1,
+        "discipline": "REST",
+        "title": "Monday Rest",
+        "description": "Begin week five with a relaxing rest day to prepare for building your fitness back up.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 5,
+        "dayOfWeek": 2,
+        "discipline": "SWIM",
+        "title": "Distance Swim",
+        "description": "Swim longer intervals with short rests in between to build your water confidence and stamina.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 0.8,
+            "targetDurationMin": 28,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 5,
+        "dayOfWeek": 3,
+        "discipline": "REST",
+        "title": "Wednesday Rest",
+        "description": "Take a day off to keep your legs fresh and rested before your upcoming bike ride.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 5,
+        "dayOfWeek": 4,
+        "discipline": "BIKE",
+        "title": "Moderate Bike Ride",
+        "description": "Ride at a comfortably hard pace to improve your cycling speed and muscular endurance.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "GLUTES",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 16,
+            "targetDurationMin": 38,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 5,
+        "dayOfWeek": 5,
+        "discipline": "REST",
+        "title": "Friday Rest",
+        "description": "Rest today so your body is ready for your first brick workout tomorrow.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 5,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "First Brick Workout",
+        "description": "Practice the feeling of running right after cycling by doing a short bike ride followed immediately by a short run.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "GLUTES",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 8,
+            "targetDurationMin": 22,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 2,
+            "targetDurationMin": 15,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 5,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Sunday Rest",
+        "description": "Rest and recover after successfully completing your very first brick workout.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 6,
+        "dayOfWeek": 1,
+        "discipline": "REST",
+        "title": "Monday Rest",
+        "description": "Take today completely off to rest your muscles and start the new week refreshed.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 6,
+        "dayOfWeek": 2,
+        "discipline": "SWIM",
+        "title": "Interval Swim",
+        "description": "Alternate between fast swimming and easy recovery laps to build speed and heart health in the pool.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "ARMS"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 0.8,
+            "targetDurationMin": 28,
+            "targetIntensity": "HARD"
+          }
+        ]
+      },
+      {
+        "weekNumber": 6,
+        "dayOfWeek": 3,
+        "discipline": "REST",
+        "title": "Wednesday Rest",
+        "description": "Rest your body today and prepare for a steady bike ride later in the week.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 6,
+        "dayOfWeek": 4,
+        "discipline": "BIKE",
+        "title": "Endurance Bike Ride",
+        "description": "Maintain a steady, moderate pace throughout your ride to build strong legs and great stamina.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "GLUTES",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 18,
+            "targetDurationMin": 40,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 6,
+        "dayOfWeek": 5,
+        "discipline": "REST",
+        "title": "Friday Rest",
+        "description": "Take a relaxing day off to keep your legs feeling light and ready for the weekend brick.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 6,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "Weekend Brick Workout",
+        "description": "Transition quickly from a moderate bike ride into a steady run to get used to race day feelings.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "GLUTES",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 10,
+            "targetDurationMin": 25,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 2.5,
+            "targetDurationMin": 18,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 6,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Sunday Rest",
+        "description": "Rest your legs and enjoy a well-earned day off after finishing your weekend brick session.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 7,
+        "dayOfWeek": 1,
+        "discipline": "REST",
+        "title": "Monday Rest",
+        "description": "Begin your final build week with a restful day off to let your body recharge completely.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 7,
+        "dayOfWeek": 2,
+        "discipline": "SWIM",
+        "title": "Peak Distance Swim",
+        "description": "Swim your longest continuous distance yet at a steady, manageable pace to build supreme confidence.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE",
+          "BACK"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 0.9,
+            "targetDurationMin": 30,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 7,
+        "dayOfWeek": 3,
+        "discipline": "REST",
+        "title": "Wednesday Rest",
+        "description": "Take today off to keep your energy high before tackling your biggest bike workout of the plan.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 7,
+        "dayOfWeek": 4,
+        "discipline": "BIKE",
+        "title": "Longer Bike Ride",
+        "description": "Ride at a steady, comfortable pace to build the endurance needed to complete a sprint triathlon.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "GLUTES",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 20,
+            "targetDurationMin": 42,
+            "targetIntensity": "MODERATE"
+          }
+        ]
+      },
+      {
+        "weekNumber": 7,
+        "dayOfWeek": 5,
+        "discipline": "REST",
+        "title": "Friday Rest",
+        "description": "Rest today so your muscles are fully prepared for your final brick session tomorrow.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 7,
+        "dayOfWeek": 6,
+        "discipline": "BRICK",
+        "title": "Peak Brick Workout",
+        "description": "Execute a solid bike ride followed by your longest run off the bike to simulate race day demands.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "GLUTES",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 10,
+            "targetDurationMin": 25,
+            "targetIntensity": "MODERATE"
+          },
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 3,
+            "targetDurationMin": 20,
+            "targetIntensity": "HARD"
+          }
+        ]
+      },
+      {
+        "weekNumber": 7,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Sunday Rest",
+        "description": "Relax and recover after completing your hardest and most important training week.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 8,
+        "dayOfWeek": 1,
+        "discipline": "REST",
+        "title": "Monday Rest",
+        "description": "Start your final week with a restful day to let all your hard training settle into your body.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 8,
+        "dayOfWeek": 2,
+        "discipline": "SWIM",
+        "title": "Final Easy Swim",
+        "description": "Enjoy a relaxed swim focusing on smooth strokes and keeping your breathing calm and easy.",
+        "muscleGroups": [
+          "SHOULDERS",
+          "CORE"
+        ],
+        "segments": [
+          {
+            "discipline": "SWIM",
+            "targetDistanceKm": 0.5,
+            "targetDurationMin": 18,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 8,
+        "dayOfWeek": 3,
+        "discipline": "REST",
+        "title": "Wednesday Rest",
+        "description": "Take today off to stay fresh and keep your legs feeling light as you wrap up the plan.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 8,
+        "dayOfWeek": 4,
+        "discipline": "BIKE",
+        "title": "Final Easy Spin",
+        "description": "Take a gentle bike ride on flat roads to keep your legs moving without adding any fatigue.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "BIKE",
+            "targetDistanceKm": 10,
+            "targetDurationMin": 25,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 8,
+        "dayOfWeek": 5,
+        "discipline": "REST",
+        "title": "Friday Rest",
+        "description": "Rest today so your entire body feels completely rejuvenated for your final run workout.",
+        "muscleGroups": [],
+        "segments": []
+      },
+      {
+        "weekNumber": 8,
+        "dayOfWeek": 6,
+        "discipline": "RUN",
+        "title": "Celebration Run",
+        "description": "Run at an easy, conversational pace to celebrate all the fitness and endurance you have built.",
+        "muscleGroups": [
+          "QUADRICEPS",
+          "HAMSTRINGS",
+          "CALVES"
+        ],
+        "segments": [
+          {
+            "discipline": "RUN",
+            "targetDistanceKm": 3,
+            "targetDurationMin": 22,
+            "targetIntensity": "EASY"
+          }
+        ]
+      },
+      {
+        "weekNumber": 8,
+        "dayOfWeek": 7,
+        "discipline": "REST",
+        "title": "Sunday Rest",
+        "description": "Congratulations on finishing your eight-week triathlon training plan with a well-deserved rest day.",
+        "muscleGroups": [],
+        "segments": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+group,scenario,runs,not_completed,completed,successes,success_rate_pct,clean_passes,clean_rate_pct,mean_attempts,mean_repairs,median_seconds,accepted_from_other_model,top_problems
+v6 (smoke),beginner-sprint,1,0,1,1,100,1,100,1,0,12,0,
+v6 (smoke),intermediate-olympic,1,0,1,1,100,0,0,1,4,21,0,
+v6 (smoke),ALL,2,0,2,2,100,1,50,1,2,16.5,0,
