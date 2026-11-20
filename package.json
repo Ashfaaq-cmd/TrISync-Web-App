@@ -20,7 +20,9 @@
     "ai:insight-facts": "tsx scripts/test-insight-facts.ts",
     "test:analysis": "tsx scripts/test-analysis.ts",
     "test:monthly-facts": "tsx scripts/test-monthly-facts.ts",
-    "test:avatar": "tsx scripts/test-avatar.ts"
+    "test:avatar": "tsx scripts/test-avatar.ts",
+    "eval:plans": "tsx scripts/eval-plans.ts",
+    "eval:summary": "tsx scripts/eval-summary.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.3",
